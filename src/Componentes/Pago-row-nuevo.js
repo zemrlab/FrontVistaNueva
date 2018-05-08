@@ -31,21 +31,6 @@ class PagoRowNuevo extends React.Component {
   render() {
     return(
     <tr>
-      <td className="td">
-      <form action="#">
-              <label className="row center-xs color_white">
-                  <input
-                    onClick={this.colocar}
-                    className="checkbox1"
-                    //name="chekbox"
-                    id={this.props.pago.idRec}
-                    type="checkbox" />
-                    <span> </span>
-
-              </label>
-      </form>
-     
-      </td>
       <td className="td">{this.props.pago.idAlum.apeNom}</td>
       <td className="td">{this.props.pago.idConcepto.concepA + ' '+ this.props.pago.idConcepto.concepB}</td>
 			<td className="td">{this.props.pago.numero}</td>
@@ -53,8 +38,8 @@ class PagoRowNuevo extends React.Component {
       <td className="td">{this.props.pago.fecha}</td>
       <td className="td">{this.props.pago.moneda}</td>
       <td className="td">{this.props.pago.importe}</td>
-      <td className="td"><SelectNuevo  listado = {HEROES}/></td>
-      <td className="td"><SelectPrograma listado = {HEROES1}/></td>
+      <td className="td"><SelectNuevo  listado = {this.props.pago.codigos}/></td>
+      <td className="td"><SelectPrograma listado = {this.props.pago.programas}/></td>
 	</tr>
     )
   }

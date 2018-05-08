@@ -6,7 +6,6 @@ class TableHeaderNuevo extends React.Component {
     return(
     <thead>
 			<tr>      
-                <th className="th">SELECCIONAR</th>
                 <th className="th">NOMBRE</th>
                 <th className="th">CONCEPTO</th>
                 <th className="th">NUMERORECIBO</th>

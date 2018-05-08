@@ -146,14 +146,7 @@ componentDidUpdate(){
             </div>   
           </div> 
           <hr />
-          <div className="margen2">
-            <button onClick={this.seleccionar} className="waves-effect waves-light btn-small botonazul2 start">
-            Seleccionar todo<i className="large material-icons left">check</i>
-            </button>
-            
-            </div>                        
-
-          <div className="SplitPane row center-xs">
+            <div className="SplitPane row center-xs">
             <div className="  center-xs-12">
               <table className=" total table ">
                 <TableHeaderNuevo/>
@@ -173,22 +166,70 @@ componentDidUpdate(){
   Asignar=(e)=>{
     var check = [];
     var check2 = [];
-
-
-
+    var opcionesSeleccionadas = [];
+    var listadoAlumnoPrograma = [];
+    
 
     check = document.getElementsByClassName("opcion");
 
     console.log("seleccionados codigos");
     for (var item of check) {
+     opcionesSeleccionadas.push(item.id);
      console.log(item.id);
     }
+    /*
     check2 = document.getElementsByClassName("opcionPrograma");
 
     console.log("seleccionados programas");
     for (var item of check2) {
      console.log(item.id);
+    }*/
+    var listado2 = this.state.pagocero;
+    console.log("listado 2");
+    console.log(listado2);
+    
+    for (let i = 0; i < listado2.length; i++) {
+      
+      if(listado2[i].alumnoPrograma.length == 0){
+        listadoAlumnoPrograma.push(null);
+      }else{
+        var index = opcionesSeleccionadas[i];
+        if(index == 'codigo'){
+           listadoAlumnoPrograma.push(null);
+        }else{
+            var ap = listado2[i].alumnoPrograma[index];
+            listadoAlumnoPrograma.push(ap);
+        }
+      }
+      
     }
+    console.log("listado alumno programa");
+    console.log(listadoAlumnoPrograma);
+    var PagosActualizados = this.state.pagos;
+    for (let i = 0; i < PagosActualizados.length; i++) {
+        var ap = listadoAlumnoPrograma[i];
+        PagosActualizados[i].alumnoPrograma = ap;
+    }
+    console.log("pagos actualizados");
+    console.log(PagosActualizados);
+    /*
+    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/updaterecaudaciones/actualizar',
+    {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: "POST",
+    body: JSON.stringify(
+      PagosActualizados
+    )
+    }).catch(error => {
+    // si hay algún error lo mostramos en consola
+    console.error(error)
+    });
+*/
+
+
+    
     /*
 
     for (let i = 0; i < this.conceptos.length; i++) {
@@ -237,8 +278,8 @@ componentDidUpdate(){
     method: "POST",
     body: JSON.stringify(
       {
-        "nombres":"LUIS",
-        "apellidos":"NAUPARI",
+        "nombres":this.state.nombre,
+        "apellidos":this.state.apellido,
         "fechaInicial": filtrodel,
         "fechaFinal": filtroal,
         "conceptos":concep,
@@ -261,7 +302,8 @@ componentDidUpdate(){
   if(pagos.length > 0){
   this.setState({
     pagocero: pagos
-  });}else{
+  });
+  }else{
     alert("No hay registros");
   }
  console.log("Pagos filtrados que recibo")
@@ -397,9 +439,6 @@ CalcularImporte() {
 BuscarNombre(busqueda) {
     let nombres = busqueda.nombres;
     console.log("Nombre ingresado");
-    console.log("nombre ingresado");
-    
-    
     console.log(busqueda.nombres);
     console.log("apellido ingresado");
     console.log(busqueda.apellidos);
@@ -411,7 +450,7 @@ BuscarNombre(busqueda) {
     });
     //creo el array de opciones
    
-      var listado1 =[];
+      var listado1 =[];/*
       var opciones  = [];
       for (let i = 0; i< RECAUDACION.length; i++) {
         var listadoRec = { idRec: 0,concepto: '',numero:'',facultad:'', fecha: '',moneda : 0 ,importe: 0,
@@ -453,7 +492,6 @@ BuscarNombre(busqueda) {
      
 
     //creo el array de opciones
-    /*
     this.setState({
       pagocero: listado1,
       pagoOpciones:listado1
@@ -464,70 +502,118 @@ BuscarNombre(busqueda) {
         return response.json()
       })
       .then((pagos) => {
+      
+      console.log("Listado de pagos recibidos");
+      console.log(pagos);
 
       var listado1 =[];
       var opciones  = [];
       for (let i = 0; i< pagos.length; i++) {
-        var listadoRec = { idRec: 0,numero:'', fecha: '',moneda : 0 ,importe: 0,
-        idConcepto :[],alumnoPrograma :[],idAlum : [],
+        var listadoRec = { 
+          alumnoPrograma: null,
+          autoseguro: '',
+          ave :'',
+          carnet:'',
+          devolTran:'',
+          fecha:'',
+          idAlum : [],
+          idConcepto:[],
+          idRec:'',
+          idRegistro:[],
+          importe:'',
+          moneda:'',
+          numero:'',
+          observacion:'',
+          validado:'',
+          codigos:[],
+          programas:[]
         }
-        listadoRec.alumnoPrograma = pagos[i].alumnoPrograma;        ; 
-        listadoRec.idAlum = pagos[i].idAlum;        ;
-        listadoRec.idRec = pagos[i].idRec;
-        listadoRec.idConcepto = pagos[i].idConcepto;
-        listadoRec.numero = pagos[i].numero;
+        listadoRec.alumnoPrograma = pagos[i].alumnoPrograma;
+        listadoRec.autoseguro = pagos[i].autoseguro;
+        listadoRec.ave= pagos[i].ave;
+        listadoRec.carnet = pagos[i].carnet;
+        listadoRec.devolTran = pagos[i].devolTran;
         listadoRec.fecha = pagos[i].fecha;
-        listadoRec.moneda = pagos[i].moneda;
+        listadoRec.idAlum = pagos[i].idAlum;
+        listadoRec.idConcepto = pagos[i].idConcepto;
+        listadoRec.idRec = pagos[i].idRec;
+        listadoRec.idRegistro = pagos[i].idRegistro;
         listadoRec.importe = pagos[i].importe;
-        var nombrefiltro = listadoRec.idAlum.apeNom;
-        console.log(nombrefiltro);
-        fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/alumnoprograma/leer/'+ nombrefiltro)
-        .then((response) => {
-        return response.json()
-        })
-        .then((alumnoprograma) => {
+        listadoRec.moneda = pagos[i].moneda;
+        listadoRec.numero = pagos[i].numero;
+        listadoRec.observacion = pagos[i].observacion;
+        listadoRec.validado = pagos[i].validado;
+        listado1.push(listadoRec); 
+      }
+     
+      console.log(nombrefiltro);
 
-          listadoRec.alumnoPrograma = alumnoprograma;
-        })
-        .catch(error => {
-          // si hay algún error lo mostramos en consola
-          console.error(error)
-        });
-
-        //var listadoOpciones = pagos[i].codigo;
-        //var listadoProgramas = pagos[i].programa;
-       // var listadoOpcionesOpciones = [];
-        //var listadoOpcionesProgramas = [];
-
-        
-        //var value = listadoOpciones[j];
-        //var label = listadoOpciones[j];
-       // var option = {value: value, label:label};
+      for (let i = 0; i< listado1.length; i++) {
+            var nombrefiltro = listado1[i].idAlum.apeNom;
+            fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/alumnoprograma/leer/'+nombrefiltro)
+            .then((response) => {
+            return response.json()
+            })
+            .then((programa) => {
+            var alumnoprograma = programa;
+            //listado1[i].alumnoPrograma = 
+            var listadoOpcionesCodigos = [];
+            var listadoOpcionesProgramas = [];
+            console.log("ALUMNO PROGRAM RECIBIDO");
+            console.log(alumnoprograma);
+            console.log("longitud del array alumno programa recibido")
+            console.log(alumnoprograma.length);
+            listado1[i].alumnoPrograma = programa;
+             
+             for(let j = 0; j< alumnoprograma.length; j++){       
     
-        //listadoRec.codigo.push(listadoOpcionesOpciones);
-        //listadoRec.programa.push(listadoOpcionesProgramas);
-        listado1.push(listadoRec);
-        
+                var value1 = j;
+                var label1 = alumnoprograma[j].alumnoProgramaPK.codAlumno;
+               
+                var option1 = {value: value1, label:label1};
+                listado1[i].codigos.push(option1);
+                //listadoOpcionesCodigos.push(option1);
+                console.log("listado de opciones de codigos");
+                var value2 = j;
+                var label2 = alumnoprograma[j].programa.nomPrograma;
+                var option2 = {value: value2, label:label2};
+                listado1[i].programas.push(option2);
+                
+               // listadoOpcionesProgramas.push(option2);    
+            
+            }
+            console.log("programa leido");
+            if(alumnoprograma.length == 0){
+              var value1 = "codigo";
+              var label1 = "Codigo1";
+              var option1 = {value: value1, label:label1};
+              listado1[i].codigos.push(option1);
+              //listadoOpcionesCodigos.push(option1);
+              console.log("listado de opciones de codigo en caso no tener programas");
+              var value2 = "programa";
+              var label2 = "Programa1";
+              var option2 = {value: value2, label:label2};
+              //listadoOpcionesProgramas.push(option2);
+              listado1[i].programas.push(option2);
+         
+            }
+            console.log(programa);
+            })
+            .catch(error => {
+            // si hay algún error lo mostramos en consola
+            console.error(error)
+            });
       }
 
-     console.log("listado de programa y codigo opciones");
-     console.log(listado1);
-
+     
 
         this.setState({
-          pagocero: pagos,
+          pagocero: listado1,
           pagos: pagos
         },
         );
-        console.log("pagos recibidos de la consulta");
-        console.log(pagos);
-        /*
-    console.log("se actualizo los pagos de alumno");
-    var total=this.state.pagocero;
-    this.state.pagocero.map((pago)=>{
-       pago.check=false
-    })
-    console.log(this.state.pagocero); */
+        console.log("listado de programa y codigo opciones despues de copiar el filtro");
+        console.log(listado1);
     }
     )
     .catch(error => {

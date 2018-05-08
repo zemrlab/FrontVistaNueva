@@ -6,7 +6,7 @@ class SelectNuevo extends React.Component {
   constructor(props) {
     super(props)
     this.state = { 
-      SelectedOption:  { value: 1, label: 'SELECT' },
+      SelectedOption:  { value: 'codigo', label: 'SELECT' },
     }
     this.opcion = 'elegido';
   }
