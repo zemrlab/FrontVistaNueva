@@ -39,7 +39,6 @@ class PagoRowNuevo extends React.Component {
       <td className="td">{this.props.pago.moneda}</td>
       <td className="td">{this.props.pago.importe}</td>
       <td className="td"><SelectNuevo  listado = {this.props.pago.codigos}/></td>
-      <td className="td"><SelectPrograma listado = {this.props.pago.programas}/></td>
 	</tr>
     )
   }

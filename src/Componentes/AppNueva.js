@@ -212,7 +212,7 @@ componentDidUpdate(){
     }
     console.log("pagos actualizados");
     console.log(PagosActualizados);
-    /*
+    
     fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/updaterecaudaciones/actualizar',
     {
     headers: {
@@ -220,16 +220,23 @@ componentDidUpdate(){
     },
     method: "POST",
     body: JSON.stringify(
-      PagosActualizados
+     PagosActualizados
     )
-    }).catch(error => {
+  })
+  .then((response) => {
+    return response.json()
+  })
+  .then((pagos) => {
+    if(pagos == 1){
+      alert("recaudaciones actualizadas exitosamente"); 
+    }else{
+      alert("error al actualizar las recaudaciones");
+    }
+  })
+  .catch(error => {
     // si hay algún error lo mostramos en consola
     console.error(error)
-    });
-*/
-
-
-    
+  });
     /*
 
     for (let i = 0; i < this.conceptos.length; i++) {
@@ -277,6 +284,16 @@ componentDidUpdate(){
     },
     method: "POST",
     body: JSON.stringify(
+      /*
+      {
+        "nombres":"JOSE CARLOS",
+        "apellidos":"ACOSTA BRAVO",
+        "fechaInicial":"0000-00-00",
+        "fechaFinal":"9999-12-12",
+        "conceptos":["210011"],
+        "recibos":["8500588"]
+     }*/
+   
       {
         "nombres":this.state.nombre,
         "apellidos":this.state.apellido,
@@ -284,7 +301,8 @@ componentDidUpdate(){
         "fechaFinal": filtroal,
         "conceptos":concep,
         "recibos":this.state.filtroNumeros
-      }/*
+      }
+      /*
       {
         "nom_ape": "RAUL NAUPARI QUIROZ",
         "fechaInicial": "0000-00-00",
@@ -299,15 +317,118 @@ componentDidUpdate(){
   return response.json()
 })
 .then((pagos) => {
-  if(pagos.length > 0){
-  this.setState({
-    pagocero: pagos
-  });
-  }else{
-    alert("No hay registros");
+  console.log("Listado de pagos recibidos");
+  console.log(pagos);
+
+  var listado3 =[];
+  var opciones  = [];
+  for (let i = 0; i< pagos.length; i++) {
+    var listadoRec = { 
+      alumnoPrograma: null,
+      autoseguro: '',
+      ave :'',
+      carnet:'',
+      devolTran:'',
+      fecha:'',
+      idAlum : [],
+      idConcepto:[],
+      idRec:'',
+      idRegistro:[],
+      importe:'',
+      moneda:'',
+      numero:'',
+      observacion:'',
+      validado:'',
+      codigos:[]//,
+      //programas:[]
+    }
+    listadoRec.alumnoPrograma = pagos[i].alumnoPrograma;
+    listadoRec.autoseguro = pagos[i].autoseguro;
+    listadoRec.ave= pagos[i].ave;
+    listadoRec.carnet = pagos[i].carnet;
+    listadoRec.devolTran = pagos[i].devolTran;
+    listadoRec.fecha = pagos[i].fecha;
+    listadoRec.idAlum = pagos[i].idAlum;
+    listadoRec.idConcepto = pagos[i].idConcepto;
+    listadoRec.idRec = pagos[i].idRec;
+    listadoRec.idRegistro = pagos[i].idRegistro;
+    listadoRec.importe = pagos[i].importe;
+    listadoRec.moneda = pagos[i].moneda;
+    listadoRec.numero = pagos[i].numero;
+    listadoRec.observacion = pagos[i].observacion;
+    listadoRec.validado = pagos[i].validado;
+    listado3.push(listadoRec); 
   }
- console.log("Pagos filtrados que recibo")
- console.log(pagos);
+ 
+  console.log(nombrefiltro);
+
+  for (let i = 0; i< listado3.length; i++) {
+        var nombrefiltro = listado3[i].idAlum.apeNom;
+        fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/alumnoprograma/leer/'+nombrefiltro)
+        .then((response) => {
+        return response.json()
+        })
+        .then((programa) => {
+        var alumnoprograma = programa;
+        //listado1[i].alumnoPrograma = 
+        var listadoOpcionesCodigos = [];
+        var listadoOpcionesProgramas = [];
+        console.log("ALUMNO PROGRAM RECIBIDO");
+        console.log(alumnoprograma);
+        console.log("longitud del array alumno programa recibido")
+        console.log(alumnoprograma.length);
+
+        listado3[i].alumnoPrograma = programa;
+         
+         for(let j = 0; j< alumnoprograma.length; j++){       
+
+            var value1 = j;
+            var label1 = alumnoprograma[j].alumnoProgramaPK.codAlumno +"/"+ alumnoprograma[j].programa.nomPrograma;
+           
+            var option1 = {value: value1, label:label1};
+            listado3[i].codigos.push(option1);
+            //listadoOpcionesCodigos.push(option1);
+            /*
+            console.log("listado de opciones de codigos");
+            var value2 = j;
+            var label2 = alumnoprograma[j].programa.nomPrograma;
+            var option2 = {value: value2, label:label2};
+            listado1[i].programas.push(option2);
+            */
+           // listadoOpcionesProgramas.push(option2);    
+        
+        }
+        console.log("programa leido");
+        if(alumnoprograma.length == 0){
+          var value1 = "codigo";
+          var label1 = "No hay coincidencias";
+          var option1 = {value: value1, label:label1};
+          listado3[i].codigos.push(option1);
+          //listadoOpcionesCodigos.push(option1);
+          /*
+          console.log("listado de opciones de codigo en caso no tener programas");
+          var value2 = "programa";
+          var label2 = "Programa1";
+          var option2 = {value: value2, label:label2};
+          //listadoOpcionesProgramas.push(option2);
+          listado1[i].programas.push(option2);*/
+     
+        }
+        console.log(programa);
+        })
+        .catch(error => {
+        // si hay algún error lo mostramos en consola
+        console.error(error)
+        });
+  }
+
+  this.setState({
+      pagocero: listado3,
+      pagos: pagos
+  },
+    );
+    console.log("listado de programa y codigo opciones despues de copiar el filtro");
+    console.log(listado3);
 })
 .catch(error => {
   // si hay algún error lo mostramos en consola
@@ -525,8 +646,8 @@ BuscarNombre(busqueda) {
           numero:'',
           observacion:'',
           validado:'',
-          codigos:[],
-          programas:[]
+          codigos:[]//,
+          //programas:[]
         }
         listadoRec.alumnoPrograma = pagos[i].alumnoPrograma;
         listadoRec.autoseguro = pagos[i].autoseguro;
@@ -563,38 +684,41 @@ BuscarNombre(busqueda) {
             console.log(alumnoprograma);
             console.log("longitud del array alumno programa recibido")
             console.log(alumnoprograma.length);
+
             listado1[i].alumnoPrograma = programa;
              
              for(let j = 0; j< alumnoprograma.length; j++){       
     
                 var value1 = j;
-                var label1 = alumnoprograma[j].alumnoProgramaPK.codAlumno;
+                var label1 = alumnoprograma[j].alumnoProgramaPK.codAlumno +"/"+ alumnoprograma[j].programa.nomPrograma;
                
                 var option1 = {value: value1, label:label1};
                 listado1[i].codigos.push(option1);
                 //listadoOpcionesCodigos.push(option1);
+                /*
                 console.log("listado de opciones de codigos");
                 var value2 = j;
                 var label2 = alumnoprograma[j].programa.nomPrograma;
                 var option2 = {value: value2, label:label2};
                 listado1[i].programas.push(option2);
-                
+                */
                // listadoOpcionesProgramas.push(option2);    
             
             }
             console.log("programa leido");
             if(alumnoprograma.length == 0){
               var value1 = "codigo";
-              var label1 = "Codigo1";
+              var label1 = "No hay coincidencias";
               var option1 = {value: value1, label:label1};
               listado1[i].codigos.push(option1);
               //listadoOpcionesCodigos.push(option1);
+              /*
               console.log("listado de opciones de codigo en caso no tener programas");
               var value2 = "programa";
               var label2 = "Programa1";
               var option2 = {value: value2, label:label2};
               //listadoOpcionesProgramas.push(option2);
-              listado1[i].programas.push(option2);
+              listado1[i].programas.push(option2);*/
          
             }
             console.log(programa);
@@ -605,12 +729,10 @@ BuscarNombre(busqueda) {
             });
       }
 
-     
-
-        this.setState({
+      this.setState({
           pagocero: listado1,
           pagos: pagos
-        },
+      },
         );
         console.log("listado de programa y codigo opciones despues de copiar el filtro");
         console.log(listado1);
