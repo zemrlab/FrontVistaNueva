@@ -76,7 +76,7 @@ class NumeroRecibo extends React.Component {
                 <input type="text" value={this.state.numero} onChange={this.onChange}  />
               </div>
               <div className="SplitPane-right col-xs-4 centrar">
-                <button  onClick={this.onSubmit} className="btn-floating red derecha center-xs-12"><b><i class="large material-icons">add</i></b></button>
+                <button  onClick={this.onSubmit} className="btn-floating red derecha center-xs-12"><b><i className="large material-icons">add</i></b></button>
               </div >
               </div>
               <div className="scroll center-xs ">

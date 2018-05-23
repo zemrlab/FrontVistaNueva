@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './Componentes/App';
 import AppNueva from './Componentes/AppNueva';
+import AppNueva2 from './Componentes/AppNueva2';
 
 import Login from './Componentes/Login';
 import NameForm from './Componentes/NameForm';
@@ -30,6 +31,7 @@ class Index extends React.Component {
             </Route>
             <Route path="/:name" component={App}></Route>
             <Route path="/vista/nueva" component={AppNueva}></Route>
+            <Route path="/vista/nueva2" component={AppNueva2}></Route>
            
           </Router>
           )

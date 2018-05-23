@@ -21,7 +21,10 @@ class Buscar extends React.Component {
         <input ref={ ( input ) => this.nombre = input } type="text" placeholder="Nombres" />
         <h4>Apellidos:</h4>
         <input ref={ ( input ) => this.apellidos= input } type="text" placeholder="Apellidos" />
-        <button  className="waves-effect waves-light btn-large botonazul2 center"type="submit">Buscar<i className="large material-icons left">search</i></button>
+        <div className="row center-xs">
++        <button  className="waves-effect waves-light btn-large botonazul23 center"type="submit">Buscar<i className="large material-icons left">search</i></button>
++
++        </div>
       </form>
     )
   }

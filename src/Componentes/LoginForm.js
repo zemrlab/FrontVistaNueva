@@ -59,7 +59,14 @@ class LoginForm extends React.Component {
   VistaNueva=(e)=>{
     
     browserHistory.push('/vista/nueva');
-    console.log("llego aca");
+    console.log("Vista nueva");
+    e.preventDefault();
+    
+  }
+  VistaNueva2=(e)=>{
+    
+    browserHistory.push('/vista/nueva2');
+    console.log("Vista nueva 2");
     e.preventDefault();
     
   }
@@ -100,9 +107,20 @@ class LoginForm extends React.Component {
       </div>
       
       </div>
-      <form>
+
+      <div className="SplitPane row">
+      <div>
       <button type="submit" onClick={this.VistaNueva} className="btn btn-primary btn-lg">VISTANUEVA</button>
-      </form>
+      </div>
+      </div>
+      <div className="SplitPane row">
+        
+      <div>
+      <button type="submit" onClick={this.VistaNueva2} className="btn btn-primary btn-lg">VISTANUEVA2</button>
+      </div>
+
+      </div>
+
       </div>
     );
   }
