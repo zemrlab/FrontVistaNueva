@@ -187,7 +187,9 @@ componentDidUpdate(){
               <Alumno alumno={this.state.pagos[0].idAlum} />
             </div>
             <div className=" col-xs-9">
-
+            <div className="center-xs-12 margen_top">
+              <h5>Filtros</h5>
+              </div>
               <div className="SplitPane row">
                 <div className="inline col-xs-4">
                   <div>
@@ -215,10 +217,10 @@ componentDidUpdate(){
             </div>
 
           </div>
-          <div className="SplitPane row">
-             <div>
-               <button onClick={this.Filtrar}  className="waves-effect waves-light btn-large botonazul2 center" type="submit">Filtrar<i className="large material-icons left">search</i></button>
-             </div>
+          <div className="SplitPane row center-xs">
+            
+               <button onClick={this.Filtrar}  className="waves-effect waves-light btn-large botonazul2 center" type="submit">Filtrar<i className="large material-icons left">check</i></button>
+            
           </div>
           <hr />
           <div className="margen2">

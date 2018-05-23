@@ -13,9 +13,7 @@ class ConceptoList extends React.Component {
                 name={concepto.concepto}
                 type="checkbox" />
                 <span key={concepto.idConcepto} className="mdc-checkbox">
-                {concepto.concepA+ '-' +concepto.concepB}
-              
-                
+                {concepto.concepto.substr(0,3)+'-'+ concepto.concepto.substr(3,3)}
                 </span>
             </label>
             })

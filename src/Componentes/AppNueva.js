@@ -111,7 +111,7 @@ componentDidUpdate(){
             </div>
 
             <div className=" col-xs-8 ">
-+              <div className="center-xs-12 margen_top">
+              <div className="center-xs-12 margen_top">
               <h5>Filtros</h5>
               </div>
               <div className="SplitPane row">
@@ -148,18 +148,23 @@ componentDidUpdate(){
           </div> 
           <hr />
             <div className="SplitPane row center-xs">
-            <div className="  center-xs-12">
+            <div className="center-xs-12">
               <table className=" total table ">
                 <TableHeaderNuevo/>
                 <PagoListNuevo  funcion={this.Funcion} listado={this.state.pagocero}/>
               </table>
-              <div className="SplitPane">
-                <div className="SplitPane-right">
-                <button  onClick={this.Asignar} className="waves-effect waves-light btn-large botonazul2 center"type="submit">Asignar<i className="large material-icons left">check</i></button>
+              <div className="row">
+                <div className="col-xs-7">
+                </div>
+                <div className="col-xs-5">
+                  <Importe importe={this.CalcularImporte()} />
                 </div>
               </div>
+              <div className="SplitPane row center-xs">  
+                <button  onClick={this.Asignar} className="waves-effect waves-light btn-large botonazul2 center"type="submit">Asignar<i className="large material-icons left">check</i></button>
+              </div>
             </div>
-          </div>
+            </div>
 
         </div>
       )

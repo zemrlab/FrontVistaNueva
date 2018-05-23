@@ -1,6 +1,6 @@
 import React from 'react'
-import PagoListNuevo from './Pago-list-nuevo'
-import TableHeaderNuevo from './Table-Header-Nuevo'
+import PagoListNuevo2 from './Pago-list-nuevo2'
+import TableHeaderNuevo2 from './Table-Header-Nuevo2'
 import Alumno from './Alumno'
 import Importe from './Importe'
 import FiltroFecha1 from './FiltroFecha1'
@@ -31,6 +31,7 @@ class AppNueva extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      conceptos : [],
       todos:false,
       nombre: '',
       apellido: '',
@@ -46,7 +47,6 @@ class AppNueva extends React.Component {
       filtroAl:new String(""),
       filtroNumeros: []
     }
-    this.conceptos = []
     this.alumno = ''
     this.importe = 0;
     this.FiltrarFecha = this.FiltrarFecha.bind(this);
@@ -111,7 +111,7 @@ componentDidUpdate(){
             </div>
 
             <div className=" col-xs-8 ">
-+              <div className="center-xs-12 margen_top">
+              <div className="center-xs-12 margen_top">
               <h5>Filtros</h5>
               </div>
               <div className="SplitPane row">
@@ -128,7 +128,7 @@ componentDidUpdate(){
                 <div className="row center-xs-4 block ">
                   <h4 className=" centrar margen_top espacio">Conceptos</h4>
                   <div className="scroll center-xs ">
-                    <form action="#"><ConceptoList listado={this.conceptos} /></form>
+                    <form action="#"><ConceptoList listado={this.state.conceptos} /></form>
                   </div>
                 </div>
                 <div className="centrar col-xs-5">
@@ -148,18 +148,23 @@ componentDidUpdate(){
           </div> 
           <hr />
             <div className="SplitPane row center-xs">
-            <div className="  center-xs-12">
+            <div className="center-xs-12">
               <table className=" total table ">
-                <TableHeaderNuevo/>
-                <PagoListNuevo  funcion={this.Funcion} listado={this.state.pagocero}/>
+                <TableHeaderNuevo2/>
+                <PagoListNuevo2  funcion={this.Funcion} listado={this.state.pagocero}/>
               </table>
-              <div className="SplitPane">
-                <div className="SplitPane-right">
-                <button  onClick={this.Asignar} className="waves-effect waves-light btn-large botonazul2 center"type="submit">Asignar<i className="large material-icons left">check</i></button>
+              <div className="row">
+                <div className="col-xs-7">
+                </div>
+                <div className="col-xs-5">
+                  <Importe importe={this.CalcularImporte()} />
                 </div>
               </div>
+              <div className="SplitPane row center-xs">  
+                <button  onClick={this.Asignar} className="waves-effect waves-light btn-large botonazul2 center"type="submit">Asignar<i className="large material-icons left">check</i></button>
+              </div>
             </div>
-          </div>
+            </div>
 
         </div>
       )
@@ -749,7 +754,13 @@ BuscarNombre(busqueda) {
         return response.json()
       })
       .then((conceptos) => {
-        this.conceptos = conceptos
+        
+        
+        this.setState({
+          conceptos: conceptos
+      });
+       console.log("conceptos recibidos de los nombres ingresados");
+       console.log(this.state.conceptos);
       })
       .catch(error => {
         // si hay algún error lo mostramos en consola
