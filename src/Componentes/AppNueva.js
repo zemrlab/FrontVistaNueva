@@ -31,6 +31,7 @@ class AppNueva extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      conceptos : [],
       todos:false,
       nombre: '',
       apellido: '',
@@ -128,7 +129,7 @@ componentDidUpdate(){
                 <div className="row center-xs-4 block ">
                   <h4 className=" centrar margen_top espacio">Conceptos</h4>
                   <div className="scroll center-xs ">
-                    <form action="#"><ConceptoList listado={this.conceptos} /></form>
+                    <form action="#"><ConceptoList listado={this.state.conceptos} /></form>
                   </div>
                 </div>
                 <div className="centrar col-xs-5">
@@ -754,7 +755,11 @@ BuscarNombre(busqueda) {
         return response.json()
       })
       .then((conceptos) => {
-        this.conceptos = conceptos
+        this.setState({
+          conceptos: conceptos
+      });
+      console.log("Conceptos recibidos de los nombres ingresados");
+      console.log(this.state.conceptos);
       })
       .catch(error => {
         // si hay algún error lo mostramos en consola

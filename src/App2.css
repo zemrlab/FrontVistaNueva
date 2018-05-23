@@ -28,7 +28,7 @@
   overflow: auto;
   height: 100px;
 }
-.table {
+.table{
   
   border-collapse: collapse;/*juntamos los border por td y la tabla en si en uno solo*/
   width: 100%;
@@ -50,23 +50,36 @@
   align-content: center;
 }
 .th{
-  
+width:200px;
 height: 18px;
 text-align: center;/*Alineamos el texto al centro ---th por defecto esta alineado al centro*/
  /* vertical-align: bottom; Alineamos el texto verticalmente hacia abajo*/
-padding: 5px 8px;
+padding: 3px 5px;
 background-color:#215c75;
 color: white;
 border: 3px solid WHITE;
 border-radius: 9px;
 /*border-bottom: 1px solid #ddd;para borde solo horizontal*/
 }
+.th1{
+  width:500px;
+  height: 18px;
+  text-align: center;/*Alineamos el texto al centro ---th por defecto esta alineado al centro*/
+   /* vertical-align: bottom; Alineamos el texto verticalmente hacia abajo*/
+  padding: 3px 5px;
+  background-color:#215c75;
+  color: white;
+  border: 3px solid WHITE;
+  border-radius: 9px;
+  /*border-bottom: 1px solid #ddd;para borde solo horizontal*/
+  }
 .td{
+  width: 200px;
   height: 20px;
   text-align: center;/*Alineamos el texto al centro ---th por defecto esta alineado al centro*/
    /* vertical-align: bottom; Alineamos el texto verticalmente hacia abajo*/
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
   border: 3px solid WHITE;
   /*border-bottom: 1px solid #ddd;para borde solo horizontal*/
   }

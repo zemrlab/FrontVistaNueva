@@ -153,13 +153,6 @@ componentDidUpdate(){
                 <TableHeaderNuevo2/>
                 <PagoListNuevo2  funcion={this.Funcion} listado={this.state.pagocero}/>
               </table>
-              <div className="row">
-                <div className="col-xs-7">
-                </div>
-                <div className="col-xs-5">
-                  <Importe importe={this.CalcularImporte()} />
-                </div>
-              </div>
               <div className="SplitPane row center-xs">  
                 <button  onClick={this.Asignar} className="waves-effect waves-light btn-large botonazul2 center"type="submit">Asignar<i className="large material-icons left">check</i></button>
               </div>
@@ -237,7 +230,10 @@ componentDidUpdate(){
       alert("recaudaciones actualizadas exitosamente"); 
     }else{
       alert("error al actualizar las recaudaciones");
+    
     }
+    console.log("lo que recibo luego de mandar el post");
+    console.log(pagos);
   })
   .catch(error => {
     // si hay algún error lo mostramos en consola

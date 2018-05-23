@@ -6,7 +6,7 @@ class SelectNuevo extends React.Component {
   constructor(props) {
     super(props)
     this.state = { 
-      SelectedOption:  { value: 'codigo', label: 'SELECT' },
+      SelectedOption:  { value: 'codigo', label: 'Eliga una opcion' },
     }
     this.opcion = 'elegido';
   }
@@ -23,7 +23,7 @@ class SelectNuevo extends React.Component {
   
     return (
       <span className="opcion" id={this.state.SelectedOption.value}>
-      <Select       
+      <Select    
         name="form-field-name"
         value={this.state.SelectedOption}
         onChange={this.handleChange}

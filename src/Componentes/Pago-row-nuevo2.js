@@ -32,9 +32,9 @@ class PagoRowNuevo2 extends React.Component {
     return(
     <tr>
       <td className="td">{this.props.pago.idAlum.apeNom}</td>
-      <td className="td">{this.props.pago.fecha.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3-$2-$1')}</td>
-      <td className="td">{this.props.pago.moneda}</td>
-      <td className="td">{'S/. '+this.props.pago.importe}</td>
+      <td className="td">{this.props.pago.idAlum.idAlum}</td>
+      <td className="td">{this.props.pago.idAlum.codigo}</td>
+      <td className="td">{this.props.pago.idAlum.idFacultad.nombre}</td>
       <td className="td"><SelectNuevo  listado = {this.props.pago.codigos}/></td>
 	</tr>
     )
