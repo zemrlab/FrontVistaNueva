@@ -15,7 +15,7 @@ import SelectNuevo from './SelectNuevo';
 import HEROES from './Data-Select';
 import RECAUDACION from './Recaudacion-Data';
 
-
+//Chinche
 const propTypes = {
   items: PropTypes.array.isRequired,
   onChangePage: PropTypes.func.isRequired,
