@@ -167,8 +167,10 @@ label {
     color: white;
 } */
 .margen2{
-  margin-top: 20px;
-  margin-left: 10%;
+  margin-top: 60px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
  } 
 .margen_izq{
   margin-left: 65px;
@@ -179,6 +181,11 @@ label {
 }
 .sin_margen{
   margin-left: 150px;
+}
+
+.margen3{
+  margin: 10px;
+ 
 }
 .margen{
   padding-left: 20px;

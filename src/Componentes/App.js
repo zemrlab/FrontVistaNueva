@@ -251,7 +251,7 @@ componentDidUpdate(){
         </div>
       )
     } else {
-      return <p className="text-center">El alumno no cuenta con registros de pagos</p>
+      return <p className="text-center">Cargando estado de pagos de alumno</p>
     }
   }
 //obtenemos la fecha del componente FILTROFECHA1

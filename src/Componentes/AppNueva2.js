@@ -9,13 +9,13 @@ import NumeroRecibo from './NumeroRecibo'
 import '../App2.css';
 import PropTypes from 'prop-types';
 import Imprimir from './Imprimir';
-import Buscar from './Buscar';
+import BuscarNuevo from './BuscarNuevo';
 import {browserHistory} from 'react-router-3';
 import SelectNuevo from './SelectNuevo';
 import HEROES from './Data-Select';
 import RECAUDACION from './Recaudacion-Data';
+import swal from 'sweetalert'
 
-//Chinche
 const propTypes = {
   items: PropTypes.array.isRequired,
   onChangePage: PropTypes.func.isRequired,
@@ -104,47 +104,11 @@ componentDidUpdate(){
           <h3>Estado de pagos</h3>
           <hr />
           <div className="SplitPane row">
-            <div className=" col-xs-4 margen_top">
-              <div className="margen">
-                <Buscar Busqueda={this.BuscarNombre} />
+            <div className=" col-xs-12 margen_top">
+              <div className="margen3">
+                <BuscarNuevo Busqueda={this.BuscarNombre} />
               </div>
-            </div>
-
-            <div className=" col-xs-8 ">
-              <div className="center-xs-12 margen_top">
-              <h5>Filtros</h5>
-              </div>
-              <div className="SplitPane row">
-                <div className="inline col-xs-3">
-                  <div>
-                    <label>Del:</label>
-                    <FiltroFecha1 Fechas={this.SeleccionFechaDel} />
-                  </div>
-                  <div>
-                    <label>Al:</label>
-                    <FiltroFecha1 Fechas={this.SeleccionFechaAl} />
-                  </div>
-                </div >
-                <div className="row center-xs-4 block ">
-                  <h4 className=" centrar margen_top espacio">Conceptos</h4>
-                  <div className="scroll center-xs ">
-                    <form action="#"><ConceptoList listado={this.state.conceptos} /></form>
-                  </div>
-                </div>
-                <div className="centrar col-xs-5">
-                  <h4 className="centrar margen_top">Recibo</h4>
-                  <div>
-                    <NumeroRecibo Numeros={this.FiltrarNumeros} />
-                  </div>
-                </div>
-                <div className="SplitPane row">
-                <div className="row center-xs-12">
-                <button onClick={this.Filtrar}  className="waves-effect waves-light btn-large botonazul2 right" type="submit">Filtrar<i className="large material-icons left">check</i></button>
-                </div>
-              </div>
-              </div>
-              
-            </div>   
+            </div>  
           </div> 
           <hr />
             <div className="SplitPane row center-xs">
@@ -174,6 +138,7 @@ componentDidUpdate(){
     console.log("seleccionados codigos");
     for (var item of check) {
      opcionesSeleccionadas.push(item.id);
+     console.log("item recibido");
      console.log(item.id);
     }
     /*
@@ -227,9 +192,9 @@ componentDidUpdate(){
   })
   .then((pagos) => {
     if(pagos == 1){
-      alert("recaudaciones actualizadas exitosamente"); 
+      swal("Recaudaciones actualizadas exitosamente!","","success");
     }else{
-      alert("error al actualizar las recaudaciones");
+      swal("Error al actualizar recaudaciones!", "", "error");
     
     }
     console.log("lo que recibo luego de mandar el post");

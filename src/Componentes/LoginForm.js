@@ -1,6 +1,7 @@
 import React from 'react';
 import {browserHistory} from 'react-router-3';
 import { Link } from 'react-router-3';
+import swal from 'sweetalert'
 
 
 class LoginForm extends React.Component {
@@ -15,6 +16,7 @@ class LoginForm extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
     this.VistaNueva = this.VistaNueva.bind(this);
+  
   }
 
 
@@ -38,11 +40,15 @@ class LoginForm extends React.Component {
                   this.setState({isValid: true})
                 }
                 if (this.state.isValid) {
-                 browserHistory.push('/'+this.state.nombres.toUpperCase())
+                 swal("Bienvenido!", this.state.alumnos.apeNom , "success").then(
+                    browserHistory.push('/'+this.state.nombres.toUpperCase())
+                 );
+                
+                 
                 }
               }
               else{
-                alert("Datos ingresados incorrectamente");
+                swal("Wrong!", "Datos ingresados incorrectos!", "error");
               }
 
             })
@@ -70,6 +76,13 @@ class LoginForm extends React.Component {
     e.preventDefault();
     
   }
+  VistaTablaCreada=(e)=>{
+    
+    browserHistory.push('/vista/Tabla');
+    console.log("Vista nueva 2");
+    e.preventDefault();
+    
+  }
   ValidarNombre(nombres){
     if(!nombres){
       alert("Ingrese un nombre");
@@ -90,7 +103,7 @@ class LoginForm extends React.Component {
       <div>
       <div className="vista">
       <div className="grupo">
-      <h4 className="center ">Bienvenido</h4>
+      <h4 className="center h4"><b>Bienvenido</b></h4>
       <form>
           <div className="center datos">
             <div>
@@ -120,6 +133,13 @@ class LoginForm extends React.Component {
       </div>
 
       </div>
+       <div className="SplitPane row">
+        
+        <div>
+        <button type="submit" onClick={this.VistaTablaCreada} className="btn btn-primary btn-lg">VER TABLA</button>
+        </div>
+  
+        </div>
 
       </div>
     );

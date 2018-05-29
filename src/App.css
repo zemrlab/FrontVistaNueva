@@ -144,7 +144,7 @@ label {
 } */
 .margen2{
   margin-top: 20px;
-  margin-left: 10%;
+  margin-bottom: 20px;
  } 
 .margen_izq{
   margin-left: 65px;
@@ -210,7 +210,7 @@ select {
   color:lightblue;
 } */
 h4{
-  font-size: 25px;
+  font-size: 35px;
   color: #042431;
 }
 .material-icons{

@@ -14,6 +14,7 @@ import {browserHistory} from 'react-router-3';
 import SelectNuevo from './SelectNuevo';
 import HEROES from './Data-Select';
 import RECAUDACION from './Recaudacion-Data';
+import swal from 'sweetalert'
 
 
 const propTypes = {
@@ -182,6 +183,7 @@ componentDidUpdate(){
     console.log("seleccionados codigos");
     for (var item of check) {
      opcionesSeleccionadas.push(item.id);
+     console.log("item recibido");
      console.log(item.id);
     }
     /*
@@ -197,15 +199,19 @@ componentDidUpdate(){
     
     for (let i = 0; i < listado2.length; i++) {
       
-      if(listado2[i].alumnoPrograma.length == 0){
+      if(listado2[i].alumnoPrograma == null){
+        
         listadoAlumnoPrograma.push(null);
       }else{
         var index = opcionesSeleccionadas[i];
+        console.log("indice")
+        console.log(index);
         if(index == 'codigo'){
            listadoAlumnoPrograma.push(null);
         }else{
             var ap = listado2[i].alumnoPrograma[index];
             listadoAlumnoPrograma.push(ap);
+            console.log("ap");
         }
       }
       
@@ -235,9 +241,9 @@ componentDidUpdate(){
   })
   .then((pagos) => {
     if(pagos == 1){
-      alert("recaudaciones actualizadas exitosamente"); 
+      swal("Recaudaciones actualizadas exitosamente!","","success");
     }else{
-      alert("error al actualizar las recaudaciones");
+      swal("Error al actualizar recaudaciones!", "", "error");
     }
   })
   .catch(error => {
