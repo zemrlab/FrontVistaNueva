@@ -6,9 +6,9 @@ class AlumnoAPRow extends React.Component {
   render() {
     return(
     <tr>
-      <td className="td">{this.props.alumnoAP.id_alumno}</td>
-	  <td className="td">{this.props.alumnoAP.cod_alumno}</td>	
-      <td className="td">{this.props.alumnoAP.id_programa}</td>
+      <td className="td">{this.props.alumnoAP.idAlumno}</td>
+	    <td className="td">{this.props.alumnoAP.codAlumno}</td>	
+      <td className="td">{this.props.alumnoAP.idPrograma}</td>
 	  </tr>
     )
   }

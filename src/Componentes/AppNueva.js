@@ -377,7 +377,7 @@ componentDidUpdate(){
 
   for (let i = 0; i< listado3.length; i++) {
         var nombrefiltro = listado3[i].idAlum.apeNom;
-        fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/alumnoprograma/leer/'+nombrefiltro)
+        fetch('http://modulo-alumno-jdbc.herokuapp.com/alumnoprograma/leer/'+nombrefiltro)
         .then((response) => {
         return response.json()
         })
@@ -396,7 +396,7 @@ componentDidUpdate(){
          for(let j = 0; j< alumnoprograma.length; j++){       
 
             var value1 = j;
-            var label1 = alumnoprograma[j].alumnoProgramaPK.codAlumno +"/"+ alumnoprograma[j].programa.nomPrograma;
+            var label1 = alumnoprograma[j].codAlumno +"/"+ alumnoprograma[j].idPrograma;
            
             var option1 = {value: value1, label:label1};
             listado3[i].codigos.push(option1);
@@ -684,7 +684,7 @@ BuscarNombre(busqueda) {
 
       for (let i = 0; i< listado1.length; i++) {
             var nombrefiltro = listado1[i].idAlum.apeNom;
-            fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/alumnoprograma/leer/'+nombrefiltro)
+            fetch('http://modulo-alumno-jdbc.herokuapp.com/alumnoprograma/leer/'+nombrefiltro)
             .then((response) => {
             return response.json()
             })
@@ -703,7 +703,7 @@ BuscarNombre(busqueda) {
              for(let j = 0; j< alumnoprograma.length; j++){       
     
                 var value1 = j;
-                var label1 = alumnoprograma[j].alumnoProgramaPK.codAlumno +"/"+ alumnoprograma[j].programa.nomPrograma;
+                var label1 = alumnoprograma[j].codAlumno +"/"+ alumnoprograma[j].idPrograma;
                
                 var option1 = {value: value1, label:label1};
                 listado1[i].codigos.push(option1);

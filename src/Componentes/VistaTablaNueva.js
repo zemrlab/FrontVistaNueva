@@ -5,8 +5,6 @@ import ALUMNOAP from './AlumnoAP-Data'
 import '../App.css';
 import {browserHistory} from 'react-router-3';
 
-
-
 class VistaTablaNueva extends React.Component {
 
   constructor(props) {
@@ -18,21 +16,13 @@ class VistaTablaNueva extends React.Component {
   }
 
   componentWillMount() {
-      /*
-    fetch('http://165.227.63.46/clientes/',
-    {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: "GET",
-
-    })
+    fetch('http://modulo-alumno-jdbc.herokuapp.com/alumnoalumnoprograma/listar')
     .then((response) => {
     return response.json()
     })
     .then((alumno) => {
       this.setState({ vehiculos: alumno})
+      
       console.log(alumno)
    
     })
@@ -40,8 +30,6 @@ class VistaTablaNueva extends React.Component {
     // si hay algún error lo mostramos en consola
         console.error(error)
     });
-    */
-
   }
 
 
@@ -55,7 +43,7 @@ class VistaTablaNueva extends React.Component {
             <div className="  center-xs-12">
               <table className=" total table ">
                 <TableHeaderAlumnoAP/>
-                <AlumnoAPList listado={ALUMNOAP} />
+                <AlumnoAPList listado={this.state.vehiculos} />
               </table>
             </div>
           </div>
