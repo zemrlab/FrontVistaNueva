@@ -176,6 +176,13 @@ label {
   margin-left: 65px;
   margin-right: 20px;
 }
+.seleccionar {
+  color: white;
+  cursor: pointer;
+  cursor: hand;
+  font-size: 20px;
+  
+}
 .margen_der{
   margin-right: 30px;
 }
@@ -253,7 +260,7 @@ h5{
   margin-left:20px;
 }
 .material-icons{
-  font-size: 40px;
+  font-size: 30px;
 }
 .negro{
   color: black;

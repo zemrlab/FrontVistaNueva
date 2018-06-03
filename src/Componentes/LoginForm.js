@@ -69,6 +69,7 @@ class LoginForm extends React.Component {
     e.preventDefault();
     
   }
+
   VistaNueva2=(e)=>{
     
     browserHistory.push('/vista/nueva2');
@@ -100,7 +101,19 @@ class LoginForm extends React.Component {
     const { nombres, isLoading,isValid } = this.state;
 
     return (
-      <div>
+      <div className="">
+      <nav>
+    <div class="nav-wrapper azul">
+      
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a onClick={this.VistaNueva} >VistaNueva</a></li>
+        <li><a onClick={this.VistaNueva2} >VistaNueva2</a></li>
+        <li><a onClick={this.VistaTablaCreada} >Ver tabla</a></li>
+        <li><a href="https://siga-fisi.herokuapp.com/dashboard" >Vista Principal<i className="material-icons right">undo</i></a></li>
+
+      </ul>
+    </div>
+  </nav>
       <div className="vista">
       <div className="grupo">
       <h4 className="center h4"><b>Bienvenido</b></h4>
@@ -120,27 +133,6 @@ class LoginForm extends React.Component {
       </div>
       
       </div>
-
-      <div className="SplitPane row">
-      <div>
-      <button type="submit" onClick={this.VistaNueva} className="btn btn-primary btn-lg">VISTANUEVA</button>
-      </div>
-      </div>
-      <div className="SplitPane row">
-        
-      <div>
-      <button type="submit" onClick={this.VistaNueva2} className="btn btn-primary btn-lg">VISTANUEVA2</button>
-      </div>
-
-      </div>
-       <div className="SplitPane row">
-        
-        <div>
-        <button type="submit" onClick={this.VistaTablaCreada} className="btn btn-primary btn-lg">VER TABLA</button>
-        </div>
-  
-        </div>
-
       </div>
     );
   }

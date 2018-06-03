@@ -7,7 +7,7 @@ class TableHeaderNuevo2 extends React.Component {
     <thead>
 			<tr>      
                 <th className="th">NOMBRE</th>
-                <th className="th">IDALUMNO</th>
+                <th className="th">ID ALUMNO</th>
                 <th className="th">CODIGO</th>
                 <th className="th">FACULTAD</th>    
                 <th className="th1"> CODIGO  /  PROGRAMA  A ESCOGER </th>

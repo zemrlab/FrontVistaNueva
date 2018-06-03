@@ -12,6 +12,7 @@ class VistaTablaNueva extends React.Component {
     this.state = {
       vehiculos: []
     }
+    this.Regresar = this.Regresar.bind(this);
 
   }
 
@@ -31,12 +32,21 @@ class VistaTablaNueva extends React.Component {
         console.error(error)
     });
   }
-
+  Regresar=(e)=>{
+    
+    browserHistory.push('/');
+    e.preventDefault();
+    
+  }
 
   render() {
       return (
         <div className="">
-              <h3>Tabla Alumno-AlumnoPrograma</h3>
+              <h3>Tabla Alumno-AlumnoPrograma
+              <ul id="nav-mobile" class="right  hide-on-med-and-down">
+              <li ><a className="seleccionar" onClick={this.Regresar} >Regresar<i className="material-icons right">reply</i></a></li>
+          </ul>
+              </h3>
             
           <hr />
           <div className="SplitPane row center-xs">

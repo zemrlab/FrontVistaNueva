@@ -57,6 +57,7 @@ class AppNueva extends React.Component {
     this.enviar=this.enviar.bind(this);
     this.Funcion=this.Funcion.bind(this);
     this.Asignar = this.Asignar.bind(this);
+    this.Regresar = this.Regresar.bind(this);
     
   }
 componentDidUpdate(){
@@ -88,13 +89,22 @@ componentDidUpdate(){
   componentWillMount() {
     
   }
-
+  Regresar=(e)=>{
+    
+    browserHistory.push('/');
+    e.preventDefault();
+    
+  }
 
   render() {
     
       return (
         <div className="">
-          <h3>Estado de pagos</h3>
+          <h3>Estado de pagos
+          <ul id="nav-mobile" class="right  hide-on-med-and-down">
+              <li ><a className="seleccionar" onClick={this.Regresar} >Regresar<i className="material-icons right">reply</i></a></li>
+          </ul>
+          </h3>
           <hr />
           <div className="SplitPane row">
             <div className=" col-xs-12 margen_top">
@@ -128,7 +138,8 @@ componentDidUpdate(){
     
 
     check = document.getElementsByClassName("opcion2");
-
+    console.log("Elementos seleccionado")
+    console.log(check);
     console.log("seleccionados codigos");
     for (var item of check) {
      opcionesSeleccionadas.push(item.id);
@@ -144,7 +155,7 @@ componentDidUpdate(){
         var index = opcionesSeleccionadas[i];
         console.log("indice")
         console.log(index);
-        if(index == 'codigo'){
+        if(!index){
            listadoAlumnoPrograma.push(null);
         }else{
            var ap = listado2[i].alumnoPrograma[index];
@@ -197,7 +208,7 @@ componentDidUpdate(){
   .catch(error => {
     // si hay algún error lo mostramos en consola
     
-      swal("Ya existe!", "", "error");
+      swal("Ya ha sido registrado!", "", "error");
     console.error(error)
   });
   
@@ -313,7 +324,7 @@ BuscarNombre(busqueda) {
       nombre: nombre,
       apellido:apellido
     });
-      var listado1 =[];  
+    var listado1 =[];  
     fetch('http://modulo-alumno-jdbc.herokuapp.com/alumno/leer/'+nombre+'/'+apellido)
       .then((response) => {
         return response.json()
@@ -332,7 +343,6 @@ BuscarNombre(busqueda) {
           codigo:'',
           dni:'',
           idFacultad:'',
-          idUsuario:'',
           codigos:[]
         }
         listadoRec.idAlum = pagos[i].idAlum;
@@ -340,8 +350,6 @@ BuscarNombre(busqueda) {
         listadoRec.codigo = pagos[i].codigo;
         listadoRec.dni = pagos[i].dni;
         listadoRec.idFacultad = pagos[i].idFacultad;
-        listadoRec.idUsuario = pagos[i].idUsuario;
-        
         listado1.push(listadoRec); 
       }
      
@@ -385,12 +393,14 @@ BuscarNombre(busqueda) {
             
             }
             console.log("programa leido");
+            /*
             if(alumnoprograma.length == 0){
               var value1 = "codigo";
               var label1 = "No hay coincidencias";
               var option1 = {value: value1, label:label1};
               listado1[i].codigos.push(option1);
             }
+            */
             console.log(programa);
             })
             .catch(error => {

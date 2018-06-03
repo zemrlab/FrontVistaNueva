@@ -6,18 +6,19 @@ class SelectNuevo2 extends React.Component {
   constructor(props) {
     super(props)
     this.state = { 
-      SelectedOption:  { value: 'codigo', label: 'Eliga una opcion' },
+      SelectedOption: '',
     }
-    this.opcion = 'elegido';
   }
   handleChange = (selectedOption) => {
-    this.setState({ SelectedOption: selectedOption,
+    if(selectedOption != null){
+      this.setState({ SelectedOption: selectedOption,
     
     });
+    }else{
+      this.setState({ SelectedOption:'',
+      });
+    }
     
-    //this.props.Opcion(selectedOption);
-
-    //console.log(selectedOption);
   }
   render() {
   

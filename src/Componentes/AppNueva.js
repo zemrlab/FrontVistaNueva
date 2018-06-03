@@ -59,6 +59,7 @@ class AppNueva extends React.Component {
     this.SeleccionFechaAl = this.SeleccionFechaAl.bind(this);
     this.Filtrar = this.Filtrar.bind(this);
     this.SeleccionConceptos = this.SeleccionConceptos.bind(this);
+    this.Regresar = this.Regresar.bind(this);
 
     this.select = [];
     this.onChangePage = this.onChangePage.bind(this);
@@ -97,13 +98,21 @@ componentDidUpdate(){
   componentWillMount() {
     
   }
-
+  Regresar=(e)=>{
+    
+    browserHistory.push('/');
+    e.preventDefault();
+    
+  }
 
   render() {
     
       return (
         <div className="">
-          <h3>Estado de pagos</h3>
+          <h3>Estado de pagos  <ul id="nav-mobile" class="right  hide-on-med-and-down">
+              <li ><a className="seleccionar" onClick={this.Regresar} >Regresar<i className="material-icons right">reply</i></a></li>
+          </ul></h3>
+         
           <hr />
           <div className="SplitPane row">
             <div className=" col-xs-4 margen_top">
@@ -198,30 +207,27 @@ componentDidUpdate(){
     console.log(listado2);
     
     for (let i = 0; i < listado2.length; i++) {
-      
-      if(listado2[i].alumnoPrograma == null){
-        
-        listadoAlumnoPrograma.push(null);
-      }else{
         var index = opcionesSeleccionadas[i];
         console.log("indice")
         console.log(index);
-        if(index == 'codigo'){
-           listadoAlumnoPrograma.push(null);
+        if(!index){
+            listadoAlumnoPrograma.push(null);
         }else{
             var ap = listado2[i].alumnoPrograma[index];
             listadoAlumnoPrograma.push(ap);
             console.log("ap");
+            console.log(ap);
         }
-      }
-      
+    
     }
     console.log("listado alumno programa");
     console.log(listadoAlumnoPrograma);
     var PagosActualizados = this.state.pagos;
     for (let i = 0; i < PagosActualizados.length; i++) {
         var ap = listadoAlumnoPrograma[i];
-        PagosActualizados[i].alumnoPrograma = ap;
+        if(ap != null){
+          PagosActualizados[i].alumnoPrograma = ap;
+        }
     }
     console.log("pagos actualizados");
     console.log(PagosActualizados);
@@ -412,6 +418,7 @@ componentDidUpdate(){
         
         }
         console.log("programa leido");
+        /*
         if(alumnoprograma.length == 0){
           var value1 = "codigo";
           var label1 = "No hay coincidencias";
@@ -424,9 +431,9 @@ componentDidUpdate(){
           var label2 = "Programa1";
           var option2 = {value: value2, label:label2};
           //listadoOpcionesProgramas.push(option2);
-          listado1[i].programas.push(option2);*/
+          listado1[i].programas.push(option2);
      
-        }
+        }*/
         console.log(programa);
         })
         .catch(error => {
