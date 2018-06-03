@@ -146,6 +146,7 @@ componentDidUpdate(){
      console.log("item recibido");
      console.log(item.id);
     }
+    
  
     var listado2 = this.state.pagocero;
     console.log("listado 2");
