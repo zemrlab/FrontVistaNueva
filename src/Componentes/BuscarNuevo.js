@@ -4,11 +4,11 @@ class BuscarNuevo extends React.Component {
   addNewFiltro(e) {
     e.preventDefault();
     var nombres = this.nombre.value.toUpperCase();
-    var apellidos = this.apellidos.value;
+
     if(!nombres){
       alert("ingrese un nombre para buscar");
     }else{
-      var busqueda = {nombres: nombres, apellidos :apellidos}
+      var busqueda = {nombres: nombres}
       this.props.Busqueda( busqueda);
     }
     
@@ -20,7 +20,6 @@ class BuscarNuevo extends React.Component {
          <div className="SplitPane row">
             <div className="col-xs-4 margen_top">
             <input ref={ ( input ) => this.nombre = input } type="text" placeholder="Nombres" /> 
-            <input ref={ ( input ) => this.apellidos= input } type="text" placeholder="Apellidos" />
             </div>
             <div className="col-xs-2 margen2">
               <button  className="waves-effect waves-light btn-large center"type="submit">Buscar<i className="large material-icons left">search</i></button>

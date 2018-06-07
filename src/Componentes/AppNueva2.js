@@ -166,16 +166,12 @@ enviar(){
 BuscarNombre(busqueda) {
     console.log("Nombre ingresado");
     console.log(busqueda.nombres);
-    console.log("apellido ingresado");
-    console.log(busqueda.apellidos);
     let nombre = busqueda.nombres;
-    let apellido = busqueda.apellidos;
     this.setState({
-      nombre: nombre,
-      apellido:apellido
+      nombre: nombre
     });
     var listado1 =[];  
-    fetch('http://modulo-alumno-jdbc.herokuapp.com/alumno/leer/'+nombre+'/'+apellido)
+    fetch('http://modulo-alumno-jdbc.herokuapp.com/alumno/leer/RAUL ABEL/ALFARO BARRIENTOS')
       .then((response) => {
         return response.json()
       })
@@ -227,7 +223,7 @@ BuscarNombre(busqueda) {
              for(let j = 0; j< alumnoprograma.length; j++){       
     
                 var value1 = j;
-                var label1 = alumnoprograma[j].codAlumno +"/"+ alumnoprograma[j].idPrograma;
+                var label1 = alumnoprograma[j].codAlumno+"/"+alumnoprograma[j].nomAlumno+"/"+alumnoprograma[j].apePaterno +"/"+ alumnoprograma[j].idPrograma;
                
                 var option1 = {value: value1, label:label1};
                 listado1[i].codigos.push(option1);

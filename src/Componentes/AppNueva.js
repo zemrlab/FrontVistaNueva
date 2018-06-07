@@ -33,7 +33,8 @@ class AppNueva extends React.Component {
       estado:0,
       filtroDel:new String(""),
       filtroAl:new String(""),
-      filtroNumeros: []
+      filtroNumeros: [],
+      alumno: ''
     }
     this.conceptos = []
     this.alumno = ''
@@ -497,56 +498,12 @@ BuscarNombre(busqueda) {
       nombre: nombre,
       apellido:apellido
     });
-    //creo el array de opciones
+
    
-      var listado1 =[];/*
-      var opciones  = [];
-      for (let i = 0; i< RECAUDACION.length; i++) {
-        var listadoRec = { idRec: 0,concepto: '',numero:'',facultad:'', fecha: '',moneda : 0 ,importe: 0,
-        codigo :[],programa :[]
-        }
-        listadoRec.idRec = RECAUDACION[i].idRec;
-        listadoRec.concepto = RECAUDACION[i].concepto;
-        listadoRec.numero = RECAUDACION[i].numero;
-        listadoRec.facultad = RECAUDACION[i].facultad;
-        listadoRec.fecha = RECAUDACION[i].fecha;
-        listadoRec.moneda = RECAUDACION[i].moneda;
-        listadoRec.importe = RECAUDACION[i].importe;
-
-        var listadoOpciones = RECAUDACION[i].codigo;
-        var listadoProgramas = RECAUDACION[i].programa;
-        var listadoOpcionesOpciones = [];
-        var listadoOpcionesProgramas = [];
-
-        for(let j = 0; j<listadoOpciones.length; j++){
-          var value = listadoOpciones[j];
-          var label = listadoOpciones[j];
-          var option = {value: value, label:label};
-          listadoOpcionesOpciones.push(option);
-        }
-        for(let j = 0; j<listadoProgramas.length; j++){
-          var value = listadoProgramas[j]
-          var label = listadoProgramas[j];
-          var option = {value: value, label:label};
-          listadoOpcionesProgramas.push(option);
-          }
-        listadoRec.codigo.push(listadoOpcionesOpciones);
-        listadoRec.programa.push(listadoOpcionesProgramas);
-        listado1.push(listadoRec);
-        
-      }
-
-     console.log("listado de programa y codigo opciones");
-     console.log(listado1);
-     
-
-    //creo el array de opciones
-    this.setState({
-      pagocero: listado1,
-      pagoOpciones:listado1
-    });*/
-    
-    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/updaterecaudaciones/listar/'+nombre+'/'+apellido)
+      var listado1 =[];
+    //antiguo link 
+    //https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/updaterecaudaciones/listar/
+    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/updaterecaudaciones/listar/'+nombre+'/'+apellido)
       .then((response) => {
         return response.json()
       })
@@ -574,8 +531,8 @@ BuscarNombre(busqueda) {
           numero:'',
           observacion:'',
           validado:'',
-          codigos:[]//,
-          //programas:[]
+          codigos:[],
+          alumno: ''
         }
         listadoRec.alumnoPrograma = pagos[i].alumnoPrograma;
         listadoRec.autoseguro = pagos[i].autoseguro;
@@ -592,14 +549,38 @@ BuscarNombre(busqueda) {
         listadoRec.numero = pagos[i].numero;
         listadoRec.observacion = pagos[i].observacion;
         listadoRec.validado = pagos[i].validado;
-        listado1.push(listadoRec); 
+        var idAlumno = pagos[i].idAlum;
+        fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/alumno/buscar/'+idAlumno)
+        .then((response) => {
+        return response.json()
+        })
+        .then((alumno) => {
+          
+    
+          console.log("alumno recibido")
+          console.log(alumno);
+          listadoRec.alumno = alumno.apeNom;
+          console.log("alumno con nombre")
+          console.log(alumno.apeNom);
+          console.log("listado rec alumno")
+          console.log(listadoRec.alumno);
+          
+        })
+        .catch(error => {
+        // si hay algún error lo mostramos en consola
+        console.error(error)
+        });
+        listado1.push(listadoRec);
       }
      
-      console.log(nombrefiltro);
-
+console.log("listado 1");
+console.log(listado1);
+  
+//link anterior
+//http://modulo-alumno-jdbc.herokuapp.com/alumnoprograma/leer/
       for (let i = 0; i< listado1.length; i++) {
-            var nombrefiltro = listado1[i].idAlum.apeNom;
-            fetch('http://modulo-alumno-jdbc.herokuapp.com/alumnoprograma/leer/'+nombrefiltro)
+            var nombrefiltro = listado1[i].alumno;
+            fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/alumnoprograma/leer/'+nombrefiltro)
             .then((response) => {
             return response.json()
             })
@@ -622,34 +603,10 @@ BuscarNombre(busqueda) {
                
                 var option1 = {value: value1, label:label1};
                 listado1[i].codigos.push(option1);
-                //listadoOpcionesCodigos.push(option1);
-                /*
-                console.log("listado de opciones de codigos");
-                var value2 = j;
-                var label2 = alumnoprograma[j].programa.nomPrograma;
-                var option2 = {value: value2, label:label2};
-                listado1[i].programas.push(option2);
-                */
-               // listadoOpcionesProgramas.push(option2);    
+             
             
             }
             console.log("programa leido");
-              /*
-            if(alumnoprograma.length == 0){
-              var value1 = "codigo";
-              var label1 = "No hay coincidencias";
-              var option1 = {value: value1, label:label1};
-              listado1[i].codigos.push(option1);
-              //listadoOpcionesCodigos.push(option1);
-            
-              console.log("listado de opciones de codigo en caso no tener programas");
-              var value2 = "programa";
-              var label2 = "Programa1";
-              var option2 = {value: value2, label:label2};
-              //listadoOpcionesProgramas.push(option2);
-              listado1[i].programas.push(option2);
-         
-            }*/
             console.log(programa);
             })
             .catch(error => {
@@ -661,7 +618,7 @@ BuscarNombre(busqueda) {
       this.setState({
           pagocero: listado1,
           pagos: pagos
-      },
+      }
         );
         console.log("listado de programa y codigo opciones despues de copiar el filtro");
         console.log(listado1);
