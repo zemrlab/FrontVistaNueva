@@ -6,14 +6,14 @@ class PagoRowNuevo extends React.Component {
   render() {
     return(
     <tr>
-      <td className="td">{this.props.pago.idAlum}</td>
-      <td className="td">{this.props.pago.idConcepto}</td>
-			<td className="td">{this.props.pago.numero}</td>
-      <td className="td">{this.props.pago.idAlum}</td>
-      <td className="td">{this.props.pago.fecha.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3-$2-$1')}</td>
-      <td className="td">{this.props.pago.moneda}</td>
-      <td className="td">{'S/. '+this.props.pago.importe}</td>
-      <td className="td"><SelectNuevo  listado = {this.props.pago.codigos}/></td>
+      <td className="td1">{this.props.pago.idAlum}</td>
+      <td className="td1">{this.props.pago.idConcepto}</td>
+			<td className="td1">{this.props.pago.numero}</td>
+      <td className="td1">{this.props.pago.idAlum}</td>
+      <td className="td1">{this.props.pago.fecha.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3-$2-$1')}</td>
+      <td className="td1">{this.props.pago.moneda}</td>
+      <td className="td1">{'S/. '+this.props.pago.importe}</td>
+      <td className="td1"><SelectNuevo  listado = {this.props.pago.codigos}/></td>
 	</tr>
     )
   }

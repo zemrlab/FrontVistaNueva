@@ -1,11 +1,14 @@
 import React from 'react'
 import PagoRowNuevo2 from './Pago-row-nuevo2'
+import TableHeaderNuevo2 from './Table-Header-Nuevo2'
 
 class PagoListNuevo2 extends React.Component {
 
   render() {
     if(this.props.listado.length >0){
       return (
+        <table className="table">
+        <TableHeaderNuevo2/>
         <tbody>
           {
             this.props.listado.map((pago) => {
@@ -14,9 +17,10 @@ class PagoListNuevo2 extends React.Component {
             })
           }
         </tbody>
+        </table>
     )
     }else{
-      return <p className="text-center">No hay registros</p>
+      return <div className="mensaje centrar">No se encontraron datos</div>
     }
     
   }

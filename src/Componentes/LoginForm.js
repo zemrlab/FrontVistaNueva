@@ -103,9 +103,9 @@ class LoginForm extends React.Component {
 
     return (
       <div className="">
+      <h3>Módulo consulta de recibos</h3>
       <nav>
     <div class="nav-wrapper azul">
-      
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a onClick={this.VistaNueva} >VistaNueva</a></li>
         <li><a onClick={this.VistaNueva2} >VistaNueva2</a></li>

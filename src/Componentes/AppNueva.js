@@ -138,13 +138,14 @@ Regresar=(e)=>{
             </div>   
           </div> 
           <hr />
-            <div className="SplitPane row center-xs">
-            <div className="center-xs-12">
-              <table className=" total table ">
-                <TableHeaderNuevo/>
+          <div className="row center-xs centrar">
+            <div className="center-xs-12 margin_top">
                 <PagoListNuevo  funcion={this.Funcion} listado={this.state.pagocero}/>
-              </table>
-              <div className="row">
+            </div>
+          </div>
+          <div>
+            <div>
+              <div className="SplitPane row margin_top">
                 <div className="col-xs-7">
                 </div>
                 <div className="col-xs-5">
@@ -154,8 +155,9 @@ Regresar=(e)=>{
               <div className="SplitPane row center-xs">  
                 <button  onClick={this.Asignar} className="waves-effect waves-light btn-large botonazul2 center"type="submit">Asignar<i className="large material-icons left">check</i></button>
               </div>
+           
             </div>
-            </div>
+          </div>
 
         </div>
       )

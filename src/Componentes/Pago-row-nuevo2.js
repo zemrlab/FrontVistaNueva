@@ -5,11 +5,11 @@ class PagoRowNuevo2 extends React.Component {
   render() {
     return(
     <tr>
-      <td className="td">{this.props.pago.apeNom}</td>
-      <td className="td">{this.props.pago.idAlum}</td>
-      <td className="td">{this.props.pago.codigo}</td>
-      <td className="td">{this.props.pago.idFacultad}</td>
-      <td className="td"><SelectNuevo2  listado = {this.props.pago.codigos}/></td>
+      <td className="td1">{this.props.pago.apeNom}</td>
+      <td className="td1">{this.props.pago.idAlum}</td>
+      <td className="td1">{this.props.pago.codigo}</td>
+      <td className="td1">{this.props.pago.idFacultad}</td>
+      <td className="td1"><SelectNuevo2  listado = {this.props.pago.codigos}/></td>
 	</tr>
     )
   }

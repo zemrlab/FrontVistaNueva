@@ -52,24 +52,27 @@ Regresar=(e)=>{
           </h3>
           <hr />
           <div className="SplitPane row">
-            <div className=" col-xs-12 margen_top">
-              <div className="margen3">
+            <div className=" col-xs-12">
+              <div>
                 <BuscarNuevo Busqueda={this.BuscarNombre} />
               </div>
             </div>  
           </div> 
-          <hr />
-            <div className="SplitPane row center-xs">
-            <div className="center-xs-12">
-              <table className=" total table ">
-                <TableHeaderNuevo2/>
+          <hr/>
+            <div className="row center-xs centrar">
+            <div className="center-xs-12 margin_top">
                 <PagoListNuevo2  funcion={this.Funcion} listado={this.state.pagocero}/>
-              </table>
+             
               <div className="SplitPane row center-xs">  
                 <button  onClick={this.Asignar} className="waves-effect waves-light btn-large botonazul2 center"type="submit">Asignar<i className="large material-icons left">check</i></button>
               </div>
             </div>
             </div>
+            <footer>
+            <div className="row center-xs centrar color">
+            Realizado por Hardcode © 2018 
+            </div>
+            </footer>
 
         </div>
       )
@@ -145,7 +148,7 @@ Asignar=(e)=>{
   })
   .then((pagos) => {
     if(pagos){
-      swal("Inserciones realizadas exitosamente!","","success");
+      swal("Asignado exitosamente!","","success");
     }
     console.log("ALUMNO QUE HA SIDO INSERTADO");
     console.log(pagos);
@@ -223,7 +226,7 @@ BuscarNombre(busqueda) {
              for(let j = 0; j< alumnoprograma.length; j++){       
     
                 var value1 = j;
-                var label1 = alumnoprograma[j].codAlumno+"/"+alumnoprograma[j].nomAlumno+"/"+alumnoprograma[j].apePaterno +"/"+ alumnoprograma[j].idPrograma;
+                var label1 = alumnoprograma[j].codAlumno+"-"+alumnoprograma[j].nomAlumno+" "+alumnoprograma[j].apePaterno +" "+alumnoprograma[j].apeMaterno +"/"+ alumnoprograma[j].idPrograma;
                
                 var option1 = {value: value1, label:label1};
                 listado1[i].codigos.push(option1);
