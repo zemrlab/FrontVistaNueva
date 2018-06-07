@@ -39,10 +39,12 @@ class App extends React.Component {
       estado:0,
       filtroDel:new String(""),
       filtroAl:new String(""),
-      filtroNumeros: []
+      filtroNumeros: [],
+      alumno: {},
+      conceptos:[]
 
     }
-    this.conceptos = []
+
     this.alumno = ''
     this.importe = 0;
     this.FiltrarFecha = this.FiltrarFecha.bind(this);
@@ -97,13 +99,38 @@ componentDidUpdate(){
        checkbox_selec.push(checkbox.id);
      }
    });
-    
 
-    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/recaudaciones/listar/' + nombres)
+   //cONSULTAMOS LA RECAUDACIONES POR NOMBRE DE ALUMNO
+//https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/recaudaciones/listar/
+    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/listar/' + nombres)
       .then((response) => {
         return response.json()
       })
       .then((pagos) => {
+
+        
+        console.log("pagos de la consulta");
+        console.log(pagos);
+        var auxPagos = pagos;
+        /*
+        for(let j=0;j<auxPagos.length;j++){
+
+        //Consultamos los nombres de conceptos
+        fetch('' + nombres)
+        .then((response) => {
+        return response.json()
+        })
+        .then((concepto) => {
+         
+            auxPagos[j].concepto = concepto.concepto.substr(0,3)+'-'+concepto.concepto.substr(3,3)
+        
+        })
+        .catch(error => {
+        // si hay algún error lo mostramos en consola
+        console.error(error)
+        });
+      
+     }*/
         this.setState({
           pagocero: pagos,
           pagos: pagos
@@ -118,64 +145,49 @@ componentDidUpdate(){
      this.state.pagocero.map((pago)=>{
        pago.check=false
      })
-      console.log(this.state.pagocero);/*
-      var checkbox=document.getElementsByClassName("checkbox");
-      console.log(checkbox);
-      var arr = Array.from(checkbox);
-      console.log(arr);
-      for(let j=0;j<arr.length;j++){
-        var codigos=[];
-        arr[j].addEventListener('click',function(){
-          
-          var id=arr[j].id;
-          console.log(id);
-          for(let i=0;i<total.length;i++){
-            
-            if(total[i].idRec==id){
-              
-             if(arr[j].checked){
-               codigos.push(total[i].idRec);
-               
-             }else{
-               codigos.splice(j,1);
-               
-             }
-            }
-          }
-          
-        })
-        
-      } */ 
+      console.log(this.state.pagocero);
       
       }
-      
-      
-
-    
     )
       .catch(error => {
         // si hay algún error lo mostramos en consola
         console.error(error)
       });
-      
-    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/concepto/leer/' + nombres)
+    //Obtenemos el listado de conceptos
+    //https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/concepto/leer/
+    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/concepto/leer/' + nombres)
       .then((response) => {
         return response.json()
       })
       .then((conceptos) => {
-        this.conceptos = conceptos
+        this.setState({
+          conceptos: conceptos
+        }
+
+        );
       })
       .catch(error => {
         // si hay algún error lo mostramos en consola
         console.error(error)
       });
+      //cONSULTAMOS LOS DATOS DEL ALUMNO POR EL NOMBRE:
 
+      fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/alumno/leer/' + nombres)
+      .then((response) => {
+        return response.json()
+      })
+      .then((alumno) => {
+        this.setState({
+          alumno: alumno
+        }
 
-    
-
+        );
+      })
+      .catch(error => {
+        // si hay algún error lo mostramos en consola
+        console.error(error)
+      });
   }
-
-
   render() {
     if (this.state.pagos.length > 0) {
       return (
@@ -184,7 +196,7 @@ componentDidUpdate(){
           <hr/>
           <div className="SplitPane row">
             <div className=" col-xs-3">
-              <Alumno alumno={this.state.pagos[0].idAlum} />
+              <Alumno alumno={this.state.alumno} />
             </div>
             <div className=" col-xs-9">
             <div className="center-xs-12 margen_top">
@@ -204,7 +216,7 @@ componentDidUpdate(){
                 <div className="row center-xs-4 block ">
                   <h4 className=" centrar espacio">Conceptos</h4>
                   <div className="scroll center-xs ">
-                    <form action="#"><ConceptoList listado={this.conceptos} /></form>
+                    <form action="#"><ConceptoList listado={this.state.conceptos} /></form>
                   </div>
                 </div>
                 <div className="centrar col-xs-4">
@@ -242,7 +254,7 @@ componentDidUpdate(){
                   <Importe importe={this.CalcularImporte()} />
                 </div>
                 <div className="SplitPane-right">
-                  <Imprimir onClick={this.enviar} listado={this.state.pagocero} alumno={this.state.pagos[0].idAlum}/>
+                  <Imprimir onClick={this.enviar} listado={this.state.pagocero} alumno={this.state.alumno}/>
                 </div>
               </div>
             </div>
@@ -283,7 +295,10 @@ componentDidUpdate(){
       filtroal = "9999-12-12";
       console.log(filtroal)
     }
-
+    console.log("listado de numeros");
+    console.log(this.state.filtroNumeros);
+    console.log("listado de conceptos");
+    console.log(concep)
 
     fetch('http://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/recaudaciones/listar/filtrar',
     {

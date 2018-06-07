@@ -3,8 +3,9 @@ import React from 'react'
 
 class Alumno extends React.Component {
   render() {
-      return (
-        <div className="Alumno">
+      
+        if(this.props.alumno){
+          return (<div className="Alumno">
         <h4 className="center ">Datos personales</h4>
         <div className="center datos">
         <div>
@@ -24,9 +25,12 @@ class Alumno extends React.Component {
         <div className="negro">
         {this.props.alumno.idAlum}
         </div></div>
-        </div>
-
-      )
+        </div>)
+        }
+        else{
+            <p>No hay datos de alumno para mostrar</p>
+        }
+ 
   }
 }
 

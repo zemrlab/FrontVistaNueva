@@ -23,11 +23,11 @@ class LoginForm extends React.Component {
   onSubmit=(e)=>{
     
     console.log(this.state.nombres);
-
+   //https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/alumno/leer/
     var nombreValidado = this.ValidarNombre(this.state.nombres);
     var nombres = this.state.nombres.toUpperCase();
     if(nombreValidado){
-        fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/alumno/leer/'+nombres)
+        fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/alumno/leer/'+nombres)
             .then((response) => {
             return response.json()
             })
@@ -54,6 +54,7 @@ class LoginForm extends React.Component {
             })
             .catch(error => {
             // si hay algún error lo mostramos en consola
+                swal("Wrong!", "Datos ingresados incorrectos!", "error");
                 console.error(error)
             });
         

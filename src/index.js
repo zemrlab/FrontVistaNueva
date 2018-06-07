@@ -5,8 +5,6 @@ import App from './Componentes/App';
 import AppNueva from './Componentes/AppNueva';
 import AppNueva2 from './Componentes/AppNueva2';
 
-import Login from './Componentes/Login';
-import NameForm from './Componentes/NameForm';
 import registerServiceWorker from './registerServiceWorker';
 import { Router, Route, browserHistory } from 'react-router-3';
 import LoginForm from './Componentes/LoginForm';

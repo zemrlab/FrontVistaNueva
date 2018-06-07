@@ -41,9 +41,9 @@ class PagoRow extends React.Component {
       </form>
      
     </td>
-      <td className="td">{this.props.pago.idConcepto.concepto.substr(0,3)+'-'+this.props.pago.idConcepto.concepto.substr(3,3) }</td>
+      <td className="td">{this.props.pago.idConcepto}</td>
 			<td className="td">{this.props.pago.numero}</td>	
-      <td className="td">{this.props.pago.idAlum.idFacultad.nombre}</td>
+      <td className="td">{this.props.pago.idAlum}</td>
       <td className="td">{this.props.pago.fecha.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3-$2-$1')}</td>
       <td className="td">{this.props.pago.moneda}</td>
       <td className="td">{'S/. '+this.props.pago.importe}</td>
@@ -51,6 +51,10 @@ class PagoRow extends React.Component {
     )
   }
 }
+//observaciones 
+//se deberia mostrar el nombre del concepto
+//se deberia mostrar el nombre facultad con idAlumno
+//
 //<td className="td">{this.props.pago.idRec}</td>
 //<td className="td">{this.props.pago.alumno.idAlum}</td>
 export default PagoRow;

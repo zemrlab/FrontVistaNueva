@@ -1,30 +1,10 @@
 import React from 'react'
 import PagoListNuevo2 from './Pago-list-nuevo2'
 import TableHeaderNuevo2 from './Table-Header-Nuevo2'
-import Alumno from './Alumno'
-import Importe from './Importe'
-import FiltroFecha1 from './FiltroFecha1'
-import ConceptoList from './Concepto-list'
-import NumeroRecibo from './NumeroRecibo'
 import '../App2.css';
-import PropTypes from 'prop-types';
-import Imprimir from './Imprimir';
 import BuscarNuevo from './BuscarNuevo';
 import {browserHistory} from 'react-router-3';
-import SelectNuevo from './SelectNuevo';
-import HEROES from './Data-Select';
-import RECAUDACION from './Recaudacion-Data';
 import swal from 'sweetalert'
-
-const propTypes = {
-  items: PropTypes.array.isRequired,
-  onChangePage: PropTypes.func.isRequired,
-  initialPage: PropTypes.number
-}
-
-const defaultProps = {
-  initialPage: 1
-}
 
 class AppNueva extends React.Component {
 
@@ -47,54 +27,19 @@ class AppNueva extends React.Component {
       filtroAl:new String(""),
       filtroNumeros: []
     }
-    this.alumno = ''
-    this.importe = 0;
-    
-    this.BuscarNombre = this.BuscarNombre.bind(this);
-    this.select = [];
-    this.onChangePage = this.onChangePage.bind(this);
-    this.seleccionar=this.seleccionar.bind(this);
     this.enviar=this.enviar.bind(this);
-    this.Funcion=this.Funcion.bind(this);
+
+    this.BuscarNombre = this.BuscarNombre.bind(this);
     this.Asignar = this.Asignar.bind(this);
     this.Regresar = this.Regresar.bind(this);
-    
-  }
-componentDidUpdate(){
-    if(this.state.estado!=0){
-      var checks=document.getElementsByClassName("checkbox1");
-      /*console.log(checks[0].id);
-      console.log(this.state.estado);
-      checks[0].checked=true;*/
+}
 
-      for(let i=0;i<checks.length;i++){
-         var id=checks[i].id;
-         for(let j=0;j<this.state.pagocero.length;j++){
-             var codigo=this.state.pagocero[j].idRec;
-             if(this.state.pagocero[j].check==true){
-               if(id==codigo){
-                 checks[i].checked=true;
-
-               }
-             }
-         
-        }
-
-        }
-       }
-       else{
-         this.setState({estado:1})
-        }
- }
-  componentWillMount() {
-    
-  }
-  Regresar=(e)=>{
+Regresar=(e)=>{
     
     browserHistory.push('/');
     e.preventDefault();
     
-  }
+}
 
   render() {
     
@@ -129,10 +74,9 @@ componentDidUpdate(){
         </div>
       )
   }
-  Asignar=(e)=>{
+Asignar=(e)=>{
 
     var check = [];
-    var check2 = [];
     var opcionesSeleccionadas = [];
     var listadoAlumnoPrograma = [];
     
@@ -214,101 +158,6 @@ componentDidUpdate(){
   });
   
     }
-
-
-/*
-var aux = { 
-  "idAlumno" : 69,
-  "codAlumno" :"15207098",
-  "idPrograma":8
-}
-    //probando insertar un alumnoalumnprograma
-    fetch('https://modulo-alumno-jdbc.herokuapp.com/alumnoalumnoprograma/add',
-    {
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    method: "POST",
-    body: JSON.stringify(
-      aux
-    )
-  })
-  .then((response) => {
-    return response.json()
-  })
-  .then((pagos) => {
-    if(pagos.idPrograma){
-      swal("Inserciones realizadas exitosamente!","","success");
-    }
-      
-    
-    console.log("ALUMNO QUE HA SIDO INSERTADO");
-    console.log(pagos);
-  })
-  .catch(error => {
-    // si hay algún error lo mostramos en consola
-    swal("Error al insertar!", "", "error");
-    console.error(error)
-  });
-*/
-  }
-
-
-  Funcion(holas){
-    console.log(holas);
-    for(let j=0;j<this.state.pagocero.length;j++){
-      if(holas==this.state.pagocero[j].idRec){
-        if(this.state.pagocero[j].check==true){
-          this.state.pagocero[j].check=false;
-        }else{
-          this.state.pagocero[j].check=true;
-        }
-      }
-    }
-    /* for(let i=0;i<selec.length;i++){
-      var m=select[i];
-      for(let j=0;j<this.state.pagocero;j++){
-        if(m==this.state.pagocero[j].idRec){
-          this.state.pagocero[j].check=true;
-        }
-      }
-    } */
-
-  }
-seleccionar(){
-  console.log("gg");
-  var checks=document.getElementsByClassName("checkbox1");
-  for (let i=0;i<checks.length;i++) {
-            if(this.state.todos==false){
-              checks[i].checked=true; 
-              
-            }
-            else{
-              checks[i].checked=false; 
-             
-            }
-            
-          
-
-}
- if(this.state.todos==false){
-          this.setState({
-            todos:true
-          })
-          this.state.pagocero.map((pago)=>{
-            pago.check=true;
-          })
-        }else{
-          this.setState({
-            todos:false
-          })
-          this.state.pagocero.map((pago)=>{
-            pago.check=true;
-          })
-        }   
-
-
-        
 }
 enviar(){
   console.log("lo que envio:");
@@ -425,165 +274,6 @@ BuscarNombre(busqueda) {
     });
 }
 
-  onChangePage(pageOfItems) {
-    
-    var total=[];
-    var checkbox_selec=[];
-    console.log("hola");
-    var checks=document.getElementsByClassName("checkbox1");
-   var checks_normales=Array.from(checks);
-   checks_normales.map((checkbox)=>{
-     if(checkbox.checked){
-       checkbox_selec.push(checkbox.id);
-       
-     }
-   });
-   console.log(checkbox_selec);
-   console.log(this.state.checkbox_);
-
-   for(let i=0;i<checkbox_selec.length;i++){
-    var id=checkbox_selec[i];
-    for(let j=0;j<this.state.pagocero.length;j++){
-      if(this.state.pagocero[j].idRec==id){
-          total.push(this.state.pagocero[j]);
-      }
-    }
- }
-    // update state with new page of items
-    this.setState({ 
-      checkbox_:total,
-      pageOfItems: pageOfItems });
-
-   
-     
-  }
-
 
 }
-
-
-class Paginacion extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { pager: {} };
-  }
-
-  componentWillMount() {
-
-    // set page if items array isn't empty
-    if (this.props.items && this.props.items.length) {
-      this.setPage(this.props.initialPage);
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    // reset page if items array has changed
-    if (this.props.items !== prevProps.items) {
-      this.setPage(this.props.initialPage);
-    }
-  }
-  setPage(page) {
-    var items = this.props.items;
-    var pager = this.state.pager;
-
-    if (page < 1 || page > pager.totalPages) {
-      return;
-    }
-
-    // get new pager object for specified page
-    pager = this.getPager(items.length, page);
-
-    // get new page of items from items array
-    var pageOfItems = items.slice(pager.startIndex, pager.endIndex + 1);
-
-    // update state
-    this.setState({ pager: pager });
-
-    // call change page function in parent component
-    this.props.onChangePage(pageOfItems);
-  }
-
-  getPager(totalItems, currentPage, pageSize) {
-    // default to first page
-    currentPage = currentPage || 1;
-
-    // default page size is 10
-    pageSize = pageSize || 10;
-
-    // calculate total pages
-    var totalPages = Math.ceil(totalItems / pageSize);
-
-    var startPage, endPage;
-    if (totalPages <= 10) {
-      // less than 10 total pages so show all
-      startPage = 1;
-      endPage = totalPages;
-    } else {
-      // more than 10 total pages so calculate start and end pages
-      if (currentPage <= 6) {
-        startPage = 1;
-        endPage = 10;
-      } else if (currentPage + 4 >= totalPages) {
-        startPage = totalPages - 9;
-        endPage = totalPages;
-      } else {
-        startPage = currentPage - 5;
-        endPage = currentPage + 4;
-      }
-    }
-
-    // calculate start and end item indexes
-    var startIndex = (currentPage - 1) * pageSize;
-    var endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
-
-    // create an array of pages to ng-repeat in the pager control
-    //var pages = _.range(startPage, endPage + 1);
-    var pages = [];
-    for (let i = 0; i < endPage; i++) {
-      pages.push(startPage + i);
-    }
-
-    // return object with all pager properties required by the view
-    return {
-      totalItems: totalItems,
-      currentPage: currentPage,
-      pageSize: pageSize,
-      totalPages: totalPages,
-      startPage: startPage,
-      endPage: endPage,
-      startIndex: startIndex,
-      endIndex: endIndex,
-      pages: pages
-    };
-  }
-
-  render() {
-    var pager = this.state.pager;
-
-    return (
-      <ul className="pagination row center-xs">
-        <li className={pager.currentPage === 1 ? 'disabled' : ''}>
-          <a onClick={() => this.setPage(1)}>First</a>
-        </li>
-        <li className={pager.currentPage === 1 ? 'disabled' : ''}>
-          <a onClick={() => this.setPage(pager.currentPage - 1)}><i class="material-icons">chevron_left</i></a>
-        </li>
-        {pager.pages.map((page, index) =>
-          <li key={index + 28} className={pager.currentPage === page ? 'active' : ''}>
-            <a onClick={() => this.setPage(page)}>{page}</a>
-          </li>
-        )}
-        <li className={pager.currentPage === pager.totalPages ? 'disabled' : ''}>
-          <a onClick={() => this.setPage(pager.currentPage + 1)}><i class="material-icons">chevron_right</i></a>
-        </li>
-        <li className={pager.currentPage === pager.totalPages ? 'disabled' : ''}>
-          <a onClick={() => this.setPage(pager.totalPages)}>Last</a>
-        </li>
-      </ul>
-    );
-  }
-}
-Paginacion.propTypes = propTypes;
-Paginacion.defaultProps = defaultProps;
-
 export default AppNueva;

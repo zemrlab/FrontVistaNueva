@@ -24,9 +24,8 @@ class Imprimir extends React.Component {
 
     var checkbox_selec=[];
     var checks=[];
-    var alumno = this.props.alumno;
-    var nombres = alumno.apeNom;
-    var codigo= alumno.codigo;
+    var nombres = this.props.alumno.apeNom; 
+    var codigo= this.props.alumno.codigo;
     var importe = 0;
     var listadopagos = this.props.listado;
     var listado = [];
@@ -52,7 +51,7 @@ class Imprimir extends React.Component {
 
 
     for (let i = 0; i<total.length; i++) {
-      var pago = [total[i].idConcepto.concepA+'-'+total[i].idConcepto.concepB,total[i].numero,total[i].idAlum.idFacultad.nombre,
+      var pago = [total[i].idConcepto,total[i].numero,total[i].idAlum,
       total[i].fecha,total[i].moneda,total[i].importe]
       listado.push(pago);
     }
