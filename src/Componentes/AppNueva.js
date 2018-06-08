@@ -158,7 +158,11 @@ Regresar=(e)=>{
            
             </div>
           </div>
-
+          <footer>
+            <div className="row center-xs centrar color">
+            Realizado por Hardcode © 2018 
+            </div>
+            </footer>
         </div>
       )
   }

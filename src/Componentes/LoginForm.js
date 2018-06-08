@@ -103,15 +103,17 @@ class LoginForm extends React.Component {
 
     return (
       <div className="">
-      <h3>Módulo consulta de recibos</h3>
+      <h3>Módulo consulta de recibos
+         <ul id="nav-mobile" class="right  hide-on-med-and-down">
+              <li ><a className="seleccionar" href="https://siga-fisi.herokuapp.com/dashboard" >Vista Principal<i className="material-icons right">launch</i></a></li>
+          </ul>
+      </h3>
       <nav>
     <div class="nav-wrapper azul">
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a onClick={this.VistaNueva} >VistaNueva</a></li>
         <li><a onClick={this.VistaNueva2} >VistaNueva2</a></li>
         <li><a onClick={this.VistaTablaCreada} >Ver tabla</a></li>
-        <li><a href="https://siga-fisi.herokuapp.com/dashboard" >Vista Principal<i className="material-icons right">undo</i></a></li>
-
       </ul>
     </div>
   </nav>
@@ -125,7 +127,7 @@ class LoginForm extends React.Component {
             </div>
             <b>Nombres y Apellidos:</b>
             <div className="center">
-            <input type="text" value={this.state.nombres} onChange={this.onChange} />
+            <input type="text" maxlength="100"  value={this.state.nombres} onChange={this.onChange} />
             </div>
            <button type="submit" onClick={this.onSubmit} className="btn btn-primary btn-lg">CONSULTAR</button>
           </div>
@@ -134,6 +136,11 @@ class LoginForm extends React.Component {
       </div>
       
       </div>
+      <footer>
+            <div className="row center-xs centrar color">
+            Realizado por Hardcode © 2018 
+            </div>
+            </footer>
       </div>
     );
   }

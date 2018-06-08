@@ -53,16 +53,17 @@ Regresar=(e)=>{
           <hr />
           <div className="SplitPane row">
             <div className=" col-xs-12">
-              <div>
+                <div>
                 <BuscarNuevo Busqueda={this.BuscarNombre} />
               </div>
             </div>  
           </div> 
           <hr/>
             <div className="row center-xs centrar">
-            <div className="center-xs-12 margin_top">
+            <div className="center-xs-12 margin_top ">
+              <div>
                 <PagoListNuevo2  funcion={this.Funcion} listado={this.state.pagocero}/>
-             
+              </div>
               <div className="SplitPane row center-xs">  
                 <button  onClick={this.Asignar} className="waves-effect waves-light btn-large botonazul2 center"type="submit">Asignar<i className="large material-icons left">check</i></button>
               </div>
@@ -170,11 +171,17 @@ BuscarNombre(busqueda) {
     console.log("Nombre ingresado");
     console.log(busqueda.nombres);
     let nombre = busqueda.nombres;
+    var separador = " "; // un espacio en blanco
+    var arregloDeSubCadenas = nombre.split(separador);
+    console.log("arreglo de subcadenas");
+    var nombrenuevo = arregloDeSubCadenas.join(" & ");
+    console.log(nombrenuevo);
+
     this.setState({
       nombre: nombre
     });
     var listado1 =[];  
-    fetch('http://modulo-alumno-jdbc.herokuapp.com/alumno/leer/RAUL ABEL/ALFARO BARRIENTOS')
+    fetch('http://modulo-alumno-jdbc.herokuapp.com/alumno/leer/restringido/'+nombrenuevo)
       .then((response) => {
         return response.json()
       })
@@ -206,8 +213,13 @@ BuscarNombre(busqueda) {
 
       for (let i = 0; i< listado1.length; i++) {
             var nombrefiltro = listado1[i].apeNom;
+            var separador1 = " "; // un espacio en blanco
+            var arregloDeSubCadenas1 = nombrefiltro.split(separador1);
+            console.log("arreglo de subcadenas para alumno programa");
+            var nombrenuevo1 = arregloDeSubCadenas1.join(" & ");
+            console.log(nombrenuevo1);
            // var nombrefiltro = "TRINIDAD ELIZABETH ABANTO MENDOZA";
-            fetch('http://modulo-alumno-jdbc.herokuapp.com/alumnoprograma/leer/'+nombrefiltro)
+            fetch('http://modulo-alumno-jdbc.herokuapp.com/alumnoprograma/leer/restringido/'+nombrenuevo1)
             .then((response) => {
             return response.json()
             })
