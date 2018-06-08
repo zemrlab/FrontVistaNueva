@@ -6,9 +6,10 @@ class TableHeaderAlumnoAP extends React.Component {
     return(
     <thead>
 			<tr> 
-                <th className="th">ID-ALUMNO</th>
-                <th className="th">CODIGO-ALUMNO</th>
-                <th className="th">ID-PROGRAMA</th>
+                
+                <th className="th1">NOMBRE-ALUMNO</th>
+                <th className="th1">CODIGO-ALUMNO</th>
+                <th className="th1">SIGLA PROGRAMA</th>
             </tr>
 	</thead>
     )

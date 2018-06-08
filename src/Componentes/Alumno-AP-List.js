@@ -1,10 +1,14 @@
 import React from 'react'
 import AlumnoAPRow from './Alumno-AP-Row'
+import TableHeaderAlumnoAP from './TableHeader-AlumnoAP'
 
 class AlumnoAPList extends React.Component {
 
   render() {
-    return (
+    if(this.props.listado.length >0){
+      return (
+      <table className="table">
+      <TableHeaderAlumnoAP/>
         <tbody>
           {
             this.props.listado.map((alumnoAP) => {
@@ -13,7 +17,11 @@ class AlumnoAPList extends React.Component {
             })
           }
         </tbody>
-    )
+        </table>
+    )}
+    else{
+      return <div className="mensaje centrar">No se encontraron datos</div>
+    }
   }
 }
 

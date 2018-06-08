@@ -12,8 +12,8 @@ class BuscarNuevo extends React.Component {
       this.props.Busqueda( busqueda);
     }
     
-}  
- 
+}
+
   render() {
     return(
       <form onSubmit={(e) => this.addNewFiltro(e)}>

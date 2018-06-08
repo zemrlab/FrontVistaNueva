@@ -61,9 +61,9 @@ Regresar=(e)=>{
           <hr/>
             <div className="row center-xs centrar">
             <div className="center-xs-12 margin_top ">
-              <div>
+              
                 <PagoListNuevo2  funcion={this.Funcion} listado={this.state.pagocero}/>
-              </div>
+              
               <div className="SplitPane row center-xs">  
                 <button  onClick={this.Asignar} className="waves-effect waves-light btn-large botonazul2 center"type="submit">Asignar<i className="large material-icons left">check</i></button>
               </div>

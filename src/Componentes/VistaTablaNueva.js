@@ -17,7 +17,7 @@ class VistaTablaNueva extends React.Component {
   }
 
   componentWillMount() {
-    fetch('http://modulo-alumno-jdbc.herokuapp.com/alumnoalumnoprograma/listar')
+    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/alumno/alumnoprograma/programa/listar')
     .then((response) => {
     return response.json()
     })
@@ -49,14 +49,12 @@ class VistaTablaNueva extends React.Component {
               </h3>
             
           <hr />
-          <div className="SplitPane row center-xs">
-            <div className="  center-xs-12">
-              <table className=" total table ">
-                <TableHeaderAlumnoAP/>
+
+        <div className="row center-xs centrar">
+            <div className="center-xs-12 margin_top ">
                 <AlumnoAPList listado={this.state.vehiculos} />
-              </table>
             </div>
-          </div>
+        </div>
           <footer>
             <div className="row center-xs centrar color">
             Realizado por Hardcode © 2018 
