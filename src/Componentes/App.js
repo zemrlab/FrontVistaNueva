@@ -524,6 +524,7 @@ FiltrarFecha(Fechas) {
     this.setState({
       filtroNumeros: listaNumeros
      })
+     //dfe
    // this.setState({
      // filtros: listaNumeros
     //})

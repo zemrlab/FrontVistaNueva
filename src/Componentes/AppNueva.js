@@ -510,6 +510,7 @@ BuscarNombre(busqueda) {
         return response.json()
       })
       .then((pagos) => {
+        //dgdg
       
       console.log("Listado de pagos recibidos");
       console.log(pagos);
