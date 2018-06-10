@@ -267,7 +267,7 @@ componentDidUpdate(){
     }
   }
 //obtenemos la fecha del componente FILTROFECHA1
-  Filtrar=(e)=>{
+Filtrar=(e)=>{
     var concep = [];
     concep = this.SeleccionConceptos();
     console.log("conceptos con check recibidos")
@@ -323,11 +323,11 @@ componentDidUpdate(){
       }*/
       
     )
-})
-.then((response) => {
+  })
+  .then((response) => {
   return response.json()
-})
-.then((pagos) => {
+  })
+  .then((pagos) => {
   if(pagos.length > 0){
   this.setState({
     pagocero: pagos
@@ -336,15 +336,15 @@ componentDidUpdate(){
   }
  console.log("Pagos filtrados que recibo")
  console.log(pagos);
-})
-.catch(error => {
+  })
+  .catch(error => {
   // si hay algún error lo mostramos en consola
   console.error(error)
-});
+  });
 
     
 
-  }
+}
   SeleccionFechaDel(Fecha) {
     console.log(Fecha);
     var fecha1 = new String(Fecha);

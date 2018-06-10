@@ -181,7 +181,7 @@ BuscarNombre(busqueda) {
       nombre: nombre
     });
     var listado1 =[];  
-    fetch('http://modulo-alumno-jdbc.herokuapp.com/alumno/leer/restringido/'+nombrenuevo)
+    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/alumno/leer/restringido/'+nombrenuevo)
       .then((response) => {
         return response.json()
       })
@@ -219,7 +219,7 @@ BuscarNombre(busqueda) {
             var nombrenuevo1 = arregloDeSubCadenas1.join(" & ");
             console.log(nombrenuevo1);
            // var nombrefiltro = "TRINIDAD ELIZABETH ABANTO MENDOZA";
-            fetch('http://modulo-alumno-jdbc.herokuapp.com/alumnoprograma/leer/restringido/'+nombrenuevo1)
+            fetch('https://modulo-alumno-jdbc.herokuapp.com/alumno/alumnoprograma/programa/leer/restringido/'+nombrenuevo1)
             .then((response) => {
             return response.json()
             })
@@ -238,7 +238,7 @@ BuscarNombre(busqueda) {
              for(let j = 0; j< alumnoprograma.length; j++){       
     
                 var value1 = j;
-                var label1 = alumnoprograma[j].codAlumno+"-"+alumnoprograma[j].nomAlumno+" "+alumnoprograma[j].apePaterno +" "+alumnoprograma[j].apeMaterno +"/"+ alumnoprograma[j].idPrograma;
+                var label1 = alumnoprograma[j].codAlumno+"-"+alumnoprograma[j].apeNom+"/"+ alumnoprograma[j].idPrograma+"-"+alumnoprograma[j].siglaPrograma;
                
                 var option1 = {value: value1, label:label1};
                 listado1[i].codigos.push(option1);
