@@ -72,10 +72,10 @@ class NumeroRecibo extends React.Component {
               <div className="col-xs-2 centrar">
                <b className="recibo">N°: </b> 
               </div>
-              <div className="col-xs-3 centrar">
+              <div className="col-xs-4 centrar">
                 <input type="text" value={this.state.numero} onChange={this.onChange}/>
               </div>
-              <div className="col-xs-4 centrar">
+              <div className="col-xs-2 centrar">
                 <button  onClick={this.onSubmit} className="btn-floating red margen_iz"><b><i className="large material-icons">add</i></b></button>
               </div >
               </div>
