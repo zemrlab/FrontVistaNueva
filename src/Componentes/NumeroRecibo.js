@@ -72,7 +72,7 @@ class NumeroRecibo extends React.Component {
               <div className="col-xs-2 centrar">
                <b className="recibo">N°: </b> 
               </div>
-              <div className="col-xs-6 centrar">
+              <div className="col-xs-3 centrar">
                 <input type="text" value={this.state.numero} onChange={this.onChange}/>
               </div>
               <div className="col-xs-4 centrar">
