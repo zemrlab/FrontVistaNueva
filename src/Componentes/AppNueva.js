@@ -116,17 +116,15 @@ Regresar=(e)=>{
                     <FiltroFecha1 Fechas={this.SeleccionFechaAl} />
                   </div>
                 </div >
-                <div className="row center-xs-4 block ">
-                  <h4 className=" centrar margen_top espacio">Conceptos</h4>
+                <div className="row center-xs-4 block">
+                  <h4 className="centrar margen_top espacio">Conceptos</h4>
                   <div className="scroll center-xs ">
                     <form action="#"><ConceptoList listado={this.state.conceptos} /></form>
                   </div>
                 </div>
                 <div className="centrar col-xs-5">
                   <h4 className="centrar margen_top">Recibo</h4>
-                  <div>
                     <NumeroRecibo Numeros={this.FiltrarNumeros} />
-                  </div>
                 </div>
                 <div className="SplitPane row">
                 <div className="row center-xs-12">
@@ -217,7 +215,8 @@ Asignar=(e)=>{
     }
     console.log("pagos actualizados");
     console.log(PagosActualizados);
-    
+    swal("Actualizaciones!","","success");
+    /*
     fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/updaterecaudaciones/actualizar',
     {
     headers: {
@@ -242,6 +241,7 @@ Asignar=(e)=>{
     // si hay algún error lo mostramos en consola
     console.error(error)
   });
+  */
     /*
 
     for (let i = 0; i < this.conceptos.length; i++) {
@@ -280,6 +280,7 @@ Filtrar=(e)=>{
       filtroal = "9999-12-12";
       console.log(filtroal)
     }
+    alert("Filtros")
 
 
     fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/updaterecaudaciones/listar/filtrar',
@@ -427,12 +428,12 @@ Filtrar=(e)=>{
         console.error(error)
         });
   }
-
+/*
   this.setState({
       pagocero: listado3,
       pagos: pagos
   },
-    );
+    );*/
     console.log("listado de programa y codigo opciones despues de copiar el filtro");
     console.log(listado3);
  })
@@ -509,7 +510,7 @@ BuscarNombre(busqueda) {
       var listado1 =[];
     //antiguo link 
     //https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/updaterecaudaciones/listar/
-    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/updaterecaudaciones/listar/'+nombre+'/'+apellido)
+    fetch('https://modulo-alumno-jdbc.herokuapp.com/recaudaciones/alumno/concepto/leer/restringido/'+nombre+'/'+apellido)
       .then((response) => {
         return response.json()
       })
@@ -523,60 +524,29 @@ BuscarNombre(busqueda) {
       var opciones  = [];
       for (let i = 0; i< pagos.length; i++) {
         var listadoRec = { 
-          alumnoPrograma: null,
-          autoseguro: '',
-          ave :'',
-          carnet:'',
-          devolTran:'',
-          fecha:'',
-          idAlum : [],
-          idConcepto:[],
-          idRec:'',
-          idRegistro:[],
-          importe:'',
-          moneda:'',
+          idRec : 0,
+          idAlum:0,
+          apeNom:'',
+          concepto:'',
           numero:'',
-          observacion:'',
-          validado:'',
+          nombre:'',
+          moneda:'',
+          importe:0,
+          fecha:'',
+          idPrograma:0,
           codigos:[],
-          alumno: ''
+          
         }
-        listadoRec.alumnoPrograma = pagos[i].alumnoPrograma;
-        listadoRec.autoseguro = pagos[i].autoseguro;
-        listadoRec.ave= pagos[i].ave;
-        listadoRec.carnet = pagos[i].carnet;
-        listadoRec.devolTran = pagos[i].devolTran;
-        listadoRec.fecha = pagos[i].fecha;
-        listadoRec.idAlum = pagos[i].idAlum;
-        listadoRec.idConcepto = pagos[i].idConcepto;
         listadoRec.idRec = pagos[i].idRec;
-        listadoRec.idRegistro = pagos[i].idRegistro;
-        listadoRec.importe = pagos[i].importe;
-        listadoRec.moneda = pagos[i].moneda;
+        listadoRec.idAlum = pagos[i].idAlum;
+        listadoRec.apeNom= pagos[i].apeNom;
+        listadoRec.concepto= pagos[i].concepto;
         listadoRec.numero = pagos[i].numero;
-        listadoRec.observacion = pagos[i].observacion;
-        listadoRec.validado = pagos[i].validado;
-        var idAlumno = pagos[i].idAlum;
-        fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/alumno/buscar/'+idAlumno)
-        .then((response) => {
-        return response.json()
-        })
-        .then((alumno) => {
-          
-    
-          console.log("alumno recibido")
-          console.log(alumno);
-          listadoRec.alumno = alumno.apeNom;
-          console.log("alumno con nombre")
-          console.log(alumno.apeNom);
-          console.log("listado rec alumno")
-          console.log(listadoRec.alumno);
-          
-        })
-        .catch(error => {
-        // si hay algún error lo mostramos en consola
-        console.error(error)
-        });
+        listadoRec.nombre= pagos[i].nombre;
+        listadoRec.moneda = pagos[i].moneda;
+        listadoRec.importe = pagos[i].importe;
+        listadoRec.fecha= pagos[i].fecha;
+        listadoRec.idPrograma = pagos[i].idPrograma;
         listado1.push(listadoRec);
       }
      
@@ -586,8 +556,16 @@ console.log(listado1);
 //link anterior
 //http://modulo-alumno-jdbc.herokuapp.com/alumnoprograma/leer/
       for (let i = 0; i< listado1.length; i++) {
-            var nombrefiltro = listado1[i].alumno;
-            fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/alumnoprograma/leer/'+nombrefiltro)
+            var nombrefiltro = listado1[i].apeNom;
+            var separador1 = " "; // un espacio en blanco
+            var arregloDeSubCadenas1 = nombrefiltro.split(separador1);
+            console.log("arreglo de subcadenas para alumno programa");
+            var nombrenuevo1 = arregloDeSubCadenas1.join(" & ");
+            console.log(nombrenuevo1);
+            //ANTERIOR LINK:https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/alumnoprograma/leer/
+            
+            
+            fetch('https://modulo-alumno-jdbc.herokuapp.com/alumno/alumnoprograma/programa/leer/restringido/'+nombrenuevo1)
             .then((response) => {
             return response.json()
             })
@@ -606,8 +584,7 @@ console.log(listado1);
              for(let j = 0; j< alumnoprograma.length; j++){       
     
                 var value1 = j;
-                var label1 = alumnoprograma[j].codAlumno +"/"+ alumnoprograma[j].idPrograma;
-               
+                var label1 = alumnoprograma[j].codAlumno+"-"+alumnoprograma[j].apeNom+"/"+alumnoprograma[j].siglaPrograma;
                 var option1 = {value: value1, label:label1};
                 listado1[i].codigos.push(option1);
              

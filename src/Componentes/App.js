@@ -299,8 +299,9 @@ Filtrar=(e)=>{
     console.log(this.state.filtroNumeros);
     console.log("listado de conceptos");
     console.log(concep)
-
-    fetch('http://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/recaudaciones/listar/filtrar',
+//ANTIGUO LINK
+//http://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/recaudaciones/listar/filtrar
+    fetch('http://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/listar/filtrar',
     {
     headers: {
       'Content-Type': 'application/json'

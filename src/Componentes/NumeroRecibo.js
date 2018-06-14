@@ -66,17 +66,17 @@ class NumeroRecibo extends React.Component {
     render() {
         return (
           <div>
-            <div className="center datos">
+            <div className="datos">
               
               <div className="SplitPane row">
-              <div className="SplitPane-left col-xs-4 centrar">
-                <b className="recibo">N° Recibo:</b> 
+              <div className="col-xs-2 centrar">
+               <b className="recibo">N°: </b> 
               </div>
-              <div className="SplitPane-center col-xs-4 centrar">
-                <input type="text" value={this.state.numero} onChange={this.onChange}  />
+              <div className="col-xs-6 centrar">
+                <input type="text" value={this.state.numero} onChange={this.onChange}/>
               </div>
-              <div className="SplitPane-right col-xs-4 centrar">
-                <button  onClick={this.onSubmit} className="btn-floating red derecha center-xs-12"><b><i className="large material-icons">add</i></b></button>
+              <div className="col-xs-4 centrar">
+                <button  onClick={this.onSubmit} className="btn-floating red margen_iz"><b><i className="large material-icons">add</i></b></button>
               </div >
               </div>
               <div className="scroll center-xs ">

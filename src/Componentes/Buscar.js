@@ -4,7 +4,7 @@ class Buscar extends React.Component {
   addNewFiltro(e) {
     e.preventDefault();
     var nombres = this.nombre.value.toUpperCase();
-    var apellidos = this.apellidos.value;
+    var apellidos = this.apellidos.value.toUpperCase();
     if(!nombres){
       alert("ingrese un nombre para buscar");
     }else{

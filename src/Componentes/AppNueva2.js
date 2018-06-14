@@ -148,20 +148,21 @@ Asignar=(e)=>{
     return response.json()
   })
   .then((pagos) => {
-    if(pagos){
+    /*if(pagos){
       swal("Asignado exitosamente!","","success");
-    }
+    }*/
     console.log("ALUMNO QUE HA SIDO INSERTADO");
     console.log(pagos);
   })
   .catch(error => {
     // si hay algún error lo mostramos en consola
     
-      swal("Ya ha sido registrado!", "", "error");
+    //swal("Ya ha sido registrado!", "", "error");
     console.error(error)
   });
+  swal("Asignado exitosamente!","","success");
   
-    }
+  }
 }
 enviar(){
   console.log("lo que envio:");
