@@ -550,11 +550,11 @@ BuscarNombre(busqueda) {
         listado1.push(listadoRec);
       }
      
-console.log("listado 1");
-console.log(listado1);
+  console.log("listado 1");
+  console.log(listado1);
   
-//link anterior
-//http://modulo-alumno-jdbc.herokuapp.com/alumnoprograma/leer/
+    //link anterior
+    //http://modulo-alumno-jdbc.herokuapp.com/alumnoprograma/leer/
       for (let i = 0; i< listado1.length; i++) {
             var nombrefiltro = listado1[i].apeNom;
             var separador1 = " "; // un espacio en blanco
