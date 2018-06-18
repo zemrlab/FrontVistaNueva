@@ -163,8 +163,11 @@ componentDidUpdate(){
         this.setState({
           conceptos: conceptos
         }
+      
 
-        );
+        );  
+        console.log("conceptos recibidos");
+        console.log(conceptos);
       })
       .catch(error => {
         // si hay algún error lo mostramos en consola
