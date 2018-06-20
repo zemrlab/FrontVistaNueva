@@ -20,24 +20,31 @@ class NumeroRecibo extends React.Component {
     onSubmit=(e)=>{
     
         console.log(this.state.numero);
-        var num = this.state.numero;
-        console.log(num);
-        var listaAgregados=[];
-        listaAgregados = this.state.listaNumeros;
-        var lista = this.state.listaNumeros.filter(h => h === num);
-        
-        //console.log(listaAgregados);
-        if(!(lista.length>0)){
-          listaAgregados.push(this.state.numero);
+        if(this.state.numero!=''){
+          var num = this.state.numero;
+          console.log(num);
+          var listaAgregados=[];
+          listaAgregados = this.state.listaNumeros;
+          var lista = this.state.listaNumeros.filter(h => h === num);
+          
+          //console.log(listaAgregados);
+          if(!(lista.length>0)){
+            listaAgregados.push(this.state.numero);
+          }else{
+            alert("El numero de voucher ya ha sido ingresado");
+          }
+          this.setState({
+          listaNumeros: listaAgregados,
+          })
+          this.state.numero='';
+      
+          this.Buscar(e);
+          
         }else{
-          alert("El numero de voucher ya ha sido ingresado");
+          alert("Debe ingresar un numero de recibo")
         }
-        this.setState({
-        listaNumeros: listaAgregados,
-        })
-        this.state.numero='';
+       
         e.preventDefault();
-        this.Buscar(e);
     }
     Buscar=(e)=>{
       this.props.Numeros(this.state.listaNumeros);

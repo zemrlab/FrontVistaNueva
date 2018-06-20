@@ -119,7 +119,7 @@ class LoginForm extends React.Component {
   </nav>
       <div className="vista">
       <div className="grupo">
-      <h4 className="center h4"><b>Bienvenido</b></h4>
+      <h4 className="center h4"><b>Consulte</b></h4>
       <form>
           <div className="center datos">
             <div>

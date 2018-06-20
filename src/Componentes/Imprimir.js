@@ -51,10 +51,12 @@ class Imprimir extends React.Component {
 
 
     for (let i = 0; i<total.length; i++) {
-      var pago = [total[i].idConcepto,total[i].numero,total[i].idAlum,
-      total[i].fecha,total[i].moneda,total[i].importe]
+      var pago = [total[i].concepto,total[i].numero,total[i].idAlum,
+      total[i].fecha.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3-$2-$1'),total[i].moneda,total[i].importe]
       listado.push(pago);
     }
+    console.log("listado para enviar a imprimir");
+    
     console.log(listado);
     
     /*

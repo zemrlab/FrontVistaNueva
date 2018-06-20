@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 import Imprimir from './Imprimir';
 import {browserHistory} from 'react-router-3';
 import HEROES from './Data-Select';
+import swal from 'sweetalert'
 
 
 
@@ -60,6 +61,7 @@ class App extends React.Component {
     this.seleccionar=this.seleccionar.bind(this);
     this.enviar=this.enviar.bind(this);
     this.Funcion=this.Funcion.bind(this);
+    this.Regresar=this.Regresar.bind(this);
     
   }
 componentDidUpdate(){
@@ -102,7 +104,7 @@ componentDidUpdate(){
 
    //cONSULTAMOS LA RECAUDACIONES POR NOMBRE DE ALUMNO
 //https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/recaudaciones/listar/
-    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/listar/' + nombres)
+    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/alumno/concepto/listar/' + nombres)
       .then((response) => {
         return response.json()
       })
@@ -191,11 +193,22 @@ componentDidUpdate(){
         console.error(error)
       });
   }
+  Regresar=(e)=>{
+    
+    browserHistory.push('/');
+    e.preventDefault();
+    
+}
+
   render() {
     if (this.state.pagos.length > 0) {
       return (
         <div className="">
-          <h3>Estado de pagos por alumno</h3>
+          <h3>Estado de pagos por alumno
+          <ul id="nav-mobile" class="right  hide-on-med-and-down">
+              <li ><a className="seleccionar" onClick={this.Regresar} >Regresar<i className="material-icons right">reply</i></a></li>
+          </ul>
+          </h3>
           <hr/>
           <div className="SplitPane row">
             <div className=" col-xs-3">
@@ -304,7 +317,7 @@ Filtrar=(e)=>{
     console.log(concep)
 //ANTIGUO LINK
 //http://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/recaudaciones/listar/filtrar
-    fetch('http://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/listar/filtrar',
+    fetch('http://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/alumno/concepto/listar/filtrar',
     {
     headers: {
       'Content-Type': 'application/json'
@@ -333,16 +346,21 @@ Filtrar=(e)=>{
   })
   .then((pagos) => {
   if(pagos.length > 0){
+    
   this.setState({
     pagocero: pagos
-  });}else{
-    alert("No hay registros");
+  });
+  swal("Filtro realizado exitosamente!","","success");
+  }else{
+    swal("No se encontraron registros","","info");
   }
- console.log("Pagos filtrados que recibo")
- console.log(pagos);
+
+  console.log("Pagos filtrados que recibo")
+  console.log(pagos);
   })
   .catch(error => {
   // si hay algún error lo mostramos en consola
+  swal("Oops, Algo salió mal!!", "","error")
   console.error(error)
   });
 
