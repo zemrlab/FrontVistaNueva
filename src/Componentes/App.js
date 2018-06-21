@@ -11,9 +11,7 @@ import PropTypes from 'prop-types';
 import Imprimir from './Imprimir';
 import {browserHistory} from 'react-router-3';
 import HEROES from './Data-Select';
-import swal from 'sweetalert'
-
-
+import swal from 'sweetalert';
 
 const propTypes = {
   items: PropTypes.array.isRequired,

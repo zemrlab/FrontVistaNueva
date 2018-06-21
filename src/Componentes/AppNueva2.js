@@ -163,6 +163,13 @@ Asignar=(e)=>{
   swal("Asignado exitosamente!","","success");
   
   }
+
+  var busqueda = {nombres:this.state.nombre}
+  this.BuscarNombre(busqueda);
+
+
+
+
 }
 enviar(){
   console.log("lo que envio:");
@@ -279,6 +286,11 @@ BuscarNombre(busqueda) {
         swal("Busqueda realizada exitosamente!","","success");
       }else{
         swal("No se encontraron registros","","info");
+        this.setState({
+          pagocero: [],
+          pagos: []
+      },
+        );
       }
     
         console.log("listado de alumno y codigo programa que se muestra en la tabla");
@@ -287,7 +299,7 @@ BuscarNombre(busqueda) {
     )
     .catch(error => {
         // si hay algún error lo mostramos en consola
-        swal("Error!", "", "error");
+        swal("Oops, Algo salió mal!!", "","error")
         console.error(error)
     });
 }
