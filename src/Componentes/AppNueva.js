@@ -151,7 +151,7 @@ Regresar=(e)=>{
                 </div>
               </div>
               <div className="SplitPane row center-xs">  
-                <button  onClick={this.Asignar} className="waves-effect waves-light btn-large botonazul2 center"type="submit">Asignar<i className="large material-icons left">check</i></button>
+                <button  onClick={this.Asignar} className="waves-effect waves-light btn-large botonazul2 center"type="submit">Actualizar<i className="large material-icons left">check</i></button>
               </div>
            
             </div>
@@ -179,13 +179,7 @@ Asignar=(e)=>{
      console.log("item recibido");
      console.log(item.id);
     }
-    /*
-    check2 = document.getElementsByClassName("opcionPrograma");
 
-    console.log("seleccionados programas");
-    for (var item of check2) {
-     console.log(item.id);
-    }*/
     var listado2 = this.state.pagocero;
     console.log("listado 2");
     console.log(listado2);
@@ -204,51 +198,51 @@ Asignar=(e)=>{
         }
     
     }
-    console.log("listado alumno programa");
+    console.log("listado alumno programa obtenidos del filtro");
     console.log(listadoAlumnoPrograma);
+    
     var PagosActualizados = this.state.pagos;
+    var PagosGuardar = [];
     for (let i = 0; i < PagosActualizados.length; i++) {
         var ap = listadoAlumnoPrograma[i];
         if(ap != null){
-          PagosActualizados[i].alumnoPrograma = ap;
+          PagosActualizados[i].idPrograma = ap.idPrograma;
+          PagosActualizados[i].codAlumno = ap.codAlumno;
+          PagosGuardar.push(PagosActualizados[i]);
         }
     }
-    console.log("pagos actualizados");
+    console.log("Pagos actualizados para enviar a actualizar");
     console.log(PagosActualizados);
-    swal("Actualizaciones!","","success");
-    /*
-    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/updaterecaudaciones/actualizar',
+    console.log("Pagos a enviar para actualizar");
+    console.log(PagosGuardar);
+
+    //https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client
+
+    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/update/recaudaciones/alumno/concepto/facultad/list/actualizar',
     {
     headers: {
+      'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    method: "POST",
+    method: "PUT",//cambiar a metodo PUT de actualizacion
     body: JSON.stringify(
-     PagosActualizados
+       PagosGuardar
     )
+})
+.then((response) => {
+  return response.json()
   })
-  .then((response) => {
-    return response.json()
-  })
-  .then((pagos) => {
-    if(pagos == 1){
-      swal("Recaudaciones actualizadas exitosamente!","","success");
-    }else{
-      swal("Error al actualizar recaudaciones!", "", "error");
-    }
+.then((data) => {
+  console.log("respuesta recibida");
+  console.log(data);
+  swal("Actualizado exitosamente!","","success");
+
   })
   .catch(error => {
-    // si hay algún error lo mostramos en consola
-    console.error(error)
-  });
-  */
-    /*
-
-    for (let i = 0; i < this.conceptos.length; i++) {
-      idconcepto.push(this.conceptos[i].idConcepto);
-    }
-    */
-
+      swal("Error al actualizar!", "", "error");
+      console.error(error)
+});    //
+   //---------------------
 
 }
 
@@ -280,167 +274,131 @@ Filtrar=(e)=>{
       filtroal = "9999-12-12";
       console.log(filtroal)
     }
-    alert("Filtros")
-
-
-    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/updaterecaudaciones/listar/filtrar',
+    var listado1 =[];
+    //antiguo link 
+    //https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/updaterecaudaciones/listar/
+    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/update/recaudaciones/alumno/concepto/facultad/listar/filtrar',
     {
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    method: "POST",
-    body: JSON.stringify(
-      /*
-      {
-        "nombres":"JOSE CARLOS",
-        "apellidos":"ACOSTA BRAVO",
-        "fechaInicial":"0000-00-00",
-        "fechaFinal":"9999-12-12",
-        "conceptos":["210011"],
-        "recibos":["8500588"]
-     }*/
-   
-      {
-        "nombres":this.state.nombre,
-        "apellidos":this.state.apellido,
-        "fechaInicial": filtrodel,
-        "fechaFinal": filtroal,
-        "conceptos":concep,
-        "recibos":this.state.filtroNumeros
-      }
-      /*
-      {
-        "nom_ape": "RAUL NAUPARI QUIROZ",
-        "fechaInicial": "0000-00-00",
-        "fechaFinal": "9999-12-12",
-        "conceptos": ["210011"],
-        "recibos":["10509204","10509205"]
-      }*/
-      
-    )
-    })
-  .then((response) => {
-  return response.json()
-  })
-  .then((pagos) => {
-  console.log("Listado de pagos recibidos");
-  console.log(pagos);
-
-  var listado3 =[];
-  var opciones  = [];
-  for (let i = 0; i< pagos.length; i++) {
-    var listadoRec = { 
-      alumnoPrograma: null,
-      autoseguro: '',
-      ave :'',
-      carnet:'',
-      devolTran:'',
-      fecha:'',
-      idAlum : [],
-      idConcepto:[],
-      idRec:'',
-      idRegistro:[],
-      importe:'',
-      moneda:'',
-      numero:'',
-      observacion:'',
-      validado:'',
-      codigos:[]//,
-      //programas:[]
-    }
-    listadoRec.alumnoPrograma = pagos[i].alumnoPrograma;
-    listadoRec.autoseguro = pagos[i].autoseguro;
-    listadoRec.ave= pagos[i].ave;
-    listadoRec.carnet = pagos[i].carnet;
-    listadoRec.devolTran = pagos[i].devolTran;
-    listadoRec.fecha = pagos[i].fecha;
-    listadoRec.idAlum = pagos[i].idAlum;
-    listadoRec.idConcepto = pagos[i].idConcepto;
-    listadoRec.idRec = pagos[i].idRec;
-    listadoRec.idRegistro = pagos[i].idRegistro;
-    listadoRec.importe = pagos[i].importe;
-    listadoRec.moneda = pagos[i].moneda;
-    listadoRec.numero = pagos[i].numero;
-    listadoRec.observacion = pagos[i].observacion;
-    listadoRec.validado = pagos[i].validado;
-    listado3.push(listadoRec); 
-  }
- 
-  console.log(nombrefiltro);
-
-  for (let i = 0; i< listado3.length; i++) {
-        var nombrefiltro = listado3[i].idAlum.apeNom;
-        fetch('http://modulo-alumno-jdbc.herokuapp.com/alumnoprograma/leer/'+nombrefiltro)
-        .then((response) => {
-        return response.json()
-        })
-        .then((programa) => {
-        var alumnoprograma = programa;
-        //listado1[i].alumnoPrograma = 
-        var listadoOpcionesCodigos = [];
-        var listadoOpcionesProgramas = [];
-        console.log("ALUMNO PROGRAM RECIBIDO");
-        console.log(alumnoprograma);
-        console.log("longitud del array alumno programa recibido")
-        console.log(alumnoprograma.length);
-
-        listado3[i].alumnoPrograma = programa;
-         
-         for(let j = 0; j< alumnoprograma.length; j++){       
-
-            var value1 = j;
-            var label1 = alumnoprograma[j].codAlumno +"/"+ alumnoprograma[j].idPrograma;
-           
-            var option1 = {value: value1, label:label1};
-            listado3[i].codigos.push(option1);
-            //listadoOpcionesCodigos.push(option1);
-            /*
-            console.log("listado de opciones de codigos");
-            var value2 = j;
-            var label2 = alumnoprograma[j].programa.nomPrograma;
-            var option2 = {value: value2, label:label2};
-            listado1[i].programas.push(option2);
-            */
-           // listadoOpcionesProgramas.push(option2);    
-        
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify(
+        {
+          "nombres":this.state.nombre,
+          "apellidos":this.state.apellido,
+          "fechaInicial": filtrodel,
+          "fechaFinal": filtroal,
+          "conceptos":concep,
+          "recibos":this.state.filtroNumeros
         }
-        console.log("programa leido");
-        /*
-        if(alumnoprograma.length == 0){
-          var value1 = "codigo";
-          var label1 = "No hay coincidencias";
-          var option1 = {value: value1, label:label1};
-          listado3[i].codigos.push(option1);
-          //listadoOpcionesCodigos.push(option1);
-          /*
-          console.log("listado de opciones de codigo en caso no tener programas");
-          var value2 = "programa";
-          var label2 = "Programa1";
-          var option2 = {value: value2, label:label2};
-          //listadoOpcionesProgramas.push(option2);
-          listado1[i].programas.push(option2);
+      )
+    })
+      .then((response) => {
+        return response.json()
+      })
+      .then((pagos) => {
+      console.log("Listado de pagos  recibidos luego de filtrar");
+      console.log(pagos);
+
+      var listado1 =[];
+      var opciones  = [];
+      for (let i = 0; i< pagos.length; i++) {
+        var listadoRec = { 
+          idRec : 0,
+          idAlum:0,
+          apeNom:'',
+          concepto:'',
+          numero:'',
+          nombre:'',
+          moneda:'',
+          importe:0,
+          fecha:'',
+          idPrograma:0,
+          codAlumno:'',
+          codigos:[],
+          
+        }
+        listadoRec.idRec = pagos[i].idRec;
+        listadoRec.idAlum = pagos[i].idAlum;
+        listadoRec.apeNom= pagos[i].apeNom;
+        listadoRec.concepto= pagos[i].concepto;
+        listadoRec.numero = pagos[i].numero;
+        listadoRec.nombre= pagos[i].nombre;
+        listadoRec.moneda = pagos[i].moneda;
+        listadoRec.importe = pagos[i].importe;
+        listadoRec.fecha= pagos[i].fecha;
+        listadoRec.idPrograma = pagos[i].idPrograma;
+        listadoRec.idPrograma =  pagos[i].codAlumno;
+        listado1.push(listadoRec);
+      }
      
-        }*/
-        console.log(programa);
-        })
-        .catch(error => {
+  console.log("listado1 en la tabla");
+  console.log(listado1);
+  
+  for (let i = 0; i< listado1.length; i++) {
+    var nombrefiltro = listado1[i].apeNom;
+    var separador1 = " "; // un espacio en blanco
+    var arregloDeSubCadenas1 = nombrefiltro.split(separador1);
+    //console.log("arreglo de subcadenas para alumno programa");
+    var nombrenuevo1 = arregloDeSubCadenas1.join(" & ");
+    //console.log(nombrenuevo1);
+    //ANTERIOR LINK:https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/alumnoprograma/leer/
+    
+    
+    fetch('https://modulo-alumno-jdbc.herokuapp.com/alumno/alumnoprograma/programa/leer/restringido/'+nombrenuevo1)
+    .then((response) => {
+    return response.json()
+    })
+    .then((programa) => {
+    var alumnoprograma = programa;
+    //listado1[i].alumnoPrograma = 
+    var listadoOpcionesCodigos = [];
+    var listadoOpcionesProgramas = [];
+    /*console.log("ALUMNO PROGRAM RECIBIDO");
+    console.log(alumnoprograma);
+    console.log("longitud del array alumno programa recibido")
+    console.log(alumnoprograma.length);*/
+
+    listado1[i].alumnoPrograma = programa;
+     
+     for(let j = 0; j< alumnoprograma.length; j++){       
+
+        var value1 = j;
+        var label1 = alumnoprograma[j].codAlumno+"-"+alumnoprograma[j].apeNom+"/"+alumnoprograma[j].siglaPrograma;
+        var option1 = {value: value1, label:label1};
+        listado1[i].codigos.push(option1);
+     
+    
+    }
+    /*
+    console.log("programa leido");
+    console.log(programa);*/
+    })
+    .catch(error => {
+    // si hay algún error lo mostramos en consola
+    console.error(error)
+    });
+}
+      if(pagos.length>0){
+        this.setState({
+          pagocero: listado1,
+          pagos: pagos
+      }
+        );
+        swal("Filtro realizado exitosamente!","","success");
+      }else{
+        swal("No se encontraron registros","","info");
+      }
+      
+    }
+    )
+    .catch(error => {
+      swal("Oops, Algo salió mal!!", "","error")
         // si hay algún error lo mostramos en consola
         console.error(error)
-        });
-  }
-/*
-  this.setState({
-      pagocero: listado3,
-      pagos: pagos
-  },
-    );*/
-    console.log("listado de programa y codigo opciones despues de copiar el filtro");
-    console.log(listado3);
- })
- .catch(error => {
-  // si hay algún error lo mostramos en consola
-  console.error(error)
- });
+    });
+
 
 }
 SeleccionFechaDel(Fecha) {
@@ -505,18 +463,15 @@ BuscarNombre(busqueda) {
       nombre: nombre,
       apellido:apellido
     });
-
    
       var listado1 =[];
     //antiguo link 
     //https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/updaterecaudaciones/listar/
-    fetch('https://modulo-alumno-jdbc.herokuapp.com/recaudaciones/alumno/concepto/leer/restringido/'+nombre+'/'+apellido)
+    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/alumno/concepto/leer/restringido/'+nombre+'/'+apellido)
       .then((response) => {
         return response.json()
       })
       .then((pagos) => {
-        //dgdg
-      
       console.log("Listado de pagos recibidos");
       console.log(pagos);
 
@@ -534,6 +489,7 @@ BuscarNombre(busqueda) {
           importe:0,
           fecha:'',
           idPrograma:0,
+          codAlumno:'',
           codigos:[],
           
         }
@@ -547,11 +503,12 @@ BuscarNombre(busqueda) {
         listadoRec.importe = pagos[i].importe;
         listadoRec.fecha= pagos[i].fecha;
         listadoRec.idPrograma = pagos[i].idPrograma;
+        listadoRec.idPrograma =  pagos[i].codAlumno;
         listado1.push(listadoRec);
       }
      
-  console.log("listado 1");
-  console.log(listado1);
+  //console.log("listado1 en la tabla");
+  //console.log(listado1);
   
     //link anterior
     //http://modulo-alumno-jdbc.herokuapp.com/alumnoprograma/leer/
@@ -559,9 +516,9 @@ BuscarNombre(busqueda) {
             var nombrefiltro = listado1[i].apeNom;
             var separador1 = " "; // un espacio en blanco
             var arregloDeSubCadenas1 = nombrefiltro.split(separador1);
-            console.log("arreglo de subcadenas para alumno programa");
+            //console.log("arreglo de subcadenas para alumno programa");
             var nombrenuevo1 = arregloDeSubCadenas1.join(" & ");
-            console.log(nombrenuevo1);
+            //console.log(nombrenuevo1);
             //ANTERIOR LINK:https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/alumnoprograma/leer/
             
             
@@ -574,10 +531,10 @@ BuscarNombre(busqueda) {
             //listado1[i].alumnoPrograma = 
             var listadoOpcionesCodigos = [];
             var listadoOpcionesProgramas = [];
-            console.log("ALUMNO PROGRAM RECIBIDO");
+            /*console.log("ALUMNO PROGRAM RECIBIDO");
             console.log(alumnoprograma);
             console.log("longitud del array alumno programa recibido")
-            console.log(alumnoprograma.length);
+            console.log(alumnoprograma.length);*/
 
             listado1[i].alumnoPrograma = programa;
              
@@ -590,22 +547,27 @@ BuscarNombre(busqueda) {
              
             
             }
+            /*
             console.log("programa leido");
-            console.log(programa);
+            console.log(programa);*/
             })
             .catch(error => {
             // si hay algún error lo mostramos en consola
             console.error(error)
             });
       }
-
-      this.setState({
+      if(pagos.length >0){
+      
+        this.setState({
           pagocero: listado1,
           pagos: pagos
+      });
+        swal("Busqueda realizada exitosamente!","","success");
+      }else{
+        swal("No se encontraron registros","","info");
       }
-        );
-        console.log("listado de programa y codigo opciones despues de copiar el filtro");
-        console.log(listado1);
+        console.log("listado de pagos que recibo del get");
+        console.log(pagos);
     }
     )
     .catch(error => {

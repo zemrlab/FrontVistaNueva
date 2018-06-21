@@ -269,12 +269,18 @@ BuscarNombre(busqueda) {
             console.error(error)
             });
       }
-
-      this.setState({
+      if(pagos.length >0){
+      
+        this.setState({
           pagocero: listado1,
           pagos: pagos
       },
         );
+        swal("Busqueda realizada exitosamente!","","success");
+      }else{
+        swal("No se encontraron registros","","info");
+      }
+    
         console.log("listado de alumno y codigo programa que se muestra en la tabla");
         console.log(listado1);
     }
