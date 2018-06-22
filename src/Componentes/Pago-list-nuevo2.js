@@ -107,6 +107,11 @@ class Paginacion extends React.Component {
 
     // calculate total pages
     var totalPages = Math.ceil(totalItems / pageSize);
+    console.log("cantidad de items");
+    console.log(totalItems);
+    console.log("cantidad de paginas");
+    console.log(totalPages);
+
 
     var startPage, endPage;
     if (totalPages <= 10) {
@@ -133,10 +138,16 @@ class Paginacion extends React.Component {
 
     // create an array of pages to ng-repeat in the pager control
     //var pages = _.range(startPage, endPage + 1);
-    var pages = [];
-    for (let i = 0; i < endPage; i++) {
+   // var pages = [];
+    /* for (let i = startPage-1; i < endPage; i++) {
       pages.push(startPage + i);
-    }
+    } */
+    var pages = [...Array((endPage + 1) - startPage).keys()].map(i => startPage + i);
+    console.log("endpage");
+    console.log(endPage);
+    console.log("cantidad de pageeees");
+    console.log(pages.length);
+
 
     // return object with all pager properties required by the view
     return {
@@ -163,6 +174,9 @@ class Paginacion extends React.Component {
         <li className={pager.currentPage === 1 ? 'disabled' : ''}>
           <a onClick={() => this.setPage(pager.currentPage - 1)}><i class="material-icons">chevron_left</i></a>
         </li>
+        {console.log("final")
+          }
+          {console.log(pager.pages.length)}
         {pager.pages.map((page, index) =>
           <li key={index + 28} className={pager.currentPage === page ? 'active' : ''}>
             <a onClick={() => this.setPage(page)}>{page}</a>
