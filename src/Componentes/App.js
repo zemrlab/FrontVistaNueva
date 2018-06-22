@@ -860,10 +860,7 @@ class Paginacion extends React.Component {
 
     // create an array of pages to ng-repeat in the pager control
     //var pages = _.range(startPage, endPage + 1);
-    var pages = [];
-    for (let i = 0; i < endPage; i++) {
-      pages.push(startPage + i);
-    }
+    var pages = [...Array((endPage + 1) - startPage).keys()].map(i => startPage + i);
 
     // return object with all pager properties required by the view
     return {
