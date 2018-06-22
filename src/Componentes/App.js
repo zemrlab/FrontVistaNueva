@@ -101,7 +101,25 @@ componentDidUpdate(){
    });
    //cONSULTAMOS LA RECAUDACIONES POR NOMBRE DE ALUMNO
 //https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/recaudaciones/listar/
-    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/alumno/concepto/listar/' + nombres)
+
+    var separador = " "; // un espacio en blanco
+    var arregloDeSubCadenas = nombres.split(separador);
+    console.log("arreglo de subcadenas");
+    console.log(arregloDeSubCadenas);
+    var arreglo = [];
+    for (let i = 0; i< arregloDeSubCadenas.length; i++) {
+      if(arregloDeSubCadenas[i]!==''){
+         arreglo.push(arregloDeSubCadenas[i])
+      }
+    }
+    console.log("arreglo sin espacios en blanco");
+    console.log(arreglo);
+
+    var nombrenuevo = arreglo.join(" & ");
+    console.log("arreglo con join")
+    console.log(nombrenuevo);
+
+    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/alumno/concepto/listar/' + nombrenuevo)
       .then((response) => {
         return response.json()
       })
