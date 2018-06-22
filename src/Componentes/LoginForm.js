@@ -54,7 +54,7 @@ class LoginForm extends React.Component {
             })
             .catch(error => {
             // si hay algún error lo mostramos en consola
-                swal("Wrong!", "Datos ingresados incorrectos!", "error");
+                swal("Datos ingresados incorrectos!", "", "warning");
                 console.error(error)
             });
         

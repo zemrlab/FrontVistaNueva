@@ -99,7 +99,6 @@ componentDidUpdate(){
        checkbox_selec.push(checkbox.id);
      }
    });
-
    //cONSULTAMOS LA RECAUDACIONES POR NOMBRE DE ALUMNO
 //https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/recaudaciones/listar/
     fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/alumno/concepto/listar/' + nombres)
@@ -187,7 +186,7 @@ componentDidUpdate(){
         );
       })
       .catch(error => {
-        // si hay algún error lo mostramos en consola
+        swal("Oops, Algo salió mal!!", "","error")
         console.error(error)
       });
   }

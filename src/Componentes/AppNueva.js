@@ -388,6 +388,12 @@ Filtrar=(e)=>{
         );
         swal("Filtro realizado exitosamente!","","success");
       }else{
+        
+        this.setState({
+          pagocero: [],
+          pagos: []
+        },
+        );
         swal("No se encontraron registros","","info");
       }
       
@@ -564,6 +570,12 @@ BuscarNombre(busqueda) {
       });
         swal("Busqueda realizada exitosamente!","","success");
       }else{
+
+        this.setState({
+          pagocero: [],
+          pagos: []
+        },
+        );
         swal("No se encontraron registros","","info");
       }
         console.log("listado de pagos que recibo del get");
@@ -571,7 +583,7 @@ BuscarNombre(busqueda) {
     }
     )
     .catch(error => {
-        // si hay algún error lo mostramos en consola
+        swal("Oops, Algo salió mal!!", "","error")
         console.error(error)
     });
   
@@ -587,7 +599,7 @@ BuscarNombre(busqueda) {
       console.log(this.state.conceptos);
       })
       .catch(error => {
-        // si hay algún error lo mostramos en consola
+
         console.error(error)
       });
 

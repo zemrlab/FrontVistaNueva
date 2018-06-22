@@ -99,6 +99,7 @@ Asignar=(e)=>{
     var listado2 = this.state.pagocero;
     console.log("listado 2");
     console.log(listado2);
+    var indices=[];
     
     for (let i = 0; i < listado2.length; i++) {
         var index = opcionesSeleccionadas[i];
@@ -130,6 +131,7 @@ Asignar=(e)=>{
     }
     console.log("alumno-alumno programa generado a insertar");
     console.log(pagoinsertar)
+
   
 
     for (let i = 0; i < pagoinsertar.length; i++) {
@@ -153,36 +155,44 @@ Asignar=(e)=>{
     }*/
     console.log("ALUMNO QUE HA SIDO INSERTADO");
     console.log(pagos);
+    swal("Asignado exitosamente!","","success");
+    
   })
   .catch(error => {
     // si hay algún error lo mostramos en consola
-    
-    //swal("Ya ha sido registrado!", "", "error");
+    swal("Oops, Algo salió mal!", "","error")
     console.error(error)
   });
-  swal("Asignado exitosamente!","","success");
+  
   
   }
 
-  var busqueda = {nombres:this.state.nombre}
-  this.BuscarNombre(busqueda);
 
-
-
-
+  
 }
 enviar(){
   console.log("lo que envio:");
   console.log(this.state.pagocero);
 }
 BuscarNombre(busqueda) {
-    console.log("Nombre ingresado");
-    console.log(busqueda.nombres);
+   // console.log("Nombre ingresado");
+    //console.log(busqueda.nombres);
     let nombre = busqueda.nombres;
     var separador = " "; // un espacio en blanco
     var arregloDeSubCadenas = nombre.split(separador);
     console.log("arreglo de subcadenas");
-    var nombrenuevo = arregloDeSubCadenas.join(" & ");
+    console.log(arregloDeSubCadenas);
+    var arreglo = [];
+    for (let i = 0; i< arregloDeSubCadenas.length; i++) {
+      if(arregloDeSubCadenas[i]!==''){
+         arreglo.push(arregloDeSubCadenas[i])
+      }
+    }
+    console.log("arreglo sin espacios en blanco");
+    console.log(arreglo);
+
+    var nombrenuevo = arreglo.join(" & ");
+    console.log("arreglo con join")
     console.log(nombrenuevo);
 
     this.setState({
@@ -217,17 +227,30 @@ BuscarNombre(busqueda) {
         listado1.push(listadoRec); 
       }
      
-      console.log(nombrefiltro);
+      //console.log(nombrefiltro);
 
       for (let i = 0; i< listado1.length; i++) {
+          /*
             var nombrefiltro = listado1[i].apeNom;
             var separador1 = " "; // un espacio en blanco
             var arregloDeSubCadenas1 = nombrefiltro.split(separador1);
-            console.log("arreglo de subcadenas para alumno programa");
-            var nombrenuevo1 = arregloDeSubCadenas1.join(" & ");
+            var arreglo1 = [];
+            for (let i = 0; i< arregloDeSubCadenas1.length; i++) {
+              if(arregloDeSubCadenas1[i]!==''){
+                 arreglo1.push(arregloDeSubCadenas1[i])
+              }
+            }
+            console.log("arreglo1 sin espacios en blanco");
+            console.log(arreglo1);
+
+            var nombrenuevo1 = arreglo1.join(" & ");
+            console.log("nombre del input a enviar a la consulta");
             console.log(nombrenuevo1);
            // var nombrefiltro = "TRINIDAD ELIZABETH ABANTO MENDOZA";
-            fetch('https://modulo-alumno-jdbc.herokuapp.com/alumno/alumnoprograma/programa/leer/restringido/'+nombrenuevo1)
+           */
+            console.log("arreglo con join")
+            console.log(nombrenuevo);
+            fetch('https://modulo-alumno-jdbc.herokuapp.com/alumno/alumnoprograma/programa/leer/restringido/'+nombrenuevo)
             .then((response) => {
             return response.json()
             })
@@ -236,10 +259,10 @@ BuscarNombre(busqueda) {
             //listado1[i].alumnoPrograma = 
             var listadoOpcionesCodigos = [];
             var listadoOpcionesProgramas = [];
-            console.log("ALUMNO PROGRAM RECIBIDO");
+            /*console.log("ALUMNO PROGRAM RECIBIDO");
             console.log(alumnoprograma);
             console.log("longitud del array alumno programa recibido")
-            console.log(alumnoprograma.length);
+            console.log(alumnoprograma.length);*/
 
             listado1[i].alumnoPrograma = programa;
              
@@ -260,9 +283,9 @@ BuscarNombre(busqueda) {
                 */
                // listadoOpcionesProgramas.push(option2);    
             
-            }
+            }/*
             console.log("programa leido");
-            /*
+            
             if(alumnoprograma.length == 0){
               var value1 = "codigo";
               var label1 = "No hay coincidencias";
@@ -270,7 +293,7 @@ BuscarNombre(busqueda) {
               listado1[i].codigos.push(option1);
             }
             */
-            console.log(programa);
+            //console.log(programa);
             })
             .catch(error => {
             console.error(error)
@@ -280,17 +303,18 @@ BuscarNombre(busqueda) {
       
         this.setState({
           pagocero: listado1,
-          pagos: pagos
+          pagos: pagos 
       },
         );
         swal("Busqueda realizada exitosamente!","","success");
       }else{
-        swal("No se encontraron registros","","info");
+        
         this.setState({
           pagocero: [],
           pagos: []
       },
         );
+        swal("No se encontraron registros","","info");
       }
     
         console.log("listado de alumno y codigo programa que se muestra en la tabla");
@@ -299,7 +323,7 @@ BuscarNombre(busqueda) {
     )
     .catch(error => {
         // si hay algún error lo mostramos en consola
-        swal("Oops, Algo salió mal!!", "","error")
+        swal("Oops, Algo salió mal!", "","error")
         console.error(error)
     });
 }

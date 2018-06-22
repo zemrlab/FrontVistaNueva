@@ -19,7 +19,7 @@ class BuscarNuevo extends React.Component {
       <form onSubmit={(e) => this.addNewFiltro(e)}>
          <div className="SplitPane row">
             <div className="col-xs-4 margen2">
-            <input ref={ ( input ) => this.nombre = input } type="text" maxlength="100" placeholder="Nombres Apelllidos" /> 
+            <input id="autocomplete-input" class="autocomplete" ref={ ( input ) => this.nombre = input } type="text" maxlength="100" placeholder="Nombres Apelllidos" /> 
             </div>
             <div className="col-xs-2 margen2">
               <button  className="waves-effect waves-light btn-large center"type="submit">Buscar<i className="large material-icons left">search</i></button>
