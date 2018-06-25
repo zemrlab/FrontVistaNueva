@@ -161,7 +161,7 @@ class Imprimir extends React.Component {
         doc.setFont("helvetica");
         doc.setFontType("bold");
         doc.setFontSize(9);
-        doc.text("Importe", 192, 248); 
+        doc.text("Importe total", 192, 248); 
 
         doc.setFont("helvetica");
         doc.setFontType("normal");

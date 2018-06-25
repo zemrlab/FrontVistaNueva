@@ -5,8 +5,8 @@ class Buscar extends React.Component {
     e.preventDefault();
     var nombres = this.nombre.value.toUpperCase();
     var apellidos = this.apellidos.value.toUpperCase();
-    if(!nombres){
-      alert("ingrese un nombre para buscar");
+    if(!nombres || !apellidos){
+      alert("Debe ingresar nombre y apellido");
     }else{
       var busqueda = {nombres: nombres, apellidos :apellidos}
       this.props.Busqueda( busqueda);

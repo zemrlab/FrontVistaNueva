@@ -18,16 +18,24 @@ class NumeroRecibo extends React.Component {
         this.setState({numero: e.target.value});
       }
     onSubmit=(e)=>{
+        console.log("numero ingresado");
+        console.log(this.state.numero);
+        console.log("longitud del numero");
+        console.log(this.state.numero.length);
     
         console.log(this.state.numero);
-        if(this.state.numero!=''){
+        if(this.state.numero==''){
+          alert("Debe ingresar un numero de recibo");
+        }else{
+         if(this.state.numero.length < 7){
+          alert("Debe ingresar un numero de recibo valido");
+         }else{
           var num = this.state.numero;
           console.log(num);
           var listaAgregados=[];
           listaAgregados = this.state.listaNumeros;
           var lista = this.state.listaNumeros.filter(h => h === num);
-          
-          //console.log(listaAgregados);
+
           if(!(lista.length>0)){
             listaAgregados.push(this.state.numero);
           }else{
@@ -39,9 +47,7 @@ class NumeroRecibo extends React.Component {
           this.state.numero='';
       
           this.Buscar(e);
-          
-        }else{
-          alert("Debe ingresar un numero de recibo")
+         } 
         }
        
         e.preventDefault();

@@ -23,7 +23,7 @@ class Alumno extends React.Component {
         </div>
         <b>Código:</b>
         <div className="negro">
-        {this.props.alumno.idAlum}
+        {this.props.alumno.codigo}
         </div></div>
         </div>)
         }

@@ -463,8 +463,45 @@ BuscarNombre(busqueda) {
     console.log(busqueda.nombres);
     console.log("apellido ingresado");
     console.log(busqueda.apellidos);
+    
+    
+    //Verificamos los espacios ingresados en el nombre
     let nombre = busqueda.nombres;
-    let apellido = busqueda.apellidos;
+    var separador = " "; // un espacio en blanco
+    var arregloDeSubCadenas = nombre.split(separador);
+    console.log("arreglo de subcadenas");
+    console.log(arregloDeSubCadenas);
+    var arreglo = [];
+    for (let i = 0; i< arregloDeSubCadenas.length; i++) {
+      if(arregloDeSubCadenas[i]!==''){
+         arreglo.push(arregloDeSubCadenas[i])
+      }
+    }
+    console.log("arreglo sin espacios en blanco");
+    console.log(arreglo);
+
+    var nombrenuevo = arreglo.join(" ");
+    console.log("arreglo nombre con join")
+    console.log(nombrenuevo);
+ //verificamos los espacio ingresado en el apellido}
+ let apellido = busqueda.apellidos;
+ var separador1 = " "; // un espacio en blanco
+ var arregloDeSubCadenas1 = apellido.split(separador);
+ console.log("arreglo de subcadenas");
+ console.log(arregloDeSubCadenas1);
+ var arreglo1 = [];
+ for (let i = 0; i< arregloDeSubCadenas1.length; i++) {
+   if(arregloDeSubCadenas1[i]!==''){
+      arreglo1.push(arregloDeSubCadenas1[i])
+   }
+ }
+ console.log("arreglo sin espacios en blanco");
+ console.log(arreglo1);
+
+ var apellidonuevo = arreglo1.join(" ");
+ console.log("arreglo apellido con join")
+ console.log(apellidonuevo);
+
     this.setState({
       nombre: nombre,
       apellido:apellido
@@ -473,7 +510,7 @@ BuscarNombre(busqueda) {
       var listado1 =[];
     //antiguo link 
     //https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/updaterecaudaciones/listar/
-    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/alumno/concepto/leer/restringido/'+nombre+'/'+apellido)
+    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/alumno/concepto/leer/restringido/'+nombrenuevo+'/'+apellidonuevo)
       .then((response) => {
         return response.json()
       })
@@ -521,9 +558,9 @@ BuscarNombre(busqueda) {
       for (let i = 0; i< listado1.length; i++) {
             var nombrefiltro = listado1[i].apeNom;
             var separador1 = " "; // un espacio en blanco
-            var arregloDeSubCadenas1 = nombrefiltro.split(separador1);
+            var arregloDeSubCadenas2 = nombrefiltro.split(separador1);
             //console.log("arreglo de subcadenas para alumno programa");
-            var nombrenuevo1 = arregloDeSubCadenas1.join(" & ");
+            var nombrenuevo1 = arregloDeSubCadenas2.join(" & ");
             //console.log(nombrenuevo1);
             //ANTERIOR LINK:https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/alumnoprograma/leer/
             

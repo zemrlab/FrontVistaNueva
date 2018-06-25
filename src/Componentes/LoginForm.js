@@ -27,7 +27,26 @@ class LoginForm extends React.Component {
     var nombreValidado = this.ValidarNombre(this.state.nombres);
     var nombres = this.state.nombres.toUpperCase();
     if(nombreValidado){
-        fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/alumno/leer/'+nombres)
+    var separador = " "; // un espacio en blanco
+    var arregloDeSubCadenas = nombres.split(separador);
+    console.log("arreglo de subcadenas");
+    console.log(arregloDeSubCadenas);
+    var arreglo = [];
+    for (let i = 0; i< arregloDeSubCadenas.length; i++) {
+      if(arregloDeSubCadenas[i]!==''){
+         arreglo.push(arregloDeSubCadenas[i])
+      }
+    }
+    console.log("arreglo sin espacios en blanco");
+    console.log(arreglo);
+
+    var nombrenuevo = arreglo.join(" ");
+    console.log("nombre nuevo");
+    console.log(nombrenuevo);
+    console.log("arreglo nombre con join")
+    console.log(nombrenuevo);
+
+        fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/alumno/leer/'+nombrenuevo)
             .then((response) => {
             return response.json()
             })
@@ -35,13 +54,13 @@ class LoginForm extends React.Component {
               if(alumno.idAlum != null){
                 this.setState({ alumnos: alumno});
                 console.log(this.state.alumnos)
-                if(this.state.alumnos.apeNom.toUpperCase() == this.state.nombres.toUpperCase()){
+                if(this.state.alumnos.apeNom.toUpperCase() ==nombrenuevo.toUpperCase()){
                   console.log("Hola")
                   this.setState({isValid: true})
                 }
                 if (this.state.isValid) {
                  swal("Bienvenido!", this.state.alumnos.apeNom , "success").then(
-                    browserHistory.push('/'+this.state.nombres.toUpperCase())
+                    browserHistory.push('/'+nombrenuevo.toUpperCase())
                  );
                 
                  

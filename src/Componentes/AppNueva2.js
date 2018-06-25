@@ -25,7 +25,8 @@ class AppNueva extends React.Component {
       estado:0,
       filtroDel:new String(""),
       filtroAl:new String(""),
-      filtroNumeros: []
+      filtroNumeros: [],
+      programa:[]
     }
     this.enviar=this.enviar.bind(this);
 
@@ -155,7 +156,11 @@ Asignar=(e)=>{
     }*/
     console.log("ALUMNO QUE HA SIDO INSERTADO");
     console.log(pagos);
-    swal("Asignado exitosamente!","","success");
+    
+
+    var busqueda1 = {nombres: this.state.nombre,
+                     mensaje:1}
+    this.BuscarNombre(busqueda1);
     
   })
   .catch(error => {
@@ -166,9 +171,11 @@ Asignar=(e)=>{
   
   
   }
-
-
+  swal("Asignado exitosamente!","","success");
+  //Actualizamos la vista:
   
+
+  e.preventDefault();
 }
 enviar(){
   console.log("lo que envio:");
@@ -226,79 +233,36 @@ BuscarNombre(busqueda) {
         listadoRec.idFacultad = pagos[i].idFacultad;
         listado1.push(listadoRec); 
       }
-     
-      //console.log(nombrefiltro);
-
-      for (let i = 0; i< listado1.length; i++) {
-          /*
-            var nombrefiltro = listado1[i].apeNom;
-            var separador1 = " "; // un espacio en blanco
-            var arregloDeSubCadenas1 = nombrefiltro.split(separador1);
-            var arreglo1 = [];
-            for (let i = 0; i< arregloDeSubCadenas1.length; i++) {
-              if(arregloDeSubCadenas1[i]!==''){
-                 arreglo1.push(arregloDeSubCadenas1[i])
-              }
-            }
-            console.log("arreglo1 sin espacios en blanco");
-            console.log(arreglo1);
-
-            var nombrenuevo1 = arreglo1.join(" & ");
-            console.log("nombre del input a enviar a la consulta");
-            console.log(nombrenuevo1);
-           // var nombrefiltro = "TRINIDAD ELIZABETH ABANTO MENDOZA";
-           */
-            console.log("arreglo con join")
-            console.log(nombrenuevo);
-            fetch('https://modulo-alumno-jdbc.herokuapp.com/alumno/alumnoprograma/programa/leer/restringido/'+nombrenuevo)
-            .then((response) => {
-            return response.json()
-            })
-            .then((programa) => {
-            var alumnoprograma = programa;
-            //listado1[i].alumnoPrograma = 
-            var listadoOpcionesCodigos = [];
-            var listadoOpcionesProgramas = [];
-            /*console.log("ALUMNO PROGRAM RECIBIDO");
-            console.log(alumnoprograma);
-            console.log("longitud del array alumno programa recibido")
-            console.log(alumnoprograma.length);*/
-
-            listado1[i].alumnoPrograma = programa;
-             
-             for(let j = 0; j< alumnoprograma.length; j++){       
-    
-                var value1 = j;
-                var label1 = alumnoprograma[j].codAlumno+"-"+alumnoprograma[j].apeNom+"/"+ alumnoprograma[j].idPrograma+"-"+alumnoprograma[j].siglaPrograma;
-               
-                var option1 = {value: value1, label:label1};
-                listado1[i].codigos.push(option1);
-                //listadoOpcionesCodigos.push(option1);
-                /*
-                console.log("listado de opciones de codigos");
-                var value2 = j;
-                var label2 = alumnoprograma[j].programa.nomPrograma;
-                var option2 = {value: value2, label:label2};
-                listado1[i].programas.push(option2);
-                */
-               // listadoOpcionesProgramas.push(option2);    
-            
-            }/*
+          console.log("arreglo con join")
+          console.log(nombrenuevo);
+          fetch('https://modulo-alumno-jdbc.herokuapp.com/alumno/alumnoprograma/programa/leer/restringido/'+nombrenuevo)
+          .then((response) => {
+          return response.json()
+          })
+          .then((programa) => {
             console.log("programa leido");
-            
-            if(alumnoprograma.length == 0){
-              var value1 = "codigo";
-              var label1 = "No hay coincidencias";
-              var option1 = {value: value1, label:label1};
-              listado1[i].codigos.push(option1);
+           console.log(programa);
+            for (let i = 0; i< listado1.length; i++) {
+              
+              var alumnoprograma = programa;
+              var listadoOpcionesCodigos = [];
+              var listadoOpcionesProgramas = [];
+              listado1[i].alumnoPrograma = programa;
+               
+               for(let j = 0; j< alumnoprograma.length; j++){       
+      
+                  var value1 = j;
+                  var label1 = alumnoprograma[j].codAlumno+"-"+alumnoprograma[j].apeNom+"/"+ alumnoprograma[j].idPrograma+"-"+alumnoprograma[j].siglaPrograma;
+                 
+                  var option1 = {value: value1, label:label1};
+                  listado1[i].codigos.push(option1);
+              }
+         
             }
-            */
-            //console.log(programa);
-            })
-            .catch(error => {
-            console.error(error)
-            });
-      }
+          })
+          .catch(error => {
+          console.error(error)
+          });
       if(pagos.length >0){
       
         this.setState({
@@ -306,7 +270,10 @@ BuscarNombre(busqueda) {
           pagos: pagos 
       },
         );
-        swal("Busqueda realizada exitosamente!","","success");
+        if(!busqueda.mensaje){
+          swal("Busqueda realizada exitosamente!","","success");
+        }
+        
       }else{
         
         this.setState({
@@ -314,7 +281,9 @@ BuscarNombre(busqueda) {
           pagos: []
       },
         );
+        if(!busqueda.mensaje){
         swal("No se encontraron registros","","info");
+        }
       }
     
         console.log("listado de alumno y codigo programa que se muestra en la tabla");
