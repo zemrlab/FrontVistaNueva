@@ -233,9 +233,10 @@ BuscarNombre(busqueda) {
         listadoRec.idFacultad = pagos[i].idFacultad;
         listado1.push(listadoRec); 
       }
-          console.log("arreglo con join")
-          console.log(nombrenuevo);
-          fetch('https://modulo-alumno-jdbc.herokuapp.com/alumno/alumnoprograma/programa/leer/restringido/'+nombrenuevo)
+      var nombrenuevo2 = arreglo.join(" | ");
+      console.log("arreglo con join")
+      console.log(nombrenuevo2);
+          fetch('https://modulo-alumno-jdbc.herokuapp.com/alumno/alumnoprograma/programa/leer/restringido/'+nombrenuevo2)
           .then((response) => {
           return response.json()
           })
