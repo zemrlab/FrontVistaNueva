@@ -2,6 +2,7 @@ import React from 'react';
 import SelectNuevo2 from './SelectNuevo2';
 
 class PagoRowNuevo2 extends React.Component {
+  
   render() {
     return(
     <tr>
