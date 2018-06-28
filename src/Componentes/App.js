@@ -178,7 +178,7 @@ componentDidUpdate(){
       });
     //Obtenemos el listado de conceptos
     //https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/concepto/leer/
-    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/concepto/leer/' + nombres)
+    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/concepto/leer/restringido/' + nombrenuevo)
       .then((response) => {
         return response.json()
       })

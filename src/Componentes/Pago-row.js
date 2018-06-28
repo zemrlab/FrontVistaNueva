@@ -41,7 +41,7 @@ class PagoRow extends React.Component {
       </form>
      
     </td>
-      
+      <td className="td">{this.props.pago.apeNom}</td>
       <td className="td">{this.props.pago.concepto}</td>
 			<td className="td">{this.props.pago.numero}</td>	
       <td className="td">{this.props.pago.nombre}</td>
