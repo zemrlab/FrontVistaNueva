@@ -130,7 +130,7 @@ class LoginForm extends React.Component {
       <nav>
     <div class="nav-wrapper azul">
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a onClick={this.VistaNueva} >VistaNueva</a></li>
+       {/*  <li><a onClick={this.VistaNueva} >VistaNueva</a></li> */}
         <li><a onClick={this.VistaNueva2} >VistaNueva2</a></li>
         <li><a onClick={this.VistaTablaCreada} >Ver tabla</a></li>
       </ul>

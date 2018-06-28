@@ -17,27 +17,18 @@ class SelectNuevo2 extends React.Component {
     }else{
       this.setState({ SelectedOption:''
       });
-    }
-
-    
+    } 
   }
 
   componentWillReceiveProps(){
     this.setState({ SelectedOption:''
       });
   }
-
-  
-
  /*  componentDidUpdate(){
     this.setState({
       SelectedOption:''
     });
   } */
-
-
-
-
   render() {
   
     return (
