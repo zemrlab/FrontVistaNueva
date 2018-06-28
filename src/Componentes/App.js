@@ -118,6 +118,8 @@ componentDidUpdate(){
     var nombrenuevo = arreglo.join(" & ");
     console.log("arreglo con join")
     console.log(nombrenuevo);
+    var nombreAlumno = arreglo.join(" ");
+
 
     fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/alumno/concepto/listar/' + nombrenuevo)
       .then((response) => {
@@ -126,7 +128,7 @@ componentDidUpdate(){
       .then((pagos) => {
 
         
-        console.log("pagos de la consulta");
+        console.log("pagos de la consulta de acuerdo el nombre ingresado");
         console.log(pagos);
         var auxPagos = pagos;
         /*
@@ -149,8 +151,7 @@ componentDidUpdate(){
       
      }*/
       var alumnoDetalle = {
-      apeNom:pagos[0].apeNom,
-      codigo:pagos[0].codigo
+      apeNom: nombreAlumno
       }
         this.setState({
           pagocero: pagos,
@@ -272,11 +273,11 @@ componentDidUpdate(){
                 <PagoList  funcion={this.Funcion} listado={this.state.pageOfItems} />
               </table>
               <div className="margen_top"> <Paginacion items={this.state.pagocero} onChangePage={this.onChangePage}/></div>
-              <div className="SplitPane">
-                <div className="SplitPane-left">
+              <div className="row">
+                <div className="col-md-7">
                   <Importe importe={this.CalcularImporte()} />
                 </div>
-                <div className="SplitPane-right">
+                <div className="col-md-5">
                   <Imprimir onClick={this.enviar} listado={this.state.pagocero} alumno={this.state.alumno}/>
                 </div>
               </div>

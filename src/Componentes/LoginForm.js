@@ -53,7 +53,7 @@ class LoginForm extends React.Component {
              if(pagos.length>0){
 
                 
-              swal("Bienvenido!" , "success").then(
+              swal("Consulta realizada exitosamente!" ,"", "success").then(
                  browserHistory.push('/'+this.state.nombres.toUpperCase()))
               }
               else{
@@ -62,7 +62,7 @@ class LoginForm extends React.Component {
 
             })
             .catch(error => {
-            // si hay algún error lo mostramos en consola
+
                 swal("Oops, Algo salió mal!", "","error")
                 console.error(error)
             });
@@ -112,7 +112,7 @@ class LoginForm extends React.Component {
 
     return (
       <div className="">
-      <h3>Módulo consulta de recibos
+      <h3>Módulo consulta de pagos
          <ul id="nav-mobile" class="right  hide-on-med-and-down">
               <li ><a className="seleccionar" href="https://siga-fisi.herokuapp.com/dashboard" >Vista Principal<i className="material-icons right">launch</i></a></li>
           </ul>

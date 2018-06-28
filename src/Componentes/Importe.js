@@ -5,7 +5,7 @@ class Importe extends React.Component {
       return(
         <div className="row">
           <b className="importe">IMPORTE TOTAL:</b>
-          <input value={'S/. '+ this.props.importe} type="text" placeholder="Importe" className="center col-xs-3"/>
+          <input value={'S/. '+ this.props.importe} type="text" placeholder="Importe" className="center col-xs-5"/>
         </div>
       )
     }   

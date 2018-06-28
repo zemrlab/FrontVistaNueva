@@ -107,8 +107,8 @@ label {
  margin-right:40px;
 }
 .importe{
-  margin-left:40px;
-  margin-right:16px;
+  margin-left:10px;
+  margin-right:20px;
   margin-top:20px;
  }
 /* 
@@ -240,7 +240,7 @@ h4{
 
 .SplitPane-left {
   float: left;
-  width: 30%;
+  width: 60%;
   height: 100%;
 }
 

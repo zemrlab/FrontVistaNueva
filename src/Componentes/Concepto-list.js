@@ -22,7 +22,7 @@ class ConceptoList extends React.Component {
         </p>
       )}
       else{
-        return <p className="text-center"></p>
+        return <p className="text-center">No se encontraron conceptos</p>
       }
     }
   }

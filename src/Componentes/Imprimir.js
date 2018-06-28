@@ -131,13 +131,13 @@ class Imprimir extends React.Component {
         doc.setFontSize(11);
         doc.text("Datos del Estudiante", 192, 188); 
 
-        
+        /*
         
         doc.setFont("helvetica");
         doc.setFontType("bold");
         doc.setFontSize(8);
         doc.text(":", 310, 208); 
-
+*/
         doc.setFont("helvetica");
         doc.setFontType("bold");
         doc.setFontSize(8);
@@ -147,12 +147,12 @@ class Imprimir extends React.Component {
         doc.setFontType("bold");
         doc.setFontSize(8);
         doc.text(":", 310, 248); 
-
+/*
         doc.setFont("helvetica");
         doc.setFontType("bold");
         doc.setFontSize(9);
         doc.text("Codigo de matricula", 192, 208); 
-
+*/
         doc.setFont("helvetica");
         doc.setFontType("bold");
         doc.setFontSize(9);
@@ -162,12 +162,12 @@ class Imprimir extends React.Component {
         doc.setFontType("bold");
         doc.setFontSize(9);
         doc.text("Importe total", 192, 248); 
-
+/*
         doc.setFont("helvetica");
         doc.setFontType("normal");
         doc.setFontSize(9);
         doc.text(codigo, 322, 208); 
-
+*/
         doc.setFont("helvetica");
         doc.setFontType("normal");
         doc.setFontSize(9);
