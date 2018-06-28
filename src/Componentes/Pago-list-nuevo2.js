@@ -107,12 +107,13 @@ class Paginacion extends React.Component {
 
     // calculate total pages
     var totalPages = Math.ceil(totalItems / pageSize);
+    /*
     console.log("cantidad de items");
     console.log(totalItems);
     console.log("cantidad de paginas");
     console.log(totalPages);
 
-
+   */
     var startPage, endPage;
     if (totalPages <= 10) {
       // less than 10 total pages so show all
@@ -143,11 +144,12 @@ class Paginacion extends React.Component {
       pages.push(startPage + i);
     } */
     var pages = [...Array((endPage + 1) - startPage).keys()].map(i => startPage + i);
+    /*
     console.log("endpage");
     console.log(endPage);
     console.log("cantidad de pageeees");
     console.log(pages.length);
-
+*/
 
     // return object with all pager properties required by the view
     return {

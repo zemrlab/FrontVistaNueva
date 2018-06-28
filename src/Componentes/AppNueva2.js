@@ -47,13 +47,13 @@ Regresar=(e)=>{
       return (
         <div className="">
           <h3>Estado de pagos
-          <ul id="nav-mobile" class="right  hide-on-med-and-down">
+          <ul id="nav-mobile" className="right  hide-on-med-and-down">
               <li ><a className="seleccionar" onClick={this.Regresar} >Regresar<i className="material-icons right">reply</i></a></li>
           </ul>
           </h3>
           <hr />
           <div className="SplitPane row">
-            <div className=" col-xs-12">
+            <div className="col-xs-12">
                 <div>
                 <BuscarNuevo Busqueda={this.BuscarNombre} />
               </div>
@@ -87,13 +87,15 @@ Asignar=(e)=>{
     
 
     check = document.getElementsByClassName("opcion2");
+    /*
     console.log("Elementos seleccionado")
     console.log(check);
-    console.log("seleccionados codigos");
+    console.log("seleccionados codigos");*/
     for (var item of check) {
      opcionesSeleccionadas.push(item.id);
+     /*
      console.log("item recibido");
-     console.log(item.id);
+     console.log(item.id);*/
     }
     
  
@@ -104,8 +106,9 @@ Asignar=(e)=>{
     
     for (let i = 0; i < listado2.length; i++) {
         var index = opcionesSeleccionadas[i];
+        /*
         console.log("indice")
-        console.log(index);
+        console.log(index);*/
         if(!index){
            listadoAlumnoPrograma.push(null);
         }else{
@@ -113,8 +116,9 @@ Asignar=(e)=>{
            listadoAlumnoPrograma.push(ap);
         }
     }
+    /*
     console.log("listado de alumnos programas");
-    console.log(listadoAlumnoPrograma);
+    console.log(listadoAlumnoPrograma);*/
     
     var pagoinsertar = [];
     var PagosActualizados = this.state.pagocero;
@@ -130,11 +134,12 @@ Asignar=(e)=>{
         pagoinsertar.push(listadoRec);
         }
     }
+    /*
     console.log("alumno-alumno programa generado a insertar");
     console.log(pagoinsertar)
 
   
-
+*/
     for (let i = 0; i < pagoinsertar.length; i++) {
       //llamar servicio insertar alumno alumno-programa
       fetch('https://modulo-alumno-jdbc.herokuapp.com/alumnoalumnoprograma/add',
@@ -153,9 +158,9 @@ Asignar=(e)=>{
   .then((pagos) => {
     /*if(pagos){
       swal("Asignado exitosamente!","","success");
-    }*/
+    }
     console.log("ALUMNO QUE HA SIDO INSERTADO");
-    console.log(pagos);
+    console.log(pagos);*/
     
 
     var busqueda1 = {nombres: this.state.nombre,
@@ -178,6 +183,7 @@ Asignar=(e)=>{
   e.preventDefault();
 }
 enviar(){
+
   console.log("lo que envio:");
   console.log(this.state.pagocero);
 }
@@ -187,20 +193,24 @@ BuscarNombre(busqueda) {
     let nombre = busqueda.nombres;
     var separador = " "; // un espacio en blanco
     var arregloDeSubCadenas = nombre.split(separador);
+    /*
     console.log("arreglo de subcadenas");
-    console.log(arregloDeSubCadenas);
+    console.log(arregloDeSubCadenas);*/
     var arreglo = [];
     for (let i = 0; i< arregloDeSubCadenas.length; i++) {
       if(arregloDeSubCadenas[i]!==''){
          arreglo.push(arregloDeSubCadenas[i])
       }
     }
+    /*
     console.log("arreglo sin espacios en blanco");
     console.log(arreglo);
-
+*/
     var nombrenuevo = arreglo.join(" & ");
+    /*
     console.log("arreglo con join")
     console.log(nombrenuevo);
+    */
 
     this.setState({
       nombre: nombre
@@ -212,8 +222,8 @@ BuscarNombre(busqueda) {
       })
       .then((pagos) => {
       
-      console.log("Listado de pagos recibidos");
-      console.log(pagos);
+      /*console.log("Listado de pagos recibidos");
+      console.log(pagos);*/
 
       var listado1 =[];
       var opciones  = [];
@@ -234,15 +244,16 @@ BuscarNombre(busqueda) {
         listado1.push(listadoRec); 
       }
       var nombrenuevo2 = arreglo.join(" | ");
-      console.log("arreglo con join")
-      console.log(nombrenuevo2);
+     /*  console.log("arreglo con join")
+      console.log(nombrenuevo2); */
           fetch('https://modulo-alumno-jdbc.herokuapp.com/alumno/alumnoprograma/programa/leer/restringido/'+nombrenuevo2)
           .then((response) => {
           return response.json()
           })
           .then((programa) => {
-            console.log("programa leido");
-           console.log(programa);
+
+          /*   console.log("programa leido");
+           console.log(programa); */
             for (let i = 0; i< listado1.length; i++) {
               
               var alumnoprograma = programa;
@@ -286,9 +297,9 @@ BuscarNombre(busqueda) {
         swal("No se encontraron registros","","info");
         }
       }
-    
+    /*
         console.log("listado de alumno y codigo programa que se muestra en la tabla");
-        console.log(listado1);
+        console.log(listado1);*/
     }
     )
     .catch(error => {

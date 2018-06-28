@@ -301,6 +301,7 @@ componentDidUpdate(){
 Filtrar=(e)=>{
     var concep = [];
     concep = this.SeleccionConceptos();
+    /*
     console.log("conceptos con check recibidos")
     console.log(concep);
     console.log(concep.length);
@@ -310,7 +311,7 @@ Filtrar=(e)=>{
     console.log(this.state.filtroAl);
     console.log("listado de numeros recibidos")
     console.log(this.state.filtroNumeros);
-    console.log(this.state.filtroNumeros.length);
+    console.log(this.state.filtroNumeros.length);*/
 
     var filtrodel = this.state.filtroDel;
 
@@ -326,10 +327,11 @@ Filtrar=(e)=>{
       filtroal = "9999-12-12";
       console.log(filtroal)
     }
+    /*
     console.log("listado de numeros");
     console.log(this.state.filtroNumeros);
     console.log("listado de conceptos");
-    console.log(concep)
+    console.log(concep)*/
 //ANTIGUO LINK
 //http://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/recaudaciones/listar/filtrar
     fetch('http://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/alumno/concepto/listar/filtrar',
@@ -369,9 +371,9 @@ Filtrar=(e)=>{
   }else{
     swal("No se encontraron registros","","info");
   }
-
+/*
   console.log("Pagos filtrados que recibo")
-  console.log(pagos);
+  console.log(pagos);*/
   })
   .catch(error => {
   // si hay algún error lo mostramos en consola
@@ -391,10 +393,12 @@ Filtrar=(e)=>{
     
   }
   SeleccionFechaAl(Fecha) {
-    console.log(Fecha);
+   
     var fecha1 = new String(Fecha);
+    /*
+    console.log(Fecha);
     console.log("fecha al");
-    console.log(fecha1);
+    console.log(fecha1);*/
     this.setState({filtroAl: fecha1});
     
   }
@@ -419,7 +423,7 @@ Filtrar=(e)=>{
       idconcepto.push(this.conceptos[i].idConcepto);
     }
     */
-    console.log(checkbox_seleccionados);
+   // console.log(checkbox_seleccionados);
    
     return checkbox_seleccionados;
 
@@ -446,7 +450,7 @@ Filtrar=(e)=>{
 
   }
 seleccionar(){
-  console.log("gg");
+  //console.log("gg");
   var checks=document.getElementsByClassName("checkbox1");
   for (let i=0;i<checks.length;i++) {
             if(this.state.todos==false){
@@ -499,10 +503,11 @@ FiltrarFecha(Fechas) {
       filtroDel: del,
       filtroAL : al
     })
+     /*
     console.log("fechas recibidas");
     console.log(del);
     console.log(al);
-    /*
+   
 
     console.log(Fechas.del);
     console.log(Fechas.al);
@@ -555,9 +560,9 @@ FiltrarFecha(Fechas) {
   }
 
   FiltrarNumeros = (listaNumeros) => {
-
+/*
     console.log("Listado de numeros recibidos:")
-    console.log(listaNumeros);
+    console.log(listaNumeros);*/
     this.setState({
       filtroNumeros: listaNumeros
      })
@@ -612,7 +617,6 @@ FiltrarFecha(Fechas) {
     
     var total=[];
     var checkbox_selec=[];
-    console.log("hola");
     var checks=document.getElementsByClassName("checkbox1");
    var checks_normales=Array.from(checks);
    checks_normales.map((checkbox)=>{
@@ -621,8 +625,9 @@ FiltrarFecha(Fechas) {
        
      }
    });
+   /*
    console.log(checkbox_selec);
-   console.log(this.state.checkbox_);
+   console.log(this.state.checkbox_);*/
 
    for(let i=0;i<checkbox_selec.length;i++){
     var id=checkbox_selec[i];
@@ -643,7 +648,7 @@ FiltrarFecha(Fechas) {
   
 
   filtrarConcepto = (filtrado) => {
-    console.log(filtrado);
+    //console.log(filtrado);
     var idconcepto = [];
     var checkbox_seleccionados = [];
     var check = [];
@@ -661,7 +666,7 @@ FiltrarFecha(Fechas) {
     for (let i = 0; i < this.conceptos.length; i++) {
       idconcepto.push(this.conceptos[i].idConcepto);
     }
-    console.log(checkbox_seleccionados);
+   // console.log(checkbox_seleccionados);
     //var arrayflitrado=this.state.pagos.filter(pago => pago.concepto.idConcepto===5);
     if (checkbox_seleccionados.length == 0) {
 
@@ -682,7 +687,7 @@ FiltrarFecha(Fechas) {
       if (arrayfiltrado.length == 0) {
         arrayfiltrado = filtrado;
       }
-      console.log(arrayfiltrado);
+     // console.log(arrayfiltrado);
 
 
 
@@ -695,17 +700,17 @@ FiltrarFecha(Fechas) {
 
 
     var numero_codigos = this.state.filtros;
-    console.log(numero_codigos);
+    //console.log(numero_codigos);
     var filtrofinal = [];
 
     var listaNumeros_seleccionados = numero_codigos;
 
-    console.log(listaNumeros_seleccionados);
+    //console.log(listaNumeros_seleccionados);
 
 
 
 
-    console.log(arrayfiltrado);
+    //console.log(arrayfiltrado);
 
     if (listaNumeros_seleccionados.length == 0) {
       
@@ -745,10 +750,10 @@ FiltrarFecha(Fechas) {
             pagocero: filtrofinal
           })
         }
-
+/*
        
         console.log(arrayfiltrado);
-        console.log(this.state.pagocero);
+        console.log(this.state.pagocero);*/
 
       }
     }
