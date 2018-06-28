@@ -224,8 +224,8 @@ BuscarNombre(busqueda) {
       })
       .then((pagos) => {
       
-      /*console.log("Listado de pagos recibidos");
-      console.log(pagos);*/
+      console.log("Listado de pagos recibidos");
+      console.log(pagos);
 
       var listado1 =[];
       var opciones  = [];

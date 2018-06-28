@@ -320,6 +320,8 @@ Filtrar=(e)=>{
       filtroal = "9999-12-12";
       console.log(filtroal)
     }
+    console.log("conceptos a enviar en json");
+    console.log(concep);
     /*
     console.log("listado de numeros");
     console.log(this.state.filtroNumeros);
@@ -327,6 +329,28 @@ Filtrar=(e)=>{
     console.log(concep)*/
 //ANTIGUO LINK
 //http://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/recaudaciones/listar/filtrar
+
+
+    let nombreFiltro = this.state.name;
+
+    var separadorFiltro = " "; // un espacio en blanco
+    var arregloDeSubCadenasFiltro = nombreFiltro.split(separadorFiltro);
+    /*
+    console.log("arreglo de subcadenas");
+    console.log(arregloDeSubCadenas);*/
+    var arregloFiltro = [];
+    for (let i = 0; i< arregloDeSubCadenasFiltro.length; i++) {
+      if(arregloDeSubCadenasFiltro[i]!==''){
+         arregloFiltro.push(arregloDeSubCadenasFiltro[i])
+      }
+    }
+    /*
+    console.log("arreglo sin espacios en blanco");
+    console.log(arreglo);
+*/
+    var nombrenuevoFiltro = arregloFiltro.join(" & ");
+    console.log("nombre a pasar para filtrar");
+    console.log(nombrenuevoFiltro);
     fetch('http://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/alumno/concepto/listar/filtrar',
     {
     headers: {
@@ -335,7 +359,7 @@ Filtrar=(e)=>{
     method: "POST",
     body: JSON.stringify(
       {
-        "nom_ape": this.state.name,
+        "nom_ape": nombrenuevoFiltro,
         "fechaInicial": filtrodel,
         "fechaFinal": filtroal,
         "conceptos": concep,
