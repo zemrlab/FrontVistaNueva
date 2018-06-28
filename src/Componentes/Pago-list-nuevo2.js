@@ -41,7 +41,7 @@ class PagoListNuevo2 extends React.Component {
         <tbody>
           {
             this.state.pageOfItems.map((pago) => {
-              return <PagoRowNuevo2 Funciones={this.props.funcion} key={pago.toString()} 
+              return <PagoRowNuevo2 nombre={this.props.nombre} Funciones={this.props.funcion} key={pago.toString()} 
                                   pago={ pago} />
             })
           }

@@ -11,6 +11,7 @@ class AppNueva extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      nombre_select: '',
       conceptos : [],
       todos:false,
       nombre: '',
@@ -63,7 +64,7 @@ Regresar=(e)=>{
             <div className="row center-xs centrar">
             <div className="center-xs-12 margin_top ">
               
-                <PagoListNuevo2  funcion={this.Funcion} listado={this.state.pagocero}/>
+                <PagoListNuevo2  nombre={this.state.nombre_select} funcion={this.Funcion} listado={this.state.pagocero}/>
               
               <div className="SplitPane row center-xs">  
                 <button  onClick={this.Asignar} className="waves-effect waves-light btn-large botonazul2 center"type="submit">Asignar<i className="large material-icons left">check</i></button>
@@ -269,16 +270,20 @@ BuscarNombre(busqueda) {
 
         console.log("arreglo a enviar al servicio alumno programa")
         console.log(nombrenuevo2)
-          fetch('https://modulo-alumno-jdbc.herokuapp.com/alumno/alumnoprograma/programa/listar/restringido/'+nombrenuevo2)
+
+        this.setState({
+          nombre_select:nombrenuevo2
+        });
+
+        
+          /* fetch('https://modulo-alumno-jdbc.herokuapp.com/alumno/alumnoprograma/programa/listar/restringido/'+nombrenuevo2)
           .then((response) => {
           return response.json()
           })
           .then((programa) => {
             
 
-          /*console.log("programa leido");
-           console.log(programa); */
-          //  for (let i = 0; i< listado1.length; i++) {
+          
               
               var alumnoprograma = programa;
               var listadoOpcionesCodigos = [];
@@ -298,7 +303,7 @@ BuscarNombre(busqueda) {
           })
           .catch(error => {
           console.error(error)
-          });
+          }); */
 
         }
 
