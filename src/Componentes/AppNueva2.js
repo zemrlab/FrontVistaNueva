@@ -191,6 +191,7 @@ BuscarNombre(busqueda) {
    // console.log("Nombre ingresado");
     //console.log(busqueda.nombres);
     let nombre = busqueda.nombres;
+
     var separador = " "; // un espacio en blanco
     var arregloDeSubCadenas = nombre.split(separador);
     /*
@@ -243,18 +244,41 @@ BuscarNombre(busqueda) {
         listadoRec.idFacultad = pagos[i].idFacultad;
         listado1.push(listadoRec); 
       }
-      var nombrenuevo2 = arreglo.join(" | ");
-     /*  console.log("arreglo con join")
-      console.log(nombrenuevo2); */
-          fetch('https://modulo-alumno-jdbc.herokuapp.com/alumno/alumnoprograma/programa/leer/restringido/'+nombrenuevo2)
+
+
+      console.log("arreglo con join con espacios")
+      console.log(nombrenuevo2);
+      for (let i = 0; i< listado1.length; i++) {
+        var apeNombre = listado1[i].apeNom;
+        var separador1 = " "; // un espacio en blanco
+        var arregloDeSubCadenas1 = apeNombre.split(separador1);
+        /*
+        console.log("arreglo de subcadenas");
+        console.log(arregloDeSubCadenas);*/
+        var arreglo1 = [];
+        for (let i = 0; i< arregloDeSubCadenas1.length; i++) {
+          if(arregloDeSubCadenas1[i]!==''){
+             arreglo1.push(arregloDeSubCadenas1[i])
+          }
+        }
+        
+        console.log("arreglo sin espacios en blanco para alumno programa");
+        console.log(arreglo1);
+    
+        var nombrenuevo2 = arreglo1.join(" ");
+
+        console.log("arreglo a enviar al servicio alumno programa")
+        console.log(nombrenuevo2)
+          fetch('https://modulo-alumno-jdbc.herokuapp.com/alumno/alumnoprograma/programa/listar/restringido/'+nombrenuevo2)
           .then((response) => {
           return response.json()
           })
           .then((programa) => {
+            
 
-          /*   console.log("programa leido");
+          /*console.log("programa leido");
            console.log(programa); */
-            for (let i = 0; i< listado1.length; i++) {
+          //  for (let i = 0; i< listado1.length; i++) {
               
               var alumnoprograma = programa;
               var listadoOpcionesCodigos = [];
@@ -270,11 +294,14 @@ BuscarNombre(busqueda) {
                   listado1[i].codigos.push(option1);
               }
          
-            }
+           // }
           })
           .catch(error => {
           console.error(error)
           });
+
+        }
+
       if(pagos.length >0){
       
         this.setState({
