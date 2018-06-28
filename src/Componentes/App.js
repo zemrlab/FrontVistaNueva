@@ -148,9 +148,14 @@ componentDidUpdate(){
         });
       
      }*/
+      var alumnoDetalle = {
+      apeNom:pagos[0].apeNom,
+      codigo:pagos[0].codigo
+      }
         this.setState({
           pagocero: pagos,
-          pagos: pagos
+          pagos: pagos,
+          alumno: alumnoDetalle
         },
 
         );
@@ -192,21 +197,8 @@ componentDidUpdate(){
       });
       //cONSULTAMOS LOS DATOS DEL ALUMNO POR EL NOMBRE:
 
-      fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/alumno/leer/' + nombres)
-      .then((response) => {
-        return response.json()
-      })
-      .then((alumno) => {
-        this.setState({
-          alumno: alumno
-        }
-
-        );
-      })
-      .catch(error => {
-        swal("Oops, Algo salió mal!!", "","error")
-        console.error(error)
-      });
+       
+     
   }
   Regresar=(e)=>{
     

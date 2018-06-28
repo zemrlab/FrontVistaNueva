@@ -39,41 +39,31 @@ class LoginForm extends React.Component {
     }
     console.log("arreglo sin espacios en blanco");
     console.log(arreglo);
-
-    var nombrenuevo = arreglo.join(" ");
+    var nombrenuevo = arreglo.join(" & ");
     console.log("nombre nuevo");
     console.log(nombrenuevo);
-    console.log("arreglo nombre con join")
-    console.log(nombrenuevo);
-
-        fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/alumno/leer/'+nombrenuevo)
+  
+        fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/alumno/concepto/listar/' + nombrenuevo)
             .then((response) => {
             return response.json()
             })
-            .then((alumno) => {
-              if(alumno.idAlum != null){
-                this.setState({ alumnos: alumno});
-                console.log(this.state.alumnos)
-                if(this.state.alumnos.apeNom.toUpperCase() ==nombrenuevo.toUpperCase()){
-                  console.log("Hola")
-                  this.setState({isValid: true})
-                }
-                if (this.state.isValid) {
-                 swal("Bienvenido!", this.state.alumnos.apeNom , "success").then(
-                    browserHistory.push('/'+nombrenuevo.toUpperCase())
-                 );
+            .then((pagos) => {
+            console.log("pagos recibidos");
+            console.log(pagos);
+             if(pagos.length>0){
+
                 
-                 
-                }
+              swal("Bienvenido!" , "success").then(
+                 browserHistory.push('/'+this.state.nombres.toUpperCase()))
               }
               else{
-                swal("Wrong!", "Datos ingresados incorrectos!", "error");
+                swal("No se encontraron pagos", "", "info");
               }
 
             })
             .catch(error => {
             // si hay algún error lo mostramos en consola
-                swal("Datos ingresados incorrectos!", "", "warning");
+                swal("Oops, Algo salió mal!", "","error")
                 console.error(error)
             });
         
