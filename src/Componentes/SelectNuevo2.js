@@ -32,7 +32,7 @@ class SelectNuevo2 extends React.Component {
       
                   var value1 = j;
                   var label1 = alumnoprograma[j].codAlumno+"-"+alumnoprograma[j].apeNom+"/"+ alumnoprograma[j].idPrograma+"-"+alumnoprograma[j].siglaPrograma;
-                 
+                  
                   var option1 = {value: value1, label:label1};
                   listado1.push(option1);
               }
@@ -72,13 +72,13 @@ class SelectNuevo2 extends React.Component {
   render() {
   
     return (
-      <span className="opcion2" id={this.state.SelectedOption.value} onClick={this.mostrarNombre}>
+      <span className="opcion2" id={this.state.SelectedOption.value}/*  onClick={this.mostrarNombre} */>
       <Select    
         class="seleccionable"
         name="form-field-name"
         value={this.state.SelectedOption}
         onChange={this.handleChange}
-        options={this.state.lista_final}
+        options={this.props.listado}
       ></Select>
       </span>
     );
@@ -86,3 +86,6 @@ class SelectNuevo2 extends React.Component {
 }
 
 export default SelectNuevo2;
+
+
+/*options={this.state.lista_final}*/
