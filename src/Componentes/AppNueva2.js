@@ -85,6 +85,7 @@ Asignar=(e)=>{
     var check = [];
     var opcionesSeleccionadas = [];
     var listadoAlumnoPrograma = [];
+    var pagoinsertar = [];
     
 
     check = document.getElementsByClassName("opcion2");
@@ -98,29 +99,84 @@ Asignar=(e)=>{
      console.log("item recibido");
      console.log(item.id);*/
     }
+    console.log("opciones seleccionadas");
+    console.log(opcionesSeleccionadas);
     
+ //Cargamos los programa de cada alumno programa
  
-    var listado2 = this.state.pagocero;
-    console.log("listado 2");
-    console.log(listado2);
+ var listado2 = this.state.pagocero;
+ console.log("listado 2");
+
+ for (let i = 0; i< listado2.length; i++) {
+  var apeNombre2 = listado2[i].apeNom;
+  var separador2 = " "; // un espacio en blanco
+  var arregloDeSubCadenas2 = apeNombre2.split(separador2);
+  /*
+  console.log("arreglo de subcadenas");
+  console.log(arregloDeSubCadenas);*/
+  var arreglo2 = [];
+  for (let i = 0; i< arregloDeSubCadenas2.length; i++) {
+    if(arregloDeSubCadenas2[i]!==''){
+       arreglo2.push(arregloDeSubCadenas2[i])
+    }
+  }
+  
+  console.log("arreglo sin espacios en blanco para alumno programa");
+  console.log(arreglo2);
+
+  var nombrenuevoPrograma = arreglo2.join(" ");
+
+  console.log("arreglo a enviar al servicio alumno programa")
+  console.log(nombrenuevoPrograma)
+    fetch('https://modulo-alumno-jdbc.herokuapp.com/alumno/alumnoprograma/programa/listar/restringido/'+nombrenuevoPrograma)
+          .then((response) => {
+          return response.json()
+          })
+          .then((programa) => {
+            listado2[i].alumnoPrograma=programa;
+            var index = opcionesSeleccionadas[i];
+            /*
+            console.log("indice")
+            console.log(index);*/
+            if(index == ""){
+               listadoAlumnoPrograma.push(null);
+            }else{
+              if(index!= undefined){
+               
+               console.log("index recibido llego aqui el indice 0")
+               console.log(index);
+               var ap = programa[index];
+               console.log("recaudacion tiene data")
+               console.log(programa[0]);
+               console.log("ap recibida");
+               console.log(ap)
+               listadoAlumnoPrograma.push(ap);
+
+               var listadoRec = { 
+                "idAlumno" : listado2[i].idAlum,
+                "codAlumno" :ap.codAlumno,
+                "idPrograma":ap.idPrograma
+              }
+               pagoinsertar.push(listadoRec);
+
+
+              }else{
+                listadoAlumnoPrograma.push(null);
+              }
+            }
+          })
+          .catch(error => {
+          console.error(error)
+          });
+
+
+  }    
     var indices=[];
     
-    for (let i = 0; i < listado2.length; i++) {
-        var index = opcionesSeleccionadas[i];
-        /*
-        console.log("indice")
-        console.log(index);*/
-        if(!index){
-           listadoAlumnoPrograma.push(null);
-        }else{
-           var ap = listado2[i].alumnoPrograma[index];
-           listadoAlumnoPrograma.push(ap);
-        }
-    }
-    /*
+
     console.log("listado de alumnos programas");
-    console.log(listadoAlumnoPrograma);*/
-    
+    console.log(listadoAlumnoPrograma);
+  /*  
     var pagoinsertar = [];
     var PagosActualizados = this.state.pagocero;
 
@@ -135,12 +191,12 @@ Asignar=(e)=>{
         pagoinsertar.push(listadoRec);
         }
     }
-    /*
+    */
     console.log("alumno-alumno programa generado a insertar");
     console.log(pagoinsertar)
 
   
-*/
+
     for (let i = 0; i < pagoinsertar.length; i++) {
       //llamar servicio insertar alumno alumno-programa
       fetch('https://modulo-alumno-jdbc.herokuapp.com/alumnoalumnoprograma/add',
@@ -236,7 +292,8 @@ BuscarNombre(busqueda) {
           codigo:'',
           dni:'',
           idFacultad:'',
-          codigos:[]
+          codigos:[],
+          alumnoPrograma:[]
         }
         listadoRec.idAlum = pagos[i].idAlum;
         listadoRec.apeNom = pagos[i].apeNom;
