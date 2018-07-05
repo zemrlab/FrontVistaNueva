@@ -27,13 +27,16 @@ class AppNueva extends React.Component {
       filtroDel:new String(""),
       filtroAl:new String(""),
       filtroNumeros: [],
-      programa:[]
+      programa:[],
+      arregloInsertar:[]
     }
     this.enviar=this.enviar.bind(this);
 
     this.BuscarNombre = this.BuscarNombre.bind(this);
     this.Asignar = this.Asignar.bind(this);
     this.Regresar = this.Regresar.bind(this);
+    this.PagoAsignar=this.PagoAsignar.bind(this);
+   
 }
 
 Regresar=(e)=>{
@@ -42,7 +45,17 @@ Regresar=(e)=>{
     e.preventDefault();
     
 }
+PagoAsignar(opcion) {
 
+  if(opcion != null){
+    this.setState({
+      arregloInsertar:opcion
+    });
+    // console.log("opcion de array")
+    // console.log(opcion)
+  }
+
+}
   render() {
     
       return (
@@ -64,11 +77,11 @@ Regresar=(e)=>{
             <div className="row center-xs centrar">
             <div className="center-xs-12 margin_top ">
               
-                <PagoListNuevo2  nombre={this.state.nombre_select} funcion={this.Funcion} listado={this.state.pagocero}/>
+                <PagoListNuevo2 Opcion={this.BuscarNombre} nombreBusqueda={this.state.nombre} nombre={this.state.nombre_select} funcion={this.Funcion} listado={this.state.pagocero}/>
               
-              <div className="SplitPane row center-xs">  
+            {/*   <div className="SplitPane row center-xs">  
                 <button  onClick={this.Asignar} className="waves-effect waves-light btn-large botonazul2 center"type="submit">Asignar<i className="large material-icons left">check</i></button>
-              </div>
+              </div> */}
             </div>
             </div>
             <footer>
@@ -82,34 +95,29 @@ Regresar=(e)=>{
   }
 Asignar=(e)=>{
 
+   
+
     var check = [];
     var opcionesSeleccionadas = [];
     var listadoAlumnoPrograma = [];
     
 
     check = document.getElementsByClassName("opcion2");
-    /*
-    console.log("Elementos seleccionado")
-    console.log(check);
-    console.log("seleccionados codigos");*/
+   
     for (var item of check) {
      opcionesSeleccionadas.push(item.id);
-     /*
-     console.log("item recibido");
-     console.log(item.id);*/
     }
     
- 
+    // console.log("opciones seleccionadas");
+    // console.log(opcionesSeleccionadas);
     var listado2 = this.state.pagocero;
-    console.log("listado 2");
-    console.log(listado2);
+    // console.log("listado 2");
+    // console.log(listado2);
     var indices=[];
     
     for (let i = 0; i < listado2.length; i++) {
         var index = opcionesSeleccionadas[i];
-        /*
-        console.log("indice")
-        console.log(index);*/
+      
         if(!index){
            listadoAlumnoPrograma.push(null);
         }else{
@@ -117,9 +125,7 @@ Asignar=(e)=>{
            listadoAlumnoPrograma.push(ap);
         }
     }
-    /*
-    console.log("listado de alumnos programas");
-    console.log(listadoAlumnoPrograma);*/
+  
     
     var pagoinsertar = [];
     var PagosActualizados = this.state.pagocero;
@@ -185,14 +191,16 @@ Asignar=(e)=>{
 }
 enviar(){
 
-  console.log("lo que envio:");
-  console.log(this.state.pagocero);
+  // console.log("lo que envio:");
+  // console.log(this.state.pagocero);
 }
 BuscarNombre(busqueda) {
-   // console.log("Nombre ingresado");
-    //console.log(busqueda.nombres);
+  //  console.log("Nombre ingresado");
+  //  console.log(busqueda.nombres);
     let nombre = busqueda.nombres;
-
+    this.setState({
+      nombre: nombre
+    });
     var separador = " "; // un espacio en blanco
     var arregloDeSubCadenas = nombre.split(separador);
     /*
@@ -214,9 +222,7 @@ BuscarNombre(busqueda) {
     console.log(nombrenuevo);
     */
 
-    this.setState({
-      nombre: nombre
-    });
+   
     var listado1 =[];  
     fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/alumno/leer/restringido/'+nombrenuevo)
       .then((response) => {
@@ -224,8 +230,8 @@ BuscarNombre(busqueda) {
       })
       .then((pagos) => {
       
-      console.log("Listado de pagos recibidos");
-      console.log(pagos);
+      // console.log("Listado de pagos recibidos");
+      // console.log(pagos);
 
       var listado1 =[];
       var opciones  = [];
@@ -247,8 +253,8 @@ BuscarNombre(busqueda) {
       }
 
 
-      console.log("arreglo con join con espacios")
-      console.log(nombrenuevo2);
+      // console.log("arreglo con join con espacios")
+      // console.log(nombrenuevo2);
       for (let i = 0; i< listado1.length; i++) {
         var apeNombre = listado1[i].apeNom;
         var separador1 = " "; // un espacio en blanco
@@ -263,19 +269,18 @@ BuscarNombre(busqueda) {
           }
         }
         
-        console.log("arreglo sin espacios en blanco para alumno programa");
-        console.log(arreglo1);
+        // console.log("arreglo sin espacios en blanco para alumno programa");
+        // console.log(arreglo1);
     
         var nombrenuevo2 = arreglo1.join(" ");
 
-        console.log("arreglo a enviar al servicio alumno programa")
-        console.log(nombrenuevo2)
+        // console.log("arreglo a enviar al servicio alumno programa")
+        // console.log(nombrenuevo2)
 
-        this.setState({
+       /*  this.setState({
           nombre_select:nombrenuevo2
-        });
+        }); */
 
-        
            fetch('https://modulo-alumno-jdbc.herokuapp.com/alumno/alumnoprograma/programa/listar/restringido/'+nombrenuevo2)
           .then((response) => {
           return response.json()

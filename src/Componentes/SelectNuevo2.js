@@ -7,56 +7,41 @@ class SelectNuevo2 extends React.Component {
     super(props)
     this.state = { 
       SelectedOption: '',
-      lista_final:[]
+      lista_final:[],
+      programa:[],
+      select_ultimo: ''
     }
+    this.mostrarNombre=this.mostrarNombre.bind(this);
   }
-
-  mostrarNombre=()=>{
-    console.log(this.props.nombre)
-    var listado1=[];
-    fetch('https://modulo-alumno-jdbc.herokuapp.com/alumno/alumnoprograma/programa/listar/restringido/'+this.props.nombre)
-          .then((response) => {
-          return response.json()
-          })
-          .then((programa) => {
-            
-
-          
-              
-              var alumnoprograma = programa;
-              var listadoOpcionesCodigos = [];
-              var listadoOpcionesProgramas = [];
-              
-               
-               for(let j = 0; j< alumnoprograma.length; j++){       
-      
-                  var value1 = j;
-                  var label1 = alumnoprograma[j].codAlumno+"-"+alumnoprograma[j].apeNom+"/"+ alumnoprograma[j].idPrograma+"-"+alumnoprograma[j].siglaPrograma;
-                  
-                  var option1 = {value: value1, label:label1};
-                  listado1.push(option1);
-              }
-              this.setState({
-                lista_final:listado1
-              });
-              console.log(listado1);
-           // }
-          })
-          .catch(error => {
-          console.error(error)
-          });
-  }
-
 
   handleChange = (selectedOption) => {
+    console.log(selectedOption);
     if(selectedOption != null){
-      this.setState({ SelectedOption: selectedOption
-    
-    });
+      this.setState({ SelectedOption: selectedOption});
+/*       var opcionSeleccionada = this.state.programa[selectedOption.value];
+      console.log("opcion seleccionada en select")
+      console.log(opcionSeleccionada)
+
+      var listadoRec = {
+      "codAlumno" :opcionSeleccionada.codAlumno,
+      "idPrograma":opcionSeleccionada.idPrograma
+      } */
+      this.setState({
+        select_ultimo:selectedOption.value
+      });
+      this.props.Opcion(selectedOption.value,true);
+      
     }else{
       this.setState({ SelectedOption:''
       });
-    } 
+      console.log(this.state.select_ultimo);
+      
+        console.log("entro");
+        this.props.Opcion(this.state.select_ultimo,false);
+        this.setState({
+          select_ultimo:''
+        });
+    }
   }
 
   componentWillReceiveProps(){

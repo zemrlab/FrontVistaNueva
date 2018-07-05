@@ -10,7 +10,6 @@ import '../App.css';
 import PropTypes from 'prop-types';
 import Imprimir from './Imprimir';
 import {browserHistory} from 'react-router-3';
-import HEROES from './Data-Select';
 import swal from 'sweetalert';
 
 const propTypes = {
@@ -104,20 +103,20 @@ componentDidUpdate(){
 
     var separador = " "; // un espacio en blanco
     var arregloDeSubCadenas = nombres.split(separador);
-    console.log("arreglo de subcadenas");
-    console.log(arregloDeSubCadenas);
+    // console.log("arreglo de subcadenas");
+    // console.log(arregloDeSubCadenas);
     var arreglo = [];
     for (let i = 0; i< arregloDeSubCadenas.length; i++) {
       if(arregloDeSubCadenas[i]!==''){
          arreglo.push(arregloDeSubCadenas[i])
       }
     }
-    console.log("arreglo sin espacios en blanco");
-    console.log(arreglo);
+    // console.log("arreglo sin espacios en blanco");
+    // console.log(arreglo);
 
     var nombrenuevo = arreglo.join(" & ");
-    console.log("arreglo con join")
-    console.log(nombrenuevo);
+    // console.log("arreglo con join")
+    // console.log(nombrenuevo);
     var nombreAlumno = arreglo.join(" ");
 
 
@@ -128,8 +127,8 @@ componentDidUpdate(){
       .then((pagos) => {
 
         
-        console.log("pagos de la consulta de acuerdo el nombre ingresado");
-        console.log(pagos);
+        // console.log("pagos de la consulta de acuerdo el nombre ingresado");
+        // console.log(pagos);
         var auxPagos = pagos;
         /*
         for(let j=0;j<auxPagos.length;j++){
@@ -162,13 +161,13 @@ componentDidUpdate(){
         );
         
         
-        console.log("hola");
+        // console.log("hola");
       var total=this.state.pagocero;
   
      this.state.pagocero.map((pago)=>{
        pago.check=false
      })
-      console.log(this.state.pagocero);
+      // console.log(this.state.pagocero);
       
       }
     )
@@ -189,8 +188,8 @@ componentDidUpdate(){
       
 
         );  
-        console.log("conceptos recibidos");
-        console.log(conceptos);
+        /* console.log("conceptos recibidos");
+        console.log(conceptos); */
       })
       .catch(error => {
         // si hay algún error lo mostramos en consola
@@ -254,8 +253,7 @@ componentDidUpdate(){
 
           </div>
           <div className="SplitPane row center-xs">
-            
-               <button onClick={this.Filtrar}  className="waves-effect waves-light btn-large botonazul2 center" type="submit">Filtrar<i className="large material-icons left">check</i></button>
+               <button onClick={this.Filtrar}  className="waves-effect waves-light btn-large botonazul2" type="submit">Filtrar<i className="large material-icons left">filter_list</i></button>
             
           </div>
           <hr />
@@ -284,6 +282,12 @@ componentDidUpdate(){
             </div>
           </div>
 
+           <footer>
+            <div className="row center-xs centrar color">
+            Realizado por Hardcode © 2018 
+            </div>
+            </footer>
+
         </div>
       )
     } else {
@@ -311,17 +315,17 @@ Filtrar=(e)=>{
     var filtroal = this.state.filtroAl;
 
     if(filtrodel.length == 0){
-      console.log("no hay del ")
+     // console.log("no hay del ")
       filtrodel = "0000-00-00";
-      console.log(filtrodel)
+     // console.log(filtrodel)
     }
     if(filtroal.length == 0){
-      console.log("no hay al");
+      //console.log("no hay al");
       filtroal = "9999-12-12";
-      console.log(filtroal)
+      //console.log(filtroal)
     }
-    console.log("conceptos a enviar en json");
-    console.log(concep);
+    // console.log("conceptos a enviar en json");
+    // console.log(concep);
     /*
     console.log("listado de numeros");
     console.log(this.state.filtroNumeros);
@@ -349,8 +353,8 @@ Filtrar=(e)=>{
     console.log(arreglo);
 */
     var nombrenuevoFiltro = arregloFiltro.join(" & ");
-    console.log("nombre a pasar para filtrar");
-    console.log(nombrenuevoFiltro);
+    // console.log("nombre a pasar para filtrar");
+    // console.log(nombrenuevoFiltro);
     fetch('http://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/alumno/concepto/listar/filtrar',
     {
     headers: {
@@ -402,10 +406,11 @@ Filtrar=(e)=>{
 
 }
   SeleccionFechaDel(Fecha) {
-    console.log(Fecha);
+    
     var fecha1 = new String(Fecha);
+    /* console.log(Fecha);
     console.log("fecha del");
-    console.log(fecha1);
+    console.log(fecha1); */
     this.setState({filtroDel: fecha1});
     
   }
@@ -446,7 +451,6 @@ Filtrar=(e)=>{
 
   }
   Funcion(holas){
-    console.log(holas);
     for(let j=0;j<this.state.pagocero.length;j++){
       if(holas==this.state.pagocero[j].idRec){
         if(this.state.pagocero[j].check==true){
@@ -499,7 +503,7 @@ seleccionar(){
         
 }
 enviar(){
-  console.log("lo que envio:");
+  // console.log("lo que envio:");
   console.log(this.state.pagocero);
 }
 CalcularImporte() {

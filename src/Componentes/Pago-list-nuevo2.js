@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import PagoRowNuevo2 from './Pago-row-nuevo2'
 import TableHeaderNuevo2 from './Table-Header-Nuevo2'
+import swal from 'sweetalert'
 const propTypes = {
   items: PropTypes.array.isRequired,
   onChangePage: PropTypes.func.isRequired,
@@ -19,19 +20,98 @@ class PagoListNuevo2 extends React.Component {
       pageOfItems: []
     }
     this.onChangePage = this.onChangePage.bind(this);
+    this.OpcionSeleccionada=this.OpcionSeleccionada.bind(this);
+    this.pagoInsertar = [];
+    this.Asignar=this.Asignar.bind(this);
+    
 
   }
 
   onChangePage(pageOfItems) {
-    
     // update state with new page of items
     this.setState({ 
-      pageOfItems: pageOfItems });
-
-   
-     
+      pageOfItems: pageOfItems });  
   }
 
+ componentWillReceiveProps(){
+    this.pagoInsertar = [];
+
+ }
+
+
+  OpcionSeleccionada(opcion,mantener) {
+
+    if(opcion != null){
+    if(mantener){
+      var array=this.pagoInsertar.filter((e)=>{return e.idAlumno==opcion.idAlumno });
+      if(array.length==0){
+        console.log("no hay, se va a insertar");
+        this.pagoInsertar.push(opcion);
+      }else{
+        console.log("ya hay, se va a reemplazar");
+        this.pagoInsertar.map(function(dato){
+          if(dato.idAlumno==opcion.idAlumno){
+            dato.idPrograma=opcion.idPrograma;
+            dato.codAlumno=opcion.codAlumno;
+          }
+        });
+      }
+      
+    }else{
+      console.log("se va a borrar");
+      console.log(opcion);
+      var array=this.pagoInsertar.filter((e)=>{return e.idAlumno!==opcion.idAlumno});
+      console.log("array filtrado");
+      console.log(array);
+      this.pagoInsertar=array;
+      //
+    }
+    
+    // console.log("pago insertar")
+    // console.log(this.pagoInsertar);
+
+    }
+    console.log("Listado de pagos luego de realizar una insercion");
+    console.log(this.pagoInsertar);
+  }
+  Asignar=(e)=>{
+  
+
+   var pagos= this.pagoInsertar;
+    for (let i = 0; i < pagos.length; i++) {
+      //llamar servicio insertar alumno alumno-programa
+      fetch('https://modulo-alumno-jdbc.herokuapp.com/alumnoalumnoprograma/add',
+    {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: "POST",
+    body: JSON.stringify(
+      pagos[i]
+    )
+  })
+  .then((response) => {
+    return response.json()
+  })
+  .then((pagos) => {
+
+    var busqueda1 = {nombres:this.props.nombreBusqueda,
+                     mensaje:1}
+    this.props.Opcion(busqueda1);
+    
+  })
+  .catch(error => {
+    // si hay algún error lo mostramos en consola
+    swal("Oops, Algo salió mal!", "","error")
+    console.error(error)
+  });
+  
+  
+  }
+  swal("Se ha Asignado exitosamente!","","success");
+
+  e.preventDefault();
+}
   render() {
     if(this.props.listado.length >0){
       return (
@@ -41,18 +121,23 @@ class PagoListNuevo2 extends React.Component {
         <tbody>
           {
             this.state.pageOfItems.map((pago) => {
-              return <PagoRowNuevo2 nombre={this.props.nombre} Funciones={this.props.funcion} key={pago.toString()} 
+              return <PagoRowNuevo2  Opcion={this.OpcionSeleccionada} nombre={this.props.nombre} Funciones={this.props.funcion} key={pago.toString()} 
                                   pago={ pago} />
             })
           }
         </tbody>
         </table>
        <div className="margen_top"> <Paginacion items={this.props.listado} onChangePage={this.onChangePage}/></div>
+
+        <div className="SplitPane row center-xs">  
+                <button  onClick={this.Asignar} className="waves-effect waves-light btn-large botonazul2 center"type="submit">Asignar<i className="large material-icons left">check</i></button>
+        </div>
       </div>
     )
     }else{
       return <div className="mensaje centrar">No se encontraron datos</div>
     }
+
     
   }
 }

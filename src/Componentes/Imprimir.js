@@ -204,7 +204,7 @@ class Imprimir extends React.Component {
 
     return (
       <div>
-        <button  onClick={() => this.Imprimir()} className=" waves-effect waves-light btn imprimir ">Imprimir<i className="large material-icons left">local_printshop</i></button>
+        <button  onClick={() => this.Imprimir()} className=" waves-effect waves-light btn-large imprimir ">Imprimir<i className="large material-icons left">local_printshop</i></button>
       </div>
 
     )

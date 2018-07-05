@@ -1,7 +1,6 @@
 import React from 'react'
-import TableHeaderAlumnoAP from './TableHeader-AlumnoAP'
+
 import AlumnoAPList from './Alumno-AP-List'
-import ALUMNOAP from './AlumnoAP-Data'
 import '../App.css';
 import {browserHistory} from 'react-router-3';
 

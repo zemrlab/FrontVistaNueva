@@ -22,34 +22,34 @@ class LoginForm extends React.Component {
 
   onSubmit=(e)=>{
     
-    console.log(this.state.nombres);
+    // console.log(this.state.nombres);
    //https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/alumno/leer/
     var nombreValidado = this.ValidarNombre(this.state.nombres);
     var nombres = this.state.nombres.toUpperCase();
     if(nombreValidado){
     var separador = " "; // un espacio en blanco
     var arregloDeSubCadenas = nombres.split(separador);
-    console.log("arreglo de subcadenas");
-    console.log(arregloDeSubCadenas);
+    // console.log("arreglo de subcadenas");
+    // console.log(arregloDeSubCadenas);
     var arreglo = [];
     for (let i = 0; i< arregloDeSubCadenas.length; i++) {
       if(arregloDeSubCadenas[i]!==''){
          arreglo.push(arregloDeSubCadenas[i])
       }
     }
-    console.log("arreglo sin espacios en blanco");
-    console.log(arreglo);
+    // console.log("arreglo sin espacios en blanco");
+    // console.log(arreglo);
     var nombrenuevo = arreglo.join(" & ");
-    console.log("nombre nuevo");
-    console.log(nombrenuevo);
+    // console.log("nombre nuevo");
+    // console.log(nombrenuevo);
   
         fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/alumno/concepto/listar/' + nombrenuevo)
             .then((response) => {
             return response.json()
             })
             .then((pagos) => {
-            console.log("pagos recibidos");
-            console.log(pagos);
+            // console.log("pagos recibidos");
+            // console.log(pagos);
              if(pagos.length>0){
 
                 
@@ -75,7 +75,7 @@ class LoginForm extends React.Component {
   VistaNueva=(e)=>{
     
     browserHistory.push('/vista/nueva');
-    console.log("Vista nueva");
+    // console.log("Vista nueva");
     e.preventDefault();
     
   }
@@ -83,14 +83,14 @@ class LoginForm extends React.Component {
   VistaNueva2=(e)=>{
     
     browserHistory.push('/vista/nueva2');
-    console.log("Vista nueva 2");
+    // console.log("Vista nueva 2");
     e.preventDefault();
     
   }
   VistaTablaCreada=(e)=>{
     
     browserHistory.push('/vista/Tabla');
-    console.log("Vista nueva 2");
+    // console.log("Vista nueva 2");
     e.preventDefault();
     
   }
@@ -113,7 +113,7 @@ class LoginForm extends React.Component {
     return (
       <div className="">
       <h3>Módulo consulta de pagos
-         <ul id="nav-mobile" class="right  hide-on-med-and-down">
+         <ul id="nav-mobile" className="right  hide-on-med-and-down">
               <li ><a className="seleccionar" href="https://siga-fisi.herokuapp.com/dashboard" >Vista Principal<i className="material-icons right">launch</i></a></li>
           </ul>
       </h3>
@@ -121,8 +121,8 @@ class LoginForm extends React.Component {
     <div class="nav-wrapper azul">
       <ul id="nav-mobile" class="right hide-on-med-and-down">
        {/*  <li><a onClick={this.VistaNueva} >VistaNueva</a></li> */}
-        <li><a onClick={this.VistaNueva2} >Asignar Programa</a></li>
-        <li><a onClick={this.VistaTablaCreada} >Ver tabla</a></li>
+        <li><a onClick={this.VistaNueva2} >  <i className="small material-icons right">check_box</i>Asignar Programa</a></li>
+        <li><a onClick={this.VistaTablaCreada} ><i className="small material-icons right">pageview</i>Ver tabla</a></li>
       </ul>
     </div>
   </nav>

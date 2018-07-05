@@ -9,7 +9,7 @@ class Alumno extends React.Component {
         <h4 className="center ">Datos personales</h4>
         <div className="center datos">
         <div>
-        <i className="material-icons">account_circle</i>
+        <i className="material-icons medium">account_circle</i>
         </div>
         <b>Nombre y Apellidos:</b>
         <div>

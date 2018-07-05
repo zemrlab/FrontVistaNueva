@@ -137,7 +137,7 @@ label {
   margin: .5em 0;
   color: black;
   font-weight: bold;
-  
+  font-size:15px;
   font-family: 'Times New Roman', Times, serif;
   width: 90px;
 
@@ -204,7 +204,7 @@ label {
 } */
 .margen2{
   margin-top: 38px;
-  margin-bottom: 16px;
+  margin-bottom: 30px;
   margin-left: 20px;
   margin-right: 20px;
  } 
@@ -265,6 +265,7 @@ select {
 }
 .botonazul2{
   margin-top: 10px;
+  margin-bottom: 20px;
 }
 .botonazul23{
   margin-top: 80px;
@@ -300,6 +301,7 @@ h5{
 }
 .negro{
   color: black;
+  margin:10px;
 }
 .datos{
   margin-bottom: 15px;
