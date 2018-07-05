@@ -11,7 +11,7 @@ class SelectNuevo2 extends React.Component {
       programa:[],
       select_ultimo: ''
     }
-    this.mostrarNombre=this.mostrarNombre.bind(this);
+
   }
 
   handleChange = (selectedOption) => {
