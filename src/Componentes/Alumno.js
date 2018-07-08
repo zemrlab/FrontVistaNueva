@@ -18,7 +18,6 @@ class Alumno extends React.Component {
         {this.props.alumno.apeNom}
          </div>
          </div>
-         
      {/*    <div className="center datos">
           <div>
           <i className="material-icons">fingerprint</i>

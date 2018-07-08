@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import PagoRowNuevo2 from './Pago-row-nuevo2'
 import TableHeaderNuevo2 from './Table-Header-Nuevo2'
 import swal from 'sweetalert'
+import CONFIG from '../Configuracion/Config'
 const propTypes = {
   items: PropTypes.array.isRequired,
   onChangePage: PropTypes.func.isRequired,
@@ -45,10 +46,10 @@ class PagoListNuevo2 extends React.Component {
     if(mantener){
       var array=this.pagoInsertar.filter((e)=>{return e.idAlumno==opcion.idAlumno });
       if(array.length==0){
-        console.log("no hay, se va a insertar");
+        // console.log("no hay, se va a insertar");
         this.pagoInsertar.push(opcion);
       }else{
-        console.log("ya hay, se va a reemplazar");
+        // console.log("ya hay, se va a reemplazar");
         this.pagoInsertar.map(function(dato){
           if(dato.idAlumno==opcion.idAlumno){
             dato.idPrograma=opcion.idPrograma;
@@ -58,11 +59,11 @@ class PagoListNuevo2 extends React.Component {
       }
       
     }else{
-      console.log("se va a borrar");
-      console.log(opcion);
+     /*  console.log("se va a borrar");
+      console.log(opcion); */
       var array=this.pagoInsertar.filter((e)=>{return e.idAlumno!==opcion.idAlumno});
-      console.log("array filtrado");
-      console.log(array);
+      /* console.log("array filtrado");
+      console.log(array); */
       this.pagoInsertar=array;
       //
     }
@@ -71,16 +72,18 @@ class PagoListNuevo2 extends React.Component {
     // console.log(this.pagoInsertar);
 
     }
-    console.log("Listado de pagos luego de realizar una insercion");
-    console.log(this.pagoInsertar);
+/*     console.log("Listado de pagos luego de realizar una insercion");
+    console.log(this.pagoInsertar); */
   }
   Asignar=(e)=>{
   
-
+   //ANTERIOR LINK
+  //'https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/alumnoalumnoprograma/add'
+   //'https://modulo-alumno-jdbc.herokuapp.com/alumnoalumnoprograma/add'
    var pagos= this.pagoInsertar;
     for (let i = 0; i < pagos.length; i++) {
       //llamar servicio insertar alumno alumno-programa
-      fetch('https://modulo-alumno-jdbc.herokuapp.com/alumnoalumnoprograma/add',
+      fetch(CONFIG+'alumnoalumnoprograma/add',
     {
     headers: {
       'Content-Type': 'application/json'
@@ -121,7 +124,7 @@ class PagoListNuevo2 extends React.Component {
         <tbody>
           {
             this.state.pageOfItems.map((pago) => {
-              return <PagoRowNuevo2  Opcion={this.OpcionSeleccionada} nombre={this.props.nombre} Funciones={this.props.funcion} key={pago.toString()} 
+              return <PagoRowNuevo2  Opcion={this.OpcionSeleccionada} nombre={this.props.nombre} Funciones={this.props.funcion} key={pago.idAlum} 
                                   pago={ pago} />
             })
           }
@@ -259,18 +262,18 @@ class Paginacion extends React.Component {
           <a onClick={() => this.setPage(1)}>First</a>
         </li>
         <li className={pager.currentPage === 1 ? 'disabled' : ''}>
-          <a onClick={() => this.setPage(pager.currentPage - 1)}><i class="material-icons">chevron_left</i></a>
+          <a onClick={() => this.setPage(pager.currentPage - 1)}><i className="material-icons">chevron_left</i></a>
         </li>
-        {console.log("final")
+        {/* {console.log("final")
           }
-          {console.log(pager.pages.length)}
+          {console.log(pager.pages.length)} */}
         {pager.pages.map((page, index) =>
           <li key={index + 28} className={pager.currentPage === page ? 'active' : ''}>
             <a onClick={() => this.setPage(page)}>{page}</a>
           </li>
         )}
         <li className={pager.currentPage === pager.totalPages ? 'disabled' : ''}>
-          <a onClick={() => this.setPage(pager.currentPage + 1)}><i class="material-icons">chevron_right</i></a>
+          <a onClick={() => this.setPage(pager.currentPage + 1)}><i className="material-icons">chevron_right</i></a>
         </li>
         <li className={pager.currentPage === pager.totalPages ? 'disabled' : ''}>
           <a onClick={() => this.setPage(pager.totalPages)}>Last</a>

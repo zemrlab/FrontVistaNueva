@@ -1,10 +1,11 @@
 import React from 'react'
 import PagoListNuevo2 from './Pago-list-nuevo2'
-import TableHeaderNuevo2 from './Table-Header-Nuevo2'
 import '../App2.css';
 import BuscarNuevo from './BuscarNuevo';
 import {browserHistory} from 'react-router-3';
 import swal from 'sweetalert'
+import CONFIG from '../Configuracion/Config'
+
 
 class AppNueva extends React.Component {
 
@@ -223,8 +224,11 @@ BuscarNombre(busqueda) {
     */
 
    
-    var listado1 =[];  
-    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/alumno/leer/restringido/'+nombrenuevo)
+    var listado1 =[];
+    //ANTERIOR LINK
+    //https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/alumno/leer/restringido/
+
+    fetch(CONFIG+'alumno/leer/restringido/'+nombrenuevo)
       .then((response) => {
         return response.json()
       })
@@ -280,16 +284,15 @@ BuscarNombre(busqueda) {
        /*  this.setState({
           nombre_select:nombrenuevo2
         }); */
-
-           fetch('https://modulo-alumno-jdbc.herokuapp.com/alumno/alumnoprograma/programa/listar/restringido/'+nombrenuevo2)
+           //ANTERIOR LINK
+            //1//https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/alumno/alumnoprograma/programa/listar/restringido/
+            //2//https://modulo-alumno-jdbc.herokuapp.com/alumno/alumnoprograma/programa/listar/restringido/
+           fetch(CONFIG+'alumno/alumnoprograma/programa/listar/restringido/'+nombrenuevo2)
           .then((response) => {
           return response.json()
           })
           .then((programa) => {
-            
-
           
-              
               var alumnoprograma = programa;
               var listadoOpcionesCodigos = [];
               var listadoOpcionesProgramas = [];

@@ -10,21 +10,21 @@ class PagoRowNuevo2 extends React.Component {
     };
   }
   OpcionSeleccionada(opcion,mantener) {
-    console.log(mantener);
+    // console.log(mantener);
     
       if(opcion != null){
-        console.log("opcion seleccionada");
+        // console.log("opcion seleccionada");
     
         var opcionSeleccionada = this.props.pago.alumnoPrograma[opcion];
-          console.log("opcion seleccionada en select")
-          console.log(opcionSeleccionada)
+          /* console.log("opcion seleccionada en select")
+          console.log(opcionSeleccionada) */
         //console.log(opcion);
         var listadoRec = { 
           "idAlumno" : this.props.pago.idAlum,
           "codAlumno" :opcionSeleccionada.codAlumno,
           "idPrograma":opcionSeleccionada.idPrograma
           }
-        console.log(listadoRec);
+        // console.log(listadoRec);
         }
         this.props.Opcion(listadoRec,mantener);
     

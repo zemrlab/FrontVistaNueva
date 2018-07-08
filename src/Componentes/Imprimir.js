@@ -7,7 +7,7 @@ class Imprimir extends React.Component {
   
   componentDidMount() {
 
-    console.log('PrintThisComponent mounted!')
+    // console.log('PrintThisComponent mounted!')
 
   }
   CalcularImporte(listado) {
@@ -20,7 +20,7 @@ class Imprimir extends React.Component {
     return importe;
   }
   Imprimir(){
-    console.log(this.props.listado);
+    // console.log(this.props.listado);
 
     var checkbox_selec=[];
     var checks=[];
@@ -37,7 +37,7 @@ class Imprimir extends React.Component {
        checkbox_selec.push(checkbox.id);
      }
     });
-   console.log(checkbox_selec);
+  //  console.log(checkbox_selec);
    
       for(let j=0;j<listadopagos.length;j++){
         if(listadopagos[j].check==true){
@@ -47,7 +47,7 @@ class Imprimir extends React.Component {
 
     importe = this.CalcularImporte(total);
    
-    console.log(total);
+    // console.log(total);
 
 
     for (let i = 0; i<total.length; i++) {
@@ -55,9 +55,9 @@ class Imprimir extends React.Component {
       total[i].fecha.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3-$2-$1'),total[i].moneda,total[i].importe]
       listado.push(pago);
     }
-    console.log("listado para enviar a imprimir");
+    // console.log("listado para enviar a imprimir");
     
-    console.log(listado);
+    // console.log(listado);
     
     /*
     var pdf = new jsPDF();

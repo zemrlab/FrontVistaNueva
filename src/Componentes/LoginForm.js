@@ -1,16 +1,13 @@
 import React from 'react';
 import {browserHistory} from 'react-router-3';
-import { Link } from 'react-router-3';
 import swal from 'sweetalert'
-
+import CONFIG from '../Configuracion/Config'
 
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      nombres : '',
-      isValid : false,
-      alumnos: {}
+      nombres : ''
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -42,8 +39,9 @@ class LoginForm extends React.Component {
     var nombrenuevo = arreglo.join(" & ");
     // console.log("nombre nuevo");
     // console.log(nombrenuevo);
-  
-        fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/alumno/concepto/listar/' + nombrenuevo)
+    //ANTERIOR LINK:
+    //https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/alumno/concepto/listar/
+        fetch(CONFIG+'recaudaciones/alumno/concepto/listar/' + nombrenuevo)
             .then((response) => {
             return response.json()
             })
@@ -57,7 +55,7 @@ class LoginForm extends React.Component {
                  browserHistory.push('/'+this.state.nombres.toUpperCase()))
               }
               else{
-                swal("No se encontraron pagos", "", "info");
+                swal("No se encontraron pagos con el nombre ingresado", "", "info");
               }
 
             })
@@ -66,8 +64,6 @@ class LoginForm extends React.Component {
                 swal("Oops, Algo salió mal!", "","error")
                 console.error(error)
             });
-        
-
     }
     e.preventDefault();
     
@@ -108,8 +104,6 @@ class LoginForm extends React.Component {
   }
 
   render() {
-    const { nombres, isLoading,isValid } = this.state;
-
     return (
       <div className="">
       <h3>Módulo consulta de pagos
@@ -118,8 +112,8 @@ class LoginForm extends React.Component {
           </ul>
       </h3>
       <nav>
-    <div class="nav-wrapper azul">
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
+    <div className="nav-wrapper azul">
+      <ul id="nav-mobile" className="right hide-on-med-and-down">
        {/*  <li><a onClick={this.VistaNueva} >VistaNueva</a></li> */}
         <li><a onClick={this.VistaNueva2} >  <i className="small material-icons right">check_box</i>Asignar Programa</a></li>
         <li><a onClick={this.VistaTablaCreada} ><i className="small material-icons right">pageview</i>Ver tabla</a></li>
@@ -136,7 +130,7 @@ class LoginForm extends React.Component {
             </div>
             <b>Nombres y Apellidos:</b>
             <div className="center">
-            <input type="text" maxlength="100"  value={this.state.nombres} onChange={this.onChange} />
+            <input type="text"  value={this.state.nombres} onChange={this.onChange} />
             </div>
            <button type="submit" onClick={this.onSubmit} className="btn btn-primary btn-lg">CONSULTAR</button>
           </div>

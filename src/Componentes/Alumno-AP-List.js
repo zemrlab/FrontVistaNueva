@@ -12,7 +12,7 @@ class AlumnoAPList extends React.Component {
         <tbody>
           {
             this.props.listado.map((alumnoAP) => {
-              return <AlumnoAPRow  key={alumnoAP.toString()} 
+              return <AlumnoAPRow  key={alumnoAP.idAlumno} 
               alumnoAP={ alumnoAP} />
             })
           }

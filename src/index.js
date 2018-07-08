@@ -12,16 +12,6 @@ import VistaTablaNuevo from './Componentes/VistaTablaNueva';
 
 
 class Index extends React.Component {
-  
-    constructor(props) {
-      super(props)
-      this.state = { 
-        pagos: [],
-        name: 'alex%20rojas'
-       }
-      this.FiltrarNombre= this.FiltrarNombre.bind(this);
-      this.validado = true;
-    }
     render() {
         return(
             <Router history={browserHistory}>
@@ -37,9 +27,7 @@ class Index extends React.Component {
           </Router>
           )
       }
-      FiltrarNombre(nombre){
-        this.setState({ name: nombre});
-      }
+      
 }
 
 ReactDOM.render(

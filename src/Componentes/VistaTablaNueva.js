@@ -3,27 +3,31 @@ import React from 'react'
 import AlumnoAPList from './Alumno-AP-List'
 import '../App.css';
 import {browserHistory} from 'react-router-3';
+import CONFIG from '../Configuracion/Config'
+
 
 class VistaTablaNueva extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      vehiculos: []
+      alumnos: []
     }
     this.Regresar = this.Regresar.bind(this);
 
   }
 
   componentWillMount() {
-    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/alumno/alumnoprograma/programa/listar')
+    //ANTERIOR LINK
+    //https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/alumno/alumnoprograma/programa/listar
+    fetch(CONFIG+'alumno/alumnoprograma/programa/listar')
     .then((response) => {
     return response.json()
     })
     .then((alumno) => {
-      this.setState({ vehiculos: alumno})
+      this.setState({ alumnos: alumno})
       
-      console.log(alumno)
+      // console.log(alumno);
    
     })
     .catch(error => {
@@ -42,7 +46,7 @@ class VistaTablaNueva extends React.Component {
       return (
         <div className="">
               <h3>Tabla Alumno-AlumnoPrograma
-              <ul id="nav-mobile" class="right  hide-on-med-and-down">
+              <ul id="nav-mobile" className="right  hide-on-med-and-down">
               <li ><a className="seleccionar" onClick={this.Regresar} >Regresar<i className="material-icons right">reply</i></a></li>
           </ul>
               </h3>
@@ -51,7 +55,7 @@ class VistaTablaNueva extends React.Component {
 
         <div className="row center-xs centrar">
             <div className="center-xs-12 margin_top ">
-                <AlumnoAPList listado={this.state.vehiculos} />
+                <AlumnoAPList listado={this.state.alumnos} />
             </div>
         </div>
           <footer>

@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 import Imprimir from './Imprimir';
 import {browserHistory} from 'react-router-3';
 import swal from 'sweetalert';
+import CONFIG from '../Configuracion/Config'
 
 const propTypes = {
   items: PropTypes.array.isRequired,
@@ -98,8 +99,7 @@ componentDidUpdate(){
        checkbox_selec.push(checkbox.id);
      }
    });
-   //cONSULTAMOS LA RECAUDACIONES POR NOMBRE DE ALUMNO
-//https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/recaudaciones/listar/
+
 
     var separador = " "; // un espacio en blanco
     var arregloDeSubCadenas = nombres.split(separador);
@@ -118,37 +118,21 @@ componentDidUpdate(){
     // console.log("arreglo con join")
     // console.log(nombrenuevo);
     var nombreAlumno = arreglo.join(" ");
+//ANTERIOR LINK
+//https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/alumno/concepto/listar/
 
-
-    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/alumno/concepto/listar/' + nombrenuevo)
+    fetch(CONFIG+'recaudaciones/alumno/concepto/listar/' + nombrenuevo)
       .then((response) => {
         return response.json()
       })
       .then((pagos) => {
 
-        
-        // console.log("pagos de la consulta de acuerdo el nombre ingresado");
-        // console.log(pagos);
-        var auxPagos = pagos;
-        /*
-        for(let j=0;j<auxPagos.length;j++){
 
-        //Consultamos los nombres de conceptos
-        fetch('' + nombres)
-        .then((response) => {
-        return response.json()
-        })
-        .then((concepto) => {
-         
-            auxPagos[j].concepto = concepto.concepto.substr(0,3)+'-'+concepto.concepto.substr(3,3)
+       /*  
+         console.log("pagos de la consulta de acuerdo el nombre ingresado");
+        console.log(pagos); */
+        var auxPagos = pagos;
         
-        })
-        .catch(error => {
-        // si hay algún error lo mostramos en consola
-        console.error(error)
-        });
-      
-     }*/
       var alumnoDetalle = {
       apeNom: nombreAlumno
       }
@@ -175,9 +159,9 @@ componentDidUpdate(){
         // si hay algún error lo mostramos en consola
         console.error(error)
       });
-    //Obtenemos el listado de conceptos
-    //https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/concepto/leer/
-    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/concepto/leer/restringido/' + nombrenuevo)
+    //LINK ANTERIOR::
+    //'https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/concepto/leer/restringido/'
+    fetch(CONFIG+'concepto/leer/restringido/' + nombrenuevo)
       .then((response) => {
         return response.json()
       })
@@ -188,17 +172,12 @@ componentDidUpdate(){
       
 
         );  
-        /* console.log("conceptos recibidos");
-        console.log(conceptos); */
+        
       })
       .catch(error => {
-        // si hay algún error lo mostramos en consola
-        console.error(error)
-      });
-      //cONSULTAMOS LOS DATOS DEL ALUMNO POR EL NOMBRE:
-
        
-     
+        console.error(error)
+      });   
   }
   Regresar=(e)=>{
     
@@ -212,7 +191,7 @@ componentDidUpdate(){
       return (
         <div className="">
           <h3>Estado de pagos por alumno
-          <ul id="nav-mobile" class="right  hide-on-med-and-down">
+          <ul id="nav-mobile" className="right  hide-on-med-and-down">
               <li ><a className="seleccionar" onClick={this.Regresar} >Regresar<i className="material-icons right">reply</i></a></li>
           </ul>
           </h3>
@@ -298,18 +277,6 @@ componentDidUpdate(){
 Filtrar=(e)=>{
     var concep = [];
     concep = this.SeleccionConceptos();
-    /*
-    console.log("conceptos con check recibidos")
-    console.log(concep);
-    console.log(concep.length);
-    console.log("filtro del recibido")
-    console.log(this.state.filtroDel);
-    console.log("filtro al recibido")
-    console.log(this.state.filtroAl);
-    console.log("listado de numeros recibidos")
-    console.log(this.state.filtroNumeros);
-    console.log(this.state.filtroNumeros.length);*/
-
     var filtrodel = this.state.filtroDel;
 
     var filtroal = this.state.filtroAl;
@@ -324,17 +291,6 @@ Filtrar=(e)=>{
       filtroal = "9999-12-12";
       //console.log(filtroal)
     }
-    // console.log("conceptos a enviar en json");
-    // console.log(concep);
-    /*
-    console.log("listado de numeros");
-    console.log(this.state.filtroNumeros);
-    console.log("listado de conceptos");
-    console.log(concep)*/
-//ANTIGUO LINK
-//http://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/recaudaciones/listar/filtrar
-
-
     let nombreFiltro = this.state.name;
 
     var separadorFiltro = " "; // un espacio en blanco
@@ -353,9 +309,13 @@ Filtrar=(e)=>{
     console.log(arreglo);
 */
     var nombrenuevoFiltro = arregloFiltro.join(" & ");
-    // console.log("nombre a pasar para filtrar");
-    // console.log(nombrenuevoFiltro);
-    fetch('http://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/alumno/concepto/listar/filtrar',
+    /* console.log("lista de numeros pasados");
+     console.log(this.state.filtroNumeros);
+     console.log("lista de CONCEPTOS PASADOSs");
+     console.log(concep); */
+    //ANTERIOR LINK:
+    //http://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/alumno/concepto/listar/filtrar
+    fetch(CONFIG+'recaudaciones/alumno/concepto/listar/filtrar',
     {
     headers: {
       'Content-Type': 'application/json'
@@ -408,19 +368,12 @@ Filtrar=(e)=>{
   SeleccionFechaDel(Fecha) {
     
     var fecha1 = new String(Fecha);
-    /* console.log(Fecha);
-    console.log("fecha del");
-    console.log(fecha1); */
     this.setState({filtroDel: fecha1});
     
   }
   SeleccionFechaAl(Fecha) {
    
     var fecha1 = new String(Fecha);
-    /*
-    console.log(Fecha);
-    console.log("fecha al");
-    console.log(fecha1);*/
     this.setState({filtroAl: fecha1});
     
   }
@@ -439,12 +392,7 @@ Filtrar=(e)=>{
         checkbox_seleccionados.push(item.name);
       }
     }
-    /*
 
-    for (let i = 0; i < this.conceptos.length; i++) {
-      idconcepto.push(this.conceptos[i].idConcepto);
-    }
-    */
    // console.log(checkbox_seleccionados);
    
     return checkbox_seleccionados;
@@ -460,15 +408,6 @@ Filtrar=(e)=>{
         }
       }
     }
-    /* for(let i=0;i<selec.length;i++){
-      var m=select[i];
-      for(let j=0;j<this.state.pagocero;j++){
-        if(m==this.state.pagocero[j].idRec){
-          this.state.pagocero[j].check=true;
-        }
-      }
-    } */
-
   }
 seleccionar(){
   //console.log("gg");
@@ -524,113 +463,14 @@ FiltrarFecha(Fechas) {
       filtroDel: del,
       filtroAL : al
     })
-     /*
-    console.log("fechas recibidas");
-    console.log(del);
-    console.log(al);
-   
-
-    console.log(Fechas.del);
-    console.log(Fechas.al);
     
-    var nombres = this.state.name;
-    fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/recaudaciones/listar/' + nombres + '/' + del + '/' + al)
-      .then((response) => {
-        return response.json()
-      })
-      .then((pagos) => {
-        if (pagos.length == 0) {
-          alert("No hay registros de pago en este rango de fechas");
-          //this.setState({pagocero: []})
-          filtrado = this.state.pagos;
-          console.log(filtrado);
-          
-        }
-        else {pagos.map((pago)=>{
-          pago.check=false;
-        });
-          filtrado = pagos;
-          console.log(filtrado);
-          var checkado=document.getElementsByName("chekado");
-          var normals=Array.from(checkado);
-          for(let i=0;i<normals;i++){
-            
-            for(let j=0;j<this.state.pagocero;j++){
-              if(normals[i].id==this.state.pagocero[j].idRec){
-                  this.state.pagocero[j].check=true;
-              }
-              else{
-                this.state.pagocero[j].check=false;
-              }
-            }
-          }
-          console.log(this.state.pagocero);
-
-        }
-
-
-        this.filtrarConcepto(filtrado);
-
-
-      })
-      .catch(error => {
-        // si hay algún error lo mostramos en consola
-        console.error(error)
-      });
-*/
   }
 
   FiltrarNumeros = (listaNumeros) => {
-/*
-    console.log("Listado de numeros recibidos:")
-    console.log(listaNumeros);*/
     this.setState({
       filtroNumeros: listaNumeros
      })
-     //dfe
-   // this.setState({
-     // filtros: listaNumeros
-    //})
-
-    /* 
-    
-    var listaNumeros_seleccionados = listaNumeros;
-    var arrayfiltrado=[];
-    console.log(listaNumeros_seleccionados);
-
-
-    for(let i=0;i<listaNumeros_seleccionados.length;i++){
-      var numeroactual=listaNumeros_seleccionados[i];
-      for(let j=0;j<this.state.pagos.length;j++){
-          var numero_seleccionado=this.state.pagos[j].numero;
-          if(numero_seleccionado==numeroactual){
-            arrayfiltrado.push(this.state.pagos[j]);
-          }
-
-      }
-    }
-    
-    console.log(arrayfiltrado);
-   
-    if(listaNumeros_seleccionados.length==0){
-      alert("Ingrese uno o mas numeros de recibos")
-      
-    }
-    else{ 
-      if(arrayfiltrado.length == 0){
-        alert("No hay registro con los numeros de voucher ingresados");
-      }
-      else{
-        console.log(arrayfiltrado);
-        this.setState({
-        pagocero : arrayfiltrado
-          })
-      }
-    }
-    
-    
-    
-    */
+ 
   }
 
 
@@ -646,9 +486,6 @@ FiltrarFecha(Fechas) {
        
      }
    });
-   /*
-   console.log(checkbox_selec);
-   console.log(this.state.checkbox_);*/
 
    for(let i=0;i<checkbox_selec.length;i++){
     var id=checkbox_selec[i];
@@ -713,26 +550,10 @@ FiltrarFecha(Fechas) {
 
 
     }
-
-
-
-
-
-
-
     var numero_codigos = this.state.filtros;
     //console.log(numero_codigos);
     var filtrofinal = [];
-
     var listaNumeros_seleccionados = numero_codigos;
-
-    //console.log(listaNumeros_seleccionados);
-
-
-
-
-    //console.log(arrayfiltrado);
-
     if (listaNumeros_seleccionados.length == 0) {
       
       this.setState({
@@ -782,48 +603,6 @@ FiltrarFecha(Fechas) {
     
 
   }
-
-    
-
-
-
-
-  /*
-    FiltrarCodigo(codigo) {
-      
-      fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/pago/listar/'+ codigo)
-        .then((response) => {
-          return response.json()
-        })
-        .then((pagos) => {
-          this.setState({ pagos: pagos })
-        })
-  
-  
-      let id = codigo;
-      var alumnosfiltrados = this.state.alumnos.filter((alumno) => alumno.alumno.idAlumno === id)
-      console.log(alumnosfiltrados);
-      this.setState({ alumnos: alumnosfiltrados })
-      
-  
-  
-      let id = this.codigo;
-      let greaterTen = [];
-  
-      for (let i = 0; i<this.state.alumnos.length; i++) {
-        var currentNumber = this.state.alumnos[i];
-        if (currentNumber.alumno.idAlumno === id) {
-         greaterTen.push(currentNumber)
-        }
-      }
-      this.solicitudesfiltradas = greaterTen;
-      console.log(this.solicitudesfiltradas);
-    }*/
-
-
-    
-
-
 }
 
 
@@ -928,7 +707,7 @@ class Paginacion extends React.Component {
           <a onClick={() => this.setPage(1)}>First</a>
         </li>
         <li className={pager.currentPage === 1 ? 'disabled' : ''}>
-          <a onClick={() => this.setPage(pager.currentPage - 1)}><i class="material-icons">chevron_left</i></a>
+          <a onClick={() => this.setPage(pager.currentPage - 1)}><i className="material-icons">chevron_left</i></a>
         </li>
         {pager.pages.map((page, index) =>
           <li key={index + 28} className={pager.currentPage === page ? 'active' : ''}>
@@ -936,7 +715,7 @@ class Paginacion extends React.Component {
           </li>
         )}
         <li className={pager.currentPage === pager.totalPages ? 'disabled' : ''}>
-          <a onClick={() => this.setPage(pager.currentPage + 1)}><i class="material-icons">chevron_right</i></a>
+          <a onClick={() => this.setPage(pager.currentPage + 1)}><i className="material-icons">chevron_right</i></a>
         </li>
         <li className={pager.currentPage === pager.totalPages ? 'disabled' : ''}>
           <a onClick={() => this.setPage(pager.totalPages)}>Last</a>
@@ -944,47 +723,6 @@ class Paginacion extends React.Component {
       </ul>
     );
   }
-
-
-
-
-
-
-
-
-  /*
-    FiltrarCodigo(codigo) {
-      
-      fetch('https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/pago/listar/'+ codigo)
-        .then((response) => {
-          return response.json()
-        })
-        .then((pagos) => {
-          this.setState({ pagos: pagos })
-        })
-  
-  
-      let id = codigo;
-      var alumnosfiltrados = this.state.alumnos.filter((alumno) => alumno.alumno.idAlumno === id)
-      console.log(alumnosfiltrados);
-      this.setState({ alumnos: alumnosfiltrados })
-      
-  
-  
-      let id = this.codigo;
-      let greaterTen = [];
-  
-      for (let i = 0; i<this.state.alumnos.length; i++) {
-        var currentNumber = this.state.alumnos[i];
-        if (currentNumber.alumno.idAlumno === id) {
-         greaterTen.push(currentNumber)
-        }
-      }
-      this.solicitudesfiltradas = greaterTen;
-      console.log(this.solicitudesfiltradas);
-    }*/
-
-
 }
 Paginacion.propTypes = propTypes;
 Paginacion.defaultProps = defaultProps;

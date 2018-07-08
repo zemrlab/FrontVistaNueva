@@ -1,7 +1,5 @@
 import React from 'react'
 import PagoListNuevo from './Pago-list-nuevo'
-import TableHeaderNuevo from './Table-Header-Nuevo'
-
 import Importe from './Importe'
 import FiltroFecha1 from './FiltroFecha1'
 import ConceptoList from './Concepto-list'
