@@ -1,43 +1,3 @@
-
-Conversación abierta. 1 mensaje sin leer.
-
-Ir al contenido
-Uso de Correo de UNMSM con lectores de pantalla
-carlosarizola17@gmail.com 
-Haz clic aquí si quieres habilitar las notificaciones de escritorio para Correo de UNMSM.   Más información  Ocultar
-
-Mover a Recibidos Más 
-2 de 31
- 
-Modulo2-HardCode-FrontEnd 
-Recibidos
-x 
-
-Carlos Arizola
-Archivos adjuntos11 jul. (hace 5 días)
-para mí 
-Reemplazar el texto del archivo FrontVistaNueva/src/Componentes/Imprimir.js  en el github desplegado (o usar  el nuestro en https://github.com/alissondiane/FrontVistaNueva ) por el del txt adjuntado.
-Luego volverlo a desplegar con los siguiente comandos.
-Heroku Login
-git add .
-git commit -m "actualizado"
-git push heroku master
-Heroku open
-
-
-
-
-
-Zona de los archivos adjuntos
-	
-Haz clic aquí para Responder o para Reenviar
-7,75 GB en uso
-Administrar
-Política del programa
-Con la tecnología de Google
-Última actividad de la cuenta: hace 0 minutos
-Abierta en 1 ubicación más · Detalles
-
 import React from 'react'
 
 var jsPDF = require('jspdf');
@@ -112,7 +72,7 @@ class Imprimir extends React.Component {
      */
 
 
-    var columns = ["N°","Descripción","Moneda","Concepto","Numero Recibo","Fecha","Importe","Observación"];
+    var columns = ["N�","Descripci�n","Moneda","Concepto","Numero Recibo","Fecha","Importe","Observaci�n"];
     
     // Only pt supported (not mm or in)
     var data = "Hola";
@@ -150,7 +110,7 @@ class Imprimir extends React.Component {
         doc.setFont("helvetica");
         doc.setFontType("bold");
         doc.setFontSize(10);
-        doc.text("Facultad de Ingeniería de Sistemas e Informática", 35, 55);
+        doc.text("Facultad de Ingenier�a de Sistemas e Inform�tica", 35, 55);
 
         doc.setFont("helvetica");
         doc.setFontType("bold");
@@ -275,5 +235,3 @@ class Imprimir extends React.Component {
   }
 }
 export default Imprimir;
-FrontVistaNueva-src-Componentes-Imprimir.txt
-Mostrando FrontVistaNueva-src-Componentes-Imprimir.txt.
