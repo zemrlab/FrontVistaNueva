@@ -156,12 +156,12 @@ class Imprimir extends React.Component {
         doc.setFont("helvetica");
         doc.setFontType("bold");
         doc.setFontSize(8);
-        doc.text(":", 310, 198); 
+        doc.text(":", 310, 140); 
 
         doc.setFont("helvetica");
         doc.setFontType("bold");
         doc.setFontSize(8);
-        doc.text(":", 310, 218); 
+        doc.text(":", 310, 160); 
 /*
         doc.setFont("helvetica");
         doc.setFontType("bold");
@@ -171,12 +171,12 @@ class Imprimir extends React.Component {
         doc.setFont("helvetica");
         doc.setFontType("bold");
         doc.setFontSize(9);
-        doc.text("Nombres y Apellidos", 180, 198); 
+        doc.text("Nombres y Apellidos", 180, 140); 
 
         doc.setFont("helvetica");
         doc.setFontType("bold");
         doc.setFontSize(9);
-        doc.text("Importe total", 180, 218); 
+        doc.text("Importe total", 180, 160); 
 
 
         
