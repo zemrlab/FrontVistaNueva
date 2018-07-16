@@ -72,7 +72,7 @@ class Imprimir extends React.Component {
      */
 
 
-    var columns = ["N�","Descripci�n","Moneda","Concepto","Numero Recibo","Fecha","Importe","Observaci�n"];
+    var columns = ["N°","Descripción","Moneda","Concepto","Numero Recibo","Fecha","Importe","Observación"];
     
     // Only pt supported (not mm or in)
     var data = "Hola";
@@ -103,36 +103,36 @@ class Imprimir extends React.Component {
         //logo.src = 'descarga.jpg';
         //doc.addImage(logo, 'JPEG', 40, 40, 100, 50);
         doc.setFont("helvetica");
-        doc.setFontType("bold");
-        doc.setFontSize(11);
+        doc.setFontType("normal");
+        doc.setFontSize(9);
         doc.text("UNIVERSIDAD NACIONAL MAYOR DE SAN MARCOS", 35, 40);
         
         doc.setFont("helvetica");
-        doc.setFontType("bold");
-        doc.setFontSize(10);
-        doc.text("Facultad de Ingenier�a de Sistemas e Inform�tica", 35, 55);
+        doc.setFontType("normal");
+        doc.setFontSize(9);
+        doc.text("Facultad de Ingeniería de Sistemas e Informática", 35, 55);
 
         doc.setFont("helvetica");
-        doc.setFontType("bold");
-        doc.setFontSize(10);
+        doc.setFontType("normal");
+        doc.setFontSize(9);
         doc.text("Unidad de Posgrado", 35, 70);
 
         var f = new Date();
         doc.setFont("helvetica");
-        doc.setFontType("bold");
-        doc.setFontSize(10);
+        doc.setFontType("normal");
+        doc.setFontSize(9);
         doc.text(f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear(), 500, 40);
 
         doc.setFont("helvetica");
-        doc.setFontType("bold");
-        doc.setFontSize(10);
+        doc.setFontType("normal");
+        doc.setFontSize(9);
         doc.text(f.getHours()+":"+f.getMinutes()+":"+f.getSeconds(), 500, 55);
         
         doc.setFont("helvetica");
-        doc.setFontType("bold");
-        doc.setFontSize(12);
-        doc.text("SISTEMA DE PAGOS", 240, 120);  
-
+        doc.setFontType("normal");
+        doc.setFontSize(11);
+        doc.text("RESUMEN DE PAGOS", 240, 120);  
+/*
         doc.setDrawColor(0, 0, 0);
         doc.setLineWidth(0.5);
         doc.line(178, 170, 450, 170);
@@ -145,7 +145,7 @@ class Imprimir extends React.Component {
         doc.setFontType("bold");
         doc.setFontSize(11);
         doc.text("Resumen de pagos", 180, 168); 
-
+*/
         /*
         
         doc.setFont("helvetica");
