@@ -108,7 +108,7 @@ class LoginForm extends React.Component {
       <div className="">
       <h3>Módulo consulta de pagos
          <ul id="nav-mobile" className="right  hide-on-med-and-down">
-              <li ><a className="seleccionar" href="https://siga-fisi.herokuapp.com/dashboard" >Vista Principal<i className="material-icons right">launch</i></a></li>
+              <li ><a className="seleccionar" href="https://sigap-upg.herokuapp.com" >Vista Principal<i className="material-icons right">launch</i></a></li>
           </ul>
       </h3>
       <nav>
