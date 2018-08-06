@@ -13,30 +13,25 @@ class LoginForm extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
     this.VistaNueva = this.VistaNueva.bind(this);
-  
   }
-
-
   onSubmit=(e)=>{
-    
-    // console.log(this.state.nombres);
-   //https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-client/alumno/leer/
     var nombreValidado = this.ValidarNombre(this.state.nombres);
-    var nombres = this.state.nombres.toUpperCase();
+    //var nombres = this.state.nombres.toUpperCase();
     if(nombreValidado){
-    var separador = " "; // un espacio en blanco
-    var arregloDeSubCadenas = nombres.split(separador);
+    //var separador = " "; // un espacio en blanco
+    //var arregloDeSubCadenas = nombres.split(separador);
     // console.log("arreglo de subcadenas");
     // console.log(arregloDeSubCadenas);
-    var arreglo = [];
+    /*var arreglo = [];
     for (let i = 0; i< arregloDeSubCadenas.length; i++) {
       if(arregloDeSubCadenas[i]!==''){
          arreglo.push(arregloDeSubCadenas[i])
       }
-    }
+    }*/
     // console.log("arreglo sin espacios en blanco");
     // console.log(arreglo);
-    var nombrenuevo = arreglo.join(" & ");
+    //var nombrenuevo = arreglo.join(" & ");
+      var nombrenuevo = nombreValidado;
     // console.log("nombre nuevo");
     // console.log(nombrenuevo);
     //ANTERIOR LINK:
@@ -52,7 +47,8 @@ class LoginForm extends React.Component {
 
                 
               swal("Consulta realizada exitosamente!" ,"", "success").then(
-                 browserHistory.push('/'+this.state.nombres.toUpperCase()))
+                 browserHistory.push('/'+this.state.nombres))
+                 //browserHistory.push('/'+this.state.nombres.toUpperCase()))
               }
               else{
                 swal("No se encontraron pagos con el nombre ingresado", "", "info");
