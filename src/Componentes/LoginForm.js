@@ -36,8 +36,8 @@ class LoginForm extends React.Component {
      console.log(nombrenuevo);
     //ANTERIOR LINK:
     //https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/alumno/concepto/listar/
-        fetch(CONFIG+'recaudaciones/alumno/concepto/listar/' + '14207097')
-        //fetch(CONFIG+'recaudaciones/alumno/concepto/listar/' + nombrenuevo)      
+        //fetch(CONFIG+'recaudaciones/alumno/concepto/listar/' + '14207097')
+        fetch(CONFIG+'recaudaciones/alumno/concepto/listar/' + nombrenuevo)      
             .then((response) => {
             console.log("response");
             console.log(response);
