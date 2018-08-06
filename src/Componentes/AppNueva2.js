@@ -227,10 +227,7 @@ BuscarNombre(busqueda) {
     var listado1 =[];
     //ANTERIOR LINK
     //https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/alumno/leer/restringido/
-    console.log("nombrenuevo");
-    console.log(nombrenuevo);
-
-    fetch(CONFIG+'alumno/leer/restringido/'+nombrenuevo)
+       fetch(CONFIG+'alumno/leer/restringido/'+nombrenuevo)
       .then((response) => {
         return response.json()
       })
