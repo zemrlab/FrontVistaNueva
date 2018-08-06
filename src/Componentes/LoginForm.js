@@ -39,6 +39,8 @@ class LoginForm extends React.Component {
         //fetch(CONFIG+'recaudaciones/alumno/concepto/listar/' + nombrenuevo)
        fetch(CONFIG+'recaudaciones/alumno/concepto/listar/' + this.state.nombres)
             .then((response) => {
+            console.log("response");
+            console.log(response);
             return response.json()
             })
             .then((pagos) => {
