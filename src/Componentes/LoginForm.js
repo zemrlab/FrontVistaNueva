@@ -36,8 +36,8 @@ class LoginForm extends React.Component {
      console.log(nombrenuevo);
     //ANTERIOR LINK:
     //https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/alumno/concepto/listar/
-        //fetch(CONFIG+'recaudaciones/alumno/concepto/listar/' + this.state.nombres)
-        fetch(CONFIG+'recaudaciones/alumno/concepto/listar/' + nombrenuevo)      
+        fetch(CONFIG+'recaudaciones/alumno/concepto/listar/' + '14207097')
+        //fetch(CONFIG+'recaudaciones/alumno/concepto/listar/' + nombrenuevo)      
             .then((response) => {
             console.log("response");
             console.log(response);
@@ -50,8 +50,8 @@ class LoginForm extends React.Component {
 
                 
               swal("Consulta realizada exitosamente!" ,"", "success").then(
-                 //browserHistory.push('/'+this.state.nombres))
-                 browserHistory.push('/'+this.state.nombres.toUpperCase()))
+                 browserHistory.push('/'+this.state.nombres))
+                 //browserHistory.push('/'+this.state.nombres.toUpperCase()))
               }
               else{
                 swal("No se encontraron pagos con el nombre ingresado", "", "info");
