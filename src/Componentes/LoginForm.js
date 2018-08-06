@@ -32,11 +32,12 @@ class LoginForm extends React.Component {
     // console.log(arreglo);
     //var nombrenuevo = arreglo.join(" & ");
       var nombrenuevo = nombreValidado;
-     console.log("nombre nuevo");
-     console.log(nombrenuevo);
+     console.log("this.state.nombres");
+     console.log(this.state.nombres);
     //ANTERIOR LINK:
     //https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/alumno/concepto/listar/
-        fetch(CONFIG+'recaudaciones/alumno/concepto/listar/' + nombrenuevo)
+        //fetch(CONFIG+'recaudaciones/alumno/concepto/listar/' + nombrenuevo)
+       fetch(CONFIG+'recaudaciones/alumno/concepto/listar/' + this.state.nombres)
             .then((response) => {
             return response.json()
             })
