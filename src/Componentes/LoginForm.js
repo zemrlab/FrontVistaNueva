@@ -32,8 +32,8 @@ class LoginForm extends React.Component {
     // console.log(arreglo);
     //var nombrenuevo = arreglo.join(" & ");
       var nombrenuevo = nombreValidado;
-    // console.log("nombre nuevo");
-    // console.log(nombrenuevo);
+     console.log("nombre nuevo");
+     console.log(nombrenuevo);
     //ANTERIOR LINK:
     //https://modulo-alumno-zuul.herokuapp.com/modulo-alumno-jdbc-client/recaudaciones/alumno/concepto/listar/
         fetch(CONFIG+'recaudaciones/alumno/concepto/listar/' + nombrenuevo)
